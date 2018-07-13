@@ -6,6 +6,6 @@
 		]
 	},
 	"hosting": {
-		"public": "dist"
+		"public": "app/dist"
 	}
 }
