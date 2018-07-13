@@ -5,6 +5,6 @@ jobs:
       - image: node
     steps:
       - checkout
-      - run: npm install
-      - run: npm run build
-      - run: npm run test:unit
+      - run: npm install && cd functions && npm install
+      - run: npm run build && cd functions && npm run build
+      - run: npm run test:unit && cd functions && npm run test
