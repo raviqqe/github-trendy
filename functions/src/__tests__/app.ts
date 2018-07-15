@@ -3,9 +3,9 @@ import { Request, Response } from 'express';
 import * as httpMocks from 'node-mocks-http';
 import { parse } from 'url';
 
-import graphql from '../graphql';
+import app from '../app';
 
-test('graphql endpoint', () => {
+test('app function', () => {
   const request = httpMocks.createRequest({
     body: { query: 'repositories {}' },
     method: 'POST'
@@ -13,11 +13,11 @@ test('graphql endpoint', () => {
 
   request.resume = () => undefined;
 
-  graphql(request, httpMocks.createResponse());
+  app(request, httpMocks.createResponse());
 });
 
-test('server', async () => {
-  graphql.listen(8888);
+test('Server response', async () => {
+  app.listen(8888);
 
   const {
     data: {

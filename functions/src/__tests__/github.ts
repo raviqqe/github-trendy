@@ -1,9 +1,9 @@
 import { parse } from 'url';
 
-import { fetchGitHubTrends } from '../github-trends';
+import { fetchTrendingRepositories } from '../github';
 
 test('Fetch GitHub repositories', async () => {
-  const repositories = await fetchGitHubTrends();
+  const repositories = await fetchTrendingRepositories();
 
   for (const { name, url } of repositories) {
     expect(name.length).toBeGreaterThan(0);

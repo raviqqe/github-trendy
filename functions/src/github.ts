@@ -7,7 +7,7 @@ export interface IRepository {
   url: string;
 }
 
-export async function fetchGitHubTrends(): Promise<IRepository[]> {
+export async function fetchTrendingRepositories(): Promise<IRepository[]> {
   const $ = cheerio.load((await axios.get('https://github.com/trending')).data);
   const repositories: IRepository[] = [];
 

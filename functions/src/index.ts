@@ -1,5 +1,5 @@
 import { https } from 'firebase-functions';
 
-import graphQL from './graphql';
+import app from './app';
 
-export const graphql = https.onRequest(graphQL);
+export const graphql = https.onRequest(app);

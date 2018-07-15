@@ -1,6 +1,6 @@
 import { makeExecutableSchema } from 'graphql-tools';
 
-import { fetchGitHubTrends, IRepository } from './github-trends';
+import { fetchTrendingRepositories, IRepository } from './github';
 
 const typeDefs = `
   type Repository {
@@ -18,7 +18,7 @@ export default makeExecutableSchema({
   resolvers: {
     Query: {
       async repositories() {
-        return await fetchGitHubTrends();
+        return await fetchTrendingRepositories();
       }
     },
     Repository: {
