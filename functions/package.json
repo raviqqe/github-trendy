@@ -4,12 +4,7 @@
 	"scripts": {
 		"lint": "tslint --project tsconfig.json",
 		"build": "tsc && cp ../common.graphql dist",
-		"test": "jest --coverage",
-		"serve": "npm run build && firebase serve --only functions",
-		"shell": "npm run build && firebase functions:shell",
-		"start": "npm run shell",
-		"deploy": "firebase deploy --only functions",
-		"logs": "firebase functions:log"
+		"test": "jest --coverage"
 	},
 	"main": "dist/index.js",
 	"dependencies": {
