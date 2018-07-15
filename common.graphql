@@ -1,0 +1,9 @@
+type Repository {
+  id: ID!
+  name: String!
+  url: String!
+}
+
+type Query {
+  repositories: [Repository]
+}
