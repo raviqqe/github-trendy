@@ -1,10 +1,12 @@
 import { makeExecutableSchema } from 'graphql-tools';
 
+import { fetchGitHubTrends, IRepository } from './github-trends';
+
 const typeDefs = `
   type Repository {
-    id: Int!
-    name: String
-    url: String
+    id: ID!
+    name: String!
+    url: String!
   }
 
   type Query {
@@ -15,8 +17,13 @@ const typeDefs = `
 export default makeExecutableSchema({
   resolvers: {
     Query: {
-      repositories() {
-        return [];
+      async repositories() {
+        return await fetchGitHubTrends();
+      }
+    },
+    Repository: {
+      id({ url }: IRepository) {
+        return url;
       }
     }
   },

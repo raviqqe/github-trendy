@@ -2,7 +2,7 @@ import axios from 'axios';
 import cheerio = require('cheerio');
 import * as url from 'url';
 
-interface IRepository {
+export interface IRepository {
   name: string;
   url: string;
 }
