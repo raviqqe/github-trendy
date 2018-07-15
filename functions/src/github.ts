@@ -15,7 +15,7 @@ export async function fetchTrendingRepositories(): Promise<IRepository[]> {
     const title = $(element).find('h3');
 
     repositories.push({
-      name: title.text(),
+      name: title.text().trim(),
       url: url.resolve('https://github.com', title.find('a').prop('href'))
     });
   }
