@@ -10,8 +10,12 @@
 		"deploy": "firebase deploy"
 	},
 	"dependencies": {
+		"apollo-boost": "^0.1.10",
+		"graphql": "^0.13.2",
+		"graphql-tag": "^2.9.2",
 		"register-service-worker": "^1.0.0",
 		"vue": "^2.5.16",
+		"vue-apollo": "^3.0.0-beta.19",
 		"vue-class-component": "^6.0.0",
 		"vue-property-decorator": "^6.0.0",
 		"vue-router": "^3.0.1",
