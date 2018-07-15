@@ -1,9 +1,10 @@
 {
 	"functions": {
 		"predeploy": [
-			"npm --prefix functions run lint",
-			"npm --prefix functions run build",
-			"npm --prefix app run build"
+			"npm run deps",
+			"npm run lint",
+			"npm run test",
+			"npm run build"
 		]
 	},
 	"hosting": {
