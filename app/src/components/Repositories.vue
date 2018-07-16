@@ -1,16 +1,14 @@
 <template>
-    <ApolloQuery :query="query">
-      <template slot-scope="{ result: { data } }">
-        <div v-if="data">
-          <Repository
-            v-for="repository of data.repositories"
-            :key="repository.id"
-            :name="repository.name"
-            :url="repository.url"
-          />
-        </div>
-      </template>
-    </ApolloQuery>
+  <ApolloQuery :query="query" :variables="{ language }">
+    <template v-if="data" slot-scope="{ result: { data } }">
+      <Repository
+        v-for="repository of data.repositories"
+        :key="repository.id"
+        :name="repository.name"
+        :url="repository.url"
+      />
+    </template>
+  </ApolloQuery>
 </template>
 
 <script lang="ts">
@@ -21,10 +19,12 @@ import { Component, Vue } from 'vue-property-decorator';
 import Repository from './Repository.vue';
 
 const query = gql`
-  query {
-    repositories {
+  query Query($language: String) {
+    repositories(language: $language) {
       id
+      language
       name
+      stars
       url
     }
   }
@@ -35,6 +35,10 @@ const query = gql`
 })
 export default class Repositories extends Vue {
   private query = query;
+
+  private get language(): string {
+    return this.$route.path.replace('/', '');
+  }
 }
 </script>
 
