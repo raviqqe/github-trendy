@@ -12,15 +12,15 @@ const typeDefs = `
   }
 
   type Query {
-    repositories: [Repository]
+    repositories(language: String): [Repository]
   }
 `;
 
 export default makeExecutableSchema({
   resolvers: {
     Query: {
-      async repositories() {
-        return await fetchTrendingRepositories();
+      async repositories(_, { language }) {
+        return await fetchTrendingRepositories(language);
       }
     },
     Repository: {

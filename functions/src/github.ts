@@ -7,8 +7,16 @@ export interface IRepository {
   url: string;
 }
 
-export async function fetchTrendingRepositories(): Promise<IRepository[]> {
-  const $ = cheerio.load((await axios.get('https://github.com/trending')).data);
+export async function fetchTrendingRepositories(
+  language?: string
+): Promise<IRepository[]> {
+  if (!language) {
+    language = '';
+  }
+
+  const $ = cheerio.load(
+    (await axios.get(`https://github.com/trending/${language}`)).data
+  );
   const repositories: IRepository[] = [];
 
   for (const element of $('ol.repo-list li').toArray()) {

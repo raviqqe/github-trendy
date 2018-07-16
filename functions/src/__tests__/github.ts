@@ -2,15 +2,19 @@ import { parse } from 'url';
 
 import { fetchTrendingRepositories } from '../github';
 
-test('Fetch GitHub repositories', async () => {
-  const repositories = await fetchTrendingRepositories();
+jest.setTimeout(10000);
 
-  for (const { name, url } of repositories) {
-    expect(name.length).toBeGreaterThan(0);
+test('Fetch trending repositories', async () => {
+  for (const language of [undefined, 'c', 'javascript']) {
+    const repositories = await fetchTrendingRepositories(language);
 
-    const { hostname, protocol } = parse(url);
+    for (const { name, url } of repositories) {
+      expect(name.length).toBeGreaterThan(0);
 
-    expect(hostname).toBe('github.com');
-    expect(protocol).toBe('https:');
+      const { hostname, protocol } = parse(url);
+
+      expect(hostname).toBe('github.com');
+      expect(protocol).toBe('https:');
+    }
   }
 });
