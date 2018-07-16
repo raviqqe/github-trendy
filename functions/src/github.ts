@@ -5,6 +5,7 @@ import * as url from 'url';
 export interface IRepository {
   language: string;
   name: string;
+  stars: number;
   url: string;
 }
 
@@ -29,6 +30,13 @@ export async function fetchTrendingRepositories(
         .text()
         .trim(),
       name: title.text().trim(),
+      stars: Number(
+        $(element)
+          .find('[aria-label="star"]')
+          .parent()
+          .text()
+          .replace(',', '')
+      ),
       url: url.resolve('https://github.com', title.find('a').prop('href'))
     });
   }

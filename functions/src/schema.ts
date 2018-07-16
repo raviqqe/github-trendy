@@ -9,6 +9,7 @@ const typeDefs = `
     id: ID!
     language: String!
     name: String!
+    stars: Int!
     url: String!
   }
 

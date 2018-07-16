@@ -26,13 +26,15 @@ test('Server response', async () => {
       data: { repositories }
     }
   } = await axios.post('http://localhost:8080/graphql', {
-    query: 'query { repositories { id, language, name, url } }'
+    query: 'query { repositories { id, language, name, stars, url } }'
   });
 
-  for (const { id, language, name, url } of repositories) {
+  for (const { id, language, name, stars, url } of repositories) {
     expect(typeof id).toBe('string');
     expect(typeof language).toBe('string');
     expect(typeof name).toBe('string');
+    expect(typeof stars).toBe('number');
+    expect(stars).toBeGreaterThan(0);
     expect(typeof url).toBe('string');
     expect(parse(url).protocol).toBe('https:');
   }
@@ -50,6 +52,7 @@ test('Use language argument', async () => {
           id
           language
           name
+          stars
           url
         }
       }
@@ -57,10 +60,12 @@ test('Use language argument', async () => {
     variables: { language: 'c' }
   });
 
-  for (const { id, language, name, url } of repositories) {
+  for (const { id, language, name, stars, url } of repositories) {
     expect(typeof id).toBe('string');
     expect(language).toBe('C');
     expect(typeof name).toBe('string');
+    expect(typeof stars).toBe('number');
+    expect(stars).toBeGreaterThan(0);
     expect(typeof url).toBe('string');
     expect(parse(url).protocol).toBe('https:');
   }
