@@ -3,6 +3,7 @@ import cheerio = require('cheerio');
 import * as url from 'url';
 
 export interface IRepository {
+  language: string;
   name: string;
   url: string;
 }
@@ -23,6 +24,10 @@ export async function fetchTrendingRepositories(
     const title = $(element).find('h3');
 
     repositories.push({
+      language: $(element)
+        .find('[itemprop="programmingLanguage"]')
+        .text()
+        .trim(),
       name: title.text().trim(),
       url: url.resolve('https://github.com', title.find('a').prop('href'))
     });

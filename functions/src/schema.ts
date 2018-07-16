@@ -7,6 +7,7 @@ import { fetchTrendingRepositories, IRepository } from './github';
 const typeDefs = `
   type Repository {
     id: ID!
+    language: String!
     name: String!
     url: String!
   }
