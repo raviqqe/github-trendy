@@ -21,7 +21,7 @@ export default new VueApollo({
   }),
   defaultOptions: {
     $query: {
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'cache-first',
       loadingKey: 'loading'
     }
   }
