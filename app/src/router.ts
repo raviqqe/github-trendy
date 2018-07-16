@@ -7,5 +7,8 @@ import Home from './views/Home.vue';
 Vue.use(Router);
 
 export default new Router({
-  routes: [{ component: Home, path: '/:language' }]
+  routes: [
+    { path: '/', redirect: languages[0].path },
+    { component: Home, path: '/:language' }
+  ]
 });
