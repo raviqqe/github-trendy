@@ -9,6 +9,7 @@
 		"test": "tools/all.sh npm run test",
 		"deploy": "firebase deploy"
 	},
+	"dependencies": {},
 	"devDependencies": {
 		"firebase-tools": "^3.19.3"
 	}

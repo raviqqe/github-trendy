@@ -11,6 +11,8 @@
 	},
 	"dependencies": {
 		"apollo-boost": "^0.1.10",
+		"apollo-cache-inmemory": "^1.2.5",
+		"apollo-cache-persist": "^0.1.1",
 		"graphql": "^0.13.2",
 		"graphql-tag": "^2.9.2",
 		"register-service-worker": "^1.0.0",
