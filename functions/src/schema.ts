@@ -4,6 +4,18 @@ import * as path from 'path';
 
 import { fetchTrendingRepositories, IRepository } from './github';
 
+const typeDefs = `
+  type Repository {
+    id: ID!
+    name: String!
+    url: String!
+  }
+
+  type Query {
+    repositories: [Repository]
+  }
+`;
+
 export default makeExecutableSchema({
   resolvers: {
     Query: {
@@ -17,5 +29,5 @@ export default makeExecutableSchema({
       }
     }
   },
-  typeDefs: fs.readFileSync(path.resolve(__dirname, 'common.graphql'), 'UTF-8')
+  typeDefs
 });

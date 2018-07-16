@@ -3,7 +3,7 @@
 	"private": true,
 	"scripts": {
 		"lint": "tslint --project tsconfig.json",
-		"build": "tsc && cp ../common.graphql dist",
+		"build": "tsc",
 		"test": "jest --coverage"
 	},
 	"main": "dist/index.js",
