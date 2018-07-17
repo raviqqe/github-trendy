@@ -1,12 +1,18 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Router from 'vue-router';
+import Vuex from 'vuex';
 
 import Repositories from '../Repositories.vue';
 
+const localVue = createLocalVue();
+
+localVue.use(Vuex);
+localVue.use(Router);
+
 test('Render a component', () => {
-  const localVue = createLocalVue();
-
-  localVue.use(Router);
-
-  shallowMount(Repositories, { localVue, router: new Router() });
+  shallowMount(Repositories, {
+    localVue,
+    router: new Router(),
+    store: new Vuex.Store({ getters: { cacheInitialized: () => true } })
+  });
 });

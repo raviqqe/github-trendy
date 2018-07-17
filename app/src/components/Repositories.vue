@@ -1,5 +1,5 @@
 <template>
-  <ApolloQuery :query="query" :variables="{ language }">
+  <ApolloQuery :query="query" :variables="{ language }" :skip="!cacheInitialized">
     <template v-if="data" slot-scope="{ result: { data } }">
       <Repository
         v-for="repository of data.repositories"
@@ -38,6 +38,10 @@ export default class Repositories extends Vue {
 
   private get language(): string {
     return this.$route.path.replace('/', '');
+  }
+
+  private get cacheInitialized(): boolean {
+    return this.$store.state.cacheInitialized;
   }
 }
 </script>
