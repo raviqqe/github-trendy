@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as bodyParser from 'body-parser';
 import express = require('express');
 import { Request, Response } from 'express';
-import * as httpMocks from 'node-mocks-http';
 import { parse } from 'url';
 
 import schema from '../schema';
@@ -15,17 +14,6 @@ const app = express();
 beforeAll(() => {
   app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
   app.listen(8080);
-});
-
-test('app function', () => {
-  const request = httpMocks.createRequest({
-    body: { query: 'repositories {}' },
-    method: 'POST'
-  });
-
-  request.resume = () => undefined;
-
-  app(request, httpMocks.createResponse());
 });
 
 test('Respond to requests', async () => {
