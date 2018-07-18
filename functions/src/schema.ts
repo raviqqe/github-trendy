@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { makeExecutableSchema } from 'graphql-tools';
 import * as path from 'path';
 
+import { languages } from './firebase';
 import { fetchTrendingRepositories, IRepository } from './github';
 
 const typeDefs = `
@@ -22,7 +23,11 @@ export default makeExecutableSchema({
   resolvers: {
     Query: {
       async repositories(_, { language }) {
-        return await fetchTrendingRepositories(language);
+        const repositories = languages.repositories(language);
+
+        await repositories.store(await fetchTrendingRepositories(language));
+
+        return await repositories.fetch();
       }
     },
     Repository: {

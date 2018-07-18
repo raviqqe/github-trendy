@@ -1,5 +1,6 @@
 module.exports = {
 	moduleFileExtensions: ['ts', 'js'],
+	"modulePathIgnorePatterns": ["<rootDir>/dist"],
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest'
 	},

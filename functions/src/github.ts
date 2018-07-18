@@ -3,6 +3,7 @@ import cheerio = require('cheerio');
 import * as url from 'url';
 
 export interface IRepository {
+  date: number;
   language: string;
   name: string;
   stars: number;
@@ -20,11 +21,13 @@ export async function fetchTrendingRepositories(
     (await axios.get(`https://github.com/trending/${language}`)).data
   );
   const repositories: IRepository[] = [];
+  const date = new Date().getTime();
 
   for (const element of $('ol.repo-list li').toArray()) {
     const title = $(element).find('h3');
 
     repositories.push({
+      date,
       language: $(element)
         .find('[itemprop="programmingLanguage"]')
         .text()
