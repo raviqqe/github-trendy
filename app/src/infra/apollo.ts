@@ -6,7 +6,7 @@ import { createHttpLink } from 'apollo-link-http';
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 
-import { getToken } from './firebase';
+import * as firebase from './firebase';
 
 Vue.use(VueApollo);
 
@@ -17,16 +17,17 @@ const persistor = new CachePersistor({
   storage: window.localStorage
 });
 
-export async function initializeCache(): Promise<void> {
+export async function initialize(): Promise<void> {
   await persistor.restore();
   await persistor.persist();
+  await firebase.initialize();
 }
 
 export default new VueApollo({
   defaultClient: new ApolloClient({
     cache,
     link: setContext(async (_, { headers }) => {
-      const token = await getToken();
+      const token = await firebase.getToken();
 
       return {
         headers: {

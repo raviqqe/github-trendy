@@ -2,41 +2,30 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import * as apollo from './infra/apollo';
-import * as firebase from './infra/firebase';
 
 Vue.use(Vuex);
 
 interface IState {
-  cacheInitialized: boolean;
-  firebaseInitialized: boolean;
+  apolloInitialized: boolean;
 }
 
 const store = new Vuex.Store<IState>({
   actions: {
-    async initializeCache(context) {
-      await apollo.initializeCache();
-      context.commit('initializeCache');
-    },
-    async initializeFirebase(context) {
-      await firebase.initialize();
-      context.commit('initializeFirebase');
+    async initializeApollo(context) {
+      await apollo.initialize();
+      context.commit('initializeApollo');
     }
   },
   mutations: {
-    initializeCache(state: IState) {
-      state.cacheInitialized = true;
-    },
-    initializeFirebase(state: IState) {
-      state.firebaseInitialized = true;
+    initializeApollo(state: IState) {
+      state.apolloInitialized = true;
     }
   },
   state: {
-    cacheInitialized: false,
-    firebaseInitialized: false
+    apolloInitialized: false
   }
 });
 
-store.dispatch('initializeCache');
-store.dispatch('initializeFirebase');
+store.dispatch('initializeApollo');
 
 export default store;

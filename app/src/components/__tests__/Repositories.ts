@@ -15,8 +15,7 @@ test('Render a component', () => {
     router: new Router(),
     store: new Vuex.Store({
       getters: {
-        cacheInitialized: () => true,
-        firebaseInitialized: () => true
+        apolloInitialized: () => true
       }
     })
   });

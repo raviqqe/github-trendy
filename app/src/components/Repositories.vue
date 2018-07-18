@@ -41,9 +41,7 @@ export default class Repositories extends Vue {
   }
 
   private get initialized(): boolean {
-    const { cacheInitialized, firebaseInitialized } = this.$store.state;
-
-    return cacheInitialized && firebaseInitialized;
+    return this.$store.state.apolloInitialized;
   }
 }
 </script>
