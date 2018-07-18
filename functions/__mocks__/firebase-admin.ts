@@ -11,16 +11,17 @@ class Firestore {
     paths = [...paths, path];
 
     return {
-      doc: (docPath: string) => {
+      doc: (path: string) => {
+        const newPaths = [...paths, path];
+
         return {
-          collection: (path: string) =>
-            this.collection(path, [...paths, docPath]),
-          set: data => lodash.set(this.storage, paths, data)
+          collection: (path: string) => this.collection(path, newPaths),
+          set: data => lodash.set(this.storage, newPaths, data)
         };
       },
       get: () =>
         Promise.resolve({
-          docs: lodash.get(this.storage, paths).map(data => ({
+          docs: Object.values(lodash.get(this.storage, paths)).map(data => ({
             data: () => data
           }))
         })

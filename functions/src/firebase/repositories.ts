@@ -14,7 +14,9 @@ export default class {
     await Promise.all(
       repositories.map(
         async (repository: IRepository) =>
-          await this.collection.doc(repository.url).set(repositories)
+          await this.collection
+            .doc(Buffer.from(repository.url).toString('base64'))
+            .set(repository)
       )
     );
   }
