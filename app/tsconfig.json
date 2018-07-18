@@ -2,33 +2,11 @@
 	"compilerOptions": {
 		"target": "esnext",
 		"module": "esnext",
-		"jsx": "preserve",
 		"moduleResolution": "node",
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
 		"esModuleInterop": true,
 		"sourceMap": true,
 		"baseUrl": ".",
-		"types": [
-			"node",
-			"jest"
-		],
-		"lib": [
-			"es2015",
-			"esnext",
-			"dom",
-			"dom.iterable",
-			"scripthost"
-		]
-	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"tests/**/*.ts",
-		"tests/**/*.tsx"
-	],
-	"exclude": [
-		"node_modules"
-	]
+		"types": ["node", "jest"]
+	}
 }

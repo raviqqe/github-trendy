@@ -5,10 +5,6 @@
 		"outDir": "dist",
 		"sourceMap": true,
 		"target": "es6",
-		"types": [
-			"node",
-			"jest"
-		]
-	},
-	"include": ["src"]
+		"types": ["node", "jest"]
+	}
 }
