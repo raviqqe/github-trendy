@@ -36,6 +36,7 @@ export default new VueApollo({
       };
     }).concat(
       createHttpLink({
+        fetchOptions: { method: 'GET' },
         uri:
           'https://us-central1-github-new-trends.cloudfunctions.net/functions/graphql'
       })

@@ -1,3 +1,4 @@
+import * as apicache from 'apicache';
 import { graphqlExpress } from 'apollo-server-express';
 import * as bodyParser from 'body-parser';
 import cors = require('cors');
@@ -11,8 +12,9 @@ const app = express();
 
 app.use(cors());
 app.use(authentication);
+app.use(apicache.middleware('1 day'));
 
 app.options('*', cors());
-app.post('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
 export const functions = https.onRequest(app);
