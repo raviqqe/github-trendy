@@ -1,12 +1,15 @@
 <template>
   <ApolloQuery :query="query" :variables="{ language }" :skip="!initialized">
-    <template v-if="data" slot-scope="{ result: { data } }">
-      <Repository
-        v-for="repository of data.repositories"
-        :key="repository.id"
-        :name="repository.name"
-        :url="repository.url"
-      />
+    <template slot-scope="{ result: { data, loading } }">
+      <template v-if="loading || !data">Loading...</template>
+      <template v-else>
+        <Repository
+          v-for="{ id, name, url } of data.repositories"
+          :key="id"
+          :name="name"
+          :url="url"
+        />
+      </template>
     </template>
   </ApolloQuery>
 </template>
