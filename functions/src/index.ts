@@ -15,6 +15,6 @@ app.use(authentication);
 app.use(apicache.middleware('1 day'));
 
 app.options('*', cors());
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+app.get('/graphql', graphqlExpress({ schema }));
 
 export const functions = https.onRequest(app);
