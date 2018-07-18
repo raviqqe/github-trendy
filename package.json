@@ -7,6 +7,7 @@
 		"build": "tools/all.sh npm run build",
 		"lint": "tools/all.sh npm run lint",
 		"test": "tools/all.sh npm run test",
+		"update": "npm update && tools/all.sh npm update",
 		"deploy": "firebase deploy"
 	},
 	"dependencies": {},
