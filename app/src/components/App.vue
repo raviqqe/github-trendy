@@ -16,7 +16,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import { languages } from './domain';
+import { languages } from '../domain';
 
 @Component
 export default class extends Vue {
