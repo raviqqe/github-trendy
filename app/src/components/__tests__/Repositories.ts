@@ -13,6 +13,11 @@ test('Render a component', () => {
   shallowMount(Repositories, {
     localVue,
     router: new Router(),
-    store: new Vuex.Store({ getters: { cacheInitialized: () => true } })
+    store: new Vuex.Store({
+      getters: {
+        cacheInitialized: () => true,
+        firebaseInitialized: () => true
+      }
+    })
   });
 });

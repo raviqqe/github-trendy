@@ -1,5 +1,5 @@
 <template>
-  <ApolloQuery :query="query" :variables="{ language }" :skip="!cacheInitialized">
+  <ApolloQuery :query="query" :variables="{ language }" :skip="!initialized">
     <template v-if="data" slot-scope="{ result: { data } }">
       <Repository
         v-for="repository of data.repositories"
@@ -40,8 +40,10 @@ export default class Repositories extends Vue {
     return this.$route.path.replace('/', '');
   }
 
-  private get cacheInitialized(): boolean {
-    return this.$store.state.cacheInitialized;
+  private get initialized(): boolean {
+    const { cacheInitialized, firebaseInitialized } = this.$store.state;
+
+    return cacheInitialized && firebaseInitialized;
   }
 }
 </script>
