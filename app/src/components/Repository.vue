@@ -8,5 +8,5 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({ props: { name: String, url: String } })
-export default class Repository extends Vue {}
+export default class extends Vue {}
 </script>

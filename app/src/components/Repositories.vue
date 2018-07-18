@@ -36,7 +36,7 @@ const query = gql`
 @Component({
   components: { ApolloQuery: (vueApollo as any).ApolloQuery, Repository }
 })
-export default class Repositories extends Vue {
+export default class extends Vue {
   private query = query;
 
   private get language(): string {
