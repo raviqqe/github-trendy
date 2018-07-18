@@ -1,0 +1,7 @@
+service cloud.firestore {
+  match /databases/{database}/languages {
+    match /{language}/repositories/{repository} {
+      allow read, write: if false;
+    }
+  }
+}
