@@ -20,6 +20,7 @@ beforeAll(() => {
 function testRepository({
   id,
   date,
+  description,
   language,
   name,
   stars,
@@ -27,6 +28,11 @@ function testRepository({
 }: IRepository & { id: string }) {
   expect(typeof id).toBe('string');
   expect(typeof date).toBe('number');
+
+  if (description) {
+    expect(typeof description).toBe('string');
+  }
+
   expect(typeof language).toBe('string');
   expect(typeof name).toBe('string');
   expect(typeof stars).toBe('number');

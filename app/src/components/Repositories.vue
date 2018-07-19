@@ -4,9 +4,10 @@
       <template v-if="loading || !data">Loading...</template>
       <template v-else>
         <Repository
-          v-for="{ id, date, language, name, stars, url } of data.repositories"
+          v-for="{ id, date, description, language, name, stars, url } of data.repositories"
           :key="id"
           :date="new Date(date)"
+          :description="description"
           :language="language"
           :name="name"
           :stars="stars"
@@ -29,6 +30,7 @@ const query = gql`
     repositories(language: $language) {
       id
       date
+      description
       language
       name
       stars

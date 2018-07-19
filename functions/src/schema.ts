@@ -9,6 +9,7 @@ const typeDefs = `
   type Repository {
     id: ID!
     date: Float!
+    description: String
     language: String
     name: String!
     stars: Int!

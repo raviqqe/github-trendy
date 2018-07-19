@@ -6,6 +6,7 @@ test('Render a component', () => {
   shallowMount(Repository, {
     propsData: {
       date: new Date(),
+      description: 'This is good.',
       language: 'JavaScript',
       name: 'My repository',
       stars: 42,

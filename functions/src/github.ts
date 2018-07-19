@@ -4,6 +4,7 @@ import * as url from 'url';
 
 export interface IRepository {
   date: number;
+  description?: string;
   language?: string;
   name: string;
   stars: number;
@@ -28,6 +29,10 @@ export async function fetchTrendingRepositories(
 
     repositories.push({
       date,
+      description: $(element)
+        .find('p')
+        .text()
+        .trim(),
       language: $(element)
         .find('[itemprop="programmingLanguage"]')
         .text()
