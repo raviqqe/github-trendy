@@ -68,29 +68,31 @@ test('Respond to requests', async () => {
 });
 
 test('Use language argument', async () => {
-  const {
-    data: {
-      data: { repositories }
-    }
-  } = await axios.post('http://localhost:8080/graphql', {
-    query: `
-      query Query($language: String) {
-        repositories(language: $language) {
-          id
-          date
-          language
-          name
-          stars
-          url
-        }
+  for (const language of ['c', 'c#', 'c++']) {
+    const {
+      data: {
+        data: { repositories }
       }
-    `,
-    variables: { language: 'c' }
-  });
+    } = await axios.post('http://localhost:8080/graphql', {
+      query: `
+        query Query($language: String) {
+          repositories(language: $language) {
+            id
+            date
+            language
+            name
+            stars
+            url
+          }
+        }
+      `,
+      variables: { language }
+    });
 
-  for (const repository of repositories) {
-    testRepository(repository);
+    for (const repository of repositories) {
+      testRepository(repository);
 
-    expect(repository.language).toBe('C');
+      expect(repository.language).toBe(language.toUpperCase());
+    }
   }
 });

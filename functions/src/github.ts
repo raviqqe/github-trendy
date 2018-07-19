@@ -20,7 +20,9 @@ export async function fetchTrendingRepositories(
   }
 
   const $ = cheerio.load(
-    (await axios.get(`https://github.com/trending/${language}`)).data
+    (await axios.get(
+      `https://github.com/trending/${encodeURIComponent(language)}`
+    )).data
   );
   const repositories: IRepository[] = [];
   const date = new Date().getTime();
