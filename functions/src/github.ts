@@ -4,7 +4,7 @@ import * as url from 'url';
 
 export interface IRepository {
   date: number;
-  language: string;
+  language?: string;
   name: string;
   stars: number;
   url: string;
