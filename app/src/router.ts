@@ -10,5 +10,8 @@ export default new Router({
   routes: [
     { path: '/', redirect: languages[0].path },
     { component: Repositories, path: '/:language' }
-  ]
+  ],
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 });
