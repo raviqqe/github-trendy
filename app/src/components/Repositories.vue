@@ -46,7 +46,7 @@ export default class extends Vue {
   private query = query;
 
   private get language(): string {
-    return this.$route.path.replace('/', '');
+    return decodeURIComponent(this.$route.path.replace('/', ''));
   }
 
   private get initialized(): boolean {

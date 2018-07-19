@@ -4,7 +4,7 @@
       <router-link
         v-for="{ name, path } in languages"
         :key="name"
-        :to="'/' + path"
+        :to="'/' + encodeURIComponent(path)"
       >
         {{ name }}
       </router-link>
