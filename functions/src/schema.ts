@@ -8,6 +8,7 @@ import { fetchTrendingRepositories, IRepository } from './github';
 const typeDefs = `
   type Repository {
     id: ID!
+    date: Float!
     language: String!
     name: String!
     stars: Int!

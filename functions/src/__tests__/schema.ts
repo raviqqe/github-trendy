@@ -5,6 +5,7 @@ import express = require('express');
 import { Request, Response } from 'express';
 import { parse } from 'url';
 
+import { IRepository } from '../github';
 import schema from '../schema';
 
 jest.setTimeout(10000);
@@ -16,17 +17,36 @@ beforeAll(() => {
   app.listen(8080);
 });
 
+function testRepository({
+  id,
+  date,
+  language,
+  name,
+  stars,
+  url
+}: IRepository & { id: string }) {
+  expect(typeof id).toBe('string');
+  expect(typeof date).toBe('number');
+  expect(typeof language).toBe('string');
+  expect(typeof name).toBe('string');
+  expect(typeof stars).toBe('number');
+  expect(stars).toBeGreaterThan(0);
+  expect(typeof url).toBe('string');
+  expect(parse(url).protocol).toBe('https:');
+}
+
 test('Respond to requests', async () => {
   for (const request of [
     () =>
       axios.get('http://localhost:8080/graphql', {
         params: {
-          query: 'query { repositories { id, language, name, stars, url } }'
+          query:
+            'query { repositories { id, date, language, name, stars, url } }'
         }
       }),
     () =>
       axios.post('http://localhost:8080/graphql', {
-        query: 'query { repositories { id, language, name, stars, url } }'
+        query: 'query { repositories { id, date, language, name, stars, url } }'
       })
   ]) {
     const {
@@ -35,14 +55,8 @@ test('Respond to requests', async () => {
       }
     } = await request();
 
-    for (const { id, language, name, stars, url } of repositories) {
-      expect(typeof id).toBe('string');
-      expect(typeof language).toBe('string');
-      expect(typeof name).toBe('string');
-      expect(typeof stars).toBe('number');
-      expect(stars).toBeGreaterThan(0);
-      expect(typeof url).toBe('string');
-      expect(parse(url).protocol).toBe('https:');
+    for (const repository of repositories) {
+      testRepository(repository);
     }
   }
 });
@@ -57,6 +71,7 @@ test('Use language argument', async () => {
       query Query($language: String) {
         repositories(language: $language) {
           id
+          date
           language
           name
           stars
@@ -67,13 +82,9 @@ test('Use language argument', async () => {
     variables: { language: 'c' }
   });
 
-  for (const { id, language, name, stars, url } of repositories) {
-    expect(typeof id).toBe('string');
-    expect(language).toBe('C');
-    expect(typeof name).toBe('string');
-    expect(typeof stars).toBe('number');
-    expect(stars).toBeGreaterThan(0);
-    expect(typeof url).toBe('string');
-    expect(parse(url).protocol).toBe('https:');
+  for (const repository of repositories) {
+    testRepository(repository);
+
+    expect(repository.language).toBe('C');
   }
 });
