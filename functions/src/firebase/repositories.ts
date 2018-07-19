@@ -22,8 +22,10 @@ export default class {
   }
 
   public async fetch(): Promise<IRepository[]> {
-    return (await this.collection.get()).docs.map(
-      snapshot => snapshot.data() as IRepository
-    );
+    return (await this.collection
+      .orderBy('date', 'desc')
+      .orderBy('stars', 'desc')
+      .limit(1000)
+      .get()).docs.map(snapshot => snapshot.data() as IRepository);
   }
 }

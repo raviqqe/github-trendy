@@ -24,7 +24,13 @@ class Firestore {
           docs: Object.values(lodash.get(this.storage, paths)).map(data => ({
             data: () => data
           }))
-        })
+        }),
+      limit() {
+        return this;
+      },
+      orderBy() {
+        return this;
+      }
     };
   }
 }
