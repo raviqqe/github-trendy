@@ -7,8 +7,8 @@ export const languages: ILanguage[] = [
   // `path` must be equivalent to GitHub Trending's paths.
   { name: 'All', path: 'all' },
   { name: 'C', path: 'c' },
-  { name: 'C#', path: 'c#' },
   { name: 'C++', path: 'c++' },
+  { name: 'C#', path: 'c#' },
   { name: 'Clojure', path: 'clojure' },
   { name: 'Common Lisp', path: 'common-lisp' },
   { name: 'Crystal', path: 'crystal' },
