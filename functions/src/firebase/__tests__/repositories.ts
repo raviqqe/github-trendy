@@ -5,6 +5,8 @@ import Repositories from '../repositories';
 
 const testRepository: IRepository = {
   date: new Date().getTime(),
+  description: 'This is good.',
+  id: 'javascript/raviqqe/github-new-trends',
   language: 'C',
   name: 'raviqqe / github-new-trends',
   stars: 42,

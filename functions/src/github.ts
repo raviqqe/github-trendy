@@ -5,6 +5,7 @@ import * as url from 'url';
 export interface IRepository {
   date: number;
   description?: string;
+  id: string;
   language?: string;
   name: string;
   stars: number;
@@ -26,6 +27,7 @@ export async function fetchTrendingRepositories(
 
   for (const element of $('ol.repo-list li').toArray()) {
     const title = $(element).find('h3');
+    const path = title.find('a').prop('href');
 
     repositories.push({
       date,
@@ -33,6 +35,7 @@ export async function fetchTrendingRepositories(
         .find('p')
         .text()
         .trim(),
+      id: (language || 'all') + path,
       language: $(element)
         .find('[itemprop="programmingLanguage"]')
         .text()
@@ -45,7 +48,7 @@ export async function fetchTrendingRepositories(
           .text()
           .replace(',', '')
       ),
-      url: url.resolve('https://github.com', title.find('a').prop('href'))
+      url: url.resolve('https://github.com', path)
     });
   }
 

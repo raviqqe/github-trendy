@@ -31,11 +31,6 @@ export default makeExecutableSchema({
 
         return await repositories.fetch();
       }
-    },
-    Repository: {
-      id({ url }: IRepository) {
-        return url;
-      }
     }
   },
   typeDefs
