@@ -1,12 +1,21 @@
 <template>
     <div>
-        <a :href="url">{{ name }}</a>
+        <a :href="url" target="_blank">{{ name }}</a>
+        <div>{{ stars }}</div>
+        <div>{{ language }}</div>
+        <div>{{ date.toLocaleString() }}</div>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
-@Component({ props: { name: String, url: String } })
-export default class extends Vue {}
+@Component
+export default class extends Vue {
+  @Prop(Date) private date: Date;
+  @Prop(String) private language: string;
+  @Prop(String) private name: string;
+  @Prop(Number) private stars: number;
+  @Prop(String) private url: string;
+}
 </script>
