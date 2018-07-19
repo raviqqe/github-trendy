@@ -1,34 +1,34 @@
 <template>
   <div>
-    <div>
-      <Header />
-      <router-link
-        v-for="{ name, path } in languages"
-        :key="name"
-        :to="'/' + encodeURIComponent(path)"
-      >
-        {{ name }}
-      </router-link>
+    <Header />
+    <div class="content">
+      <router-view />
+      <Menu />
     </div>
-    <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import { languages } from '../domain';
 import Header from './Header.vue';
+import Menu from './Menu.vue';
 
-@Component({ components: { Header } })
-export default class extends Vue {
-  private languages = languages;
-}
+@Component({ components: { Header, Menu } })
+export default class extends Vue {}
 </script>
 
 <style lang="scss">
 body {
-  font-family: sans-serif;
+  font: 16px sans-serif;
   margin: 0;
+}
+</style>
+
+<style scoped lang="scss">
+.content {
+  display: flex;
+  max-width: 800px;
+  margin: 0 auto;
 }
 </style>

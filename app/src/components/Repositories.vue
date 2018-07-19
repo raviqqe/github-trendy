@@ -1,21 +1,23 @@
 <template>
-  <ApolloQuery :query="query" :variables="{ language }" :skip="!initialized">
-    <template slot-scope="{ result: { data, loading } }">
-      <template v-if="loading || !data">Loading...</template>
-      <template v-else>
-        <Repository
-          v-for="{ id, date, description, language, name, stars, url } of data.repositories"
-          :key="id"
-          :date="new Date(date)"
-          :description="description"
-          :language="language"
-          :name="name"
-          :stars="stars"
-          :url="url"
-        />
+  <div class="repositories">
+    <ApolloQuery :query="query" :variables="{ language }" :skip="!initialized">
+      <template slot-scope="{ result: { data, loading } }">
+        <template v-if="loading || !data">Loading...</template>
+        <template v-else>
+          <Repository
+            v-for="{ id, date, description, language, name, stars, url } of data.repositories"
+            :key="id"
+            :date="new Date(date)"
+            :description="description"
+            :language="language"
+            :name="name"
+            :stars="stars"
+            :url="url"
+          />
+        </template>
       </template>
-    </template>
-  </ApolloQuery>
+    </ApolloQuery>
+  </div>
 </template>
 
 <script lang="ts">
@@ -56,4 +58,8 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
+.repositories {
+  flex: 1;
+  margin: 1em;
+}
 </style>
