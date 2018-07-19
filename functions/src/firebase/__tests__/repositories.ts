@@ -11,12 +11,12 @@ const testRepository: IRepository = {
   url: 'https://github.com/raviqqe/github-new-trends'
 };
 
-test('Store repositories', () => {
+test('Store repositories', async () => {
   const repositories = new Repositories(
     admin.firestore().collection('repositories')
   );
 
-  repositories.store([testRepository]);
+  await repositories.store([testRepository]);
 });
 
 test('Fetch repositories', async () => {
@@ -26,7 +26,29 @@ test('Fetch repositories', async () => {
 
   expect(await repositories.fetch()).toEqual([]);
 
-  repositories.store([testRepository]);
+  await repositories.store([testRepository]);
 
   expect(await repositories.fetch()).toEqual([testRepository]);
+});
+
+test('Update repositories', async () => {
+  const repositories = new Repositories(
+    admin.firestore().collection('repositories')
+  );
+
+  await repositories.store([testRepository]);
+
+  expect(await repositories.fetch()).toEqual([testRepository]);
+
+  const newRepository = {
+    ...testRepository,
+    date: new Date().getTime(),
+    name: 'someone / repo'
+  };
+
+  await repositories.store([newRepository]);
+
+  expect(await repositories.fetch()).toEqual([
+    { ...testRepository, name: 'someone / repo' }
+  ]);
 });

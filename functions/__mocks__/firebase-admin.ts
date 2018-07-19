@@ -16,17 +16,17 @@ class Firestore {
 
         return {
           collection: (path: string) => this.collection(path, newPaths),
+          get: async () => ({ data: () => lodash.get(this.storage, newPaths) }),
           set: data => lodash.set(this.storage, newPaths, data)
         };
       },
-      get: () =>
-        Promise.resolve({
-          docs: Object.values(lodash.get(this.storage, paths) || {}).map(
-            data => ({
-              data: () => data
-            })
-          )
-        }),
+      get: async () => ({
+        docs: Object.values(lodash.get(this.storage, paths) || {}).map(
+          data => ({
+            data: () => data
+          })
+        )
+      }),
       limit() {
         return this;
       },

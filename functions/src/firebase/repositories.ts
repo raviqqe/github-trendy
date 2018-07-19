@@ -12,12 +12,21 @@ export default class {
 
   public async store(repositories: IRepository[]): Promise<void> {
     await Promise.all(
-      repositories.map(
-        async (repository: IRepository) =>
-          await this.collection
-            .doc(Buffer.from(repository.url).toString('base64'))
-            .set(repository)
-      )
+      repositories.map(async (repository: IRepository) => {
+        const key = Buffer.from(repository.url).toString('base64');
+
+        const oldRepository = (await this.collection
+          .doc(key)
+          .get()).data() as IRepository;
+
+        await this.collection
+          .doc(key)
+          .set(
+            oldRepository
+              ? { ...repository, date: oldRepository.date }
+              : repository
+          );
+      })
     );
   }
 
