@@ -4,6 +4,7 @@ export interface ILanguage {
 }
 
 export const languages: ILanguage[] = [
+  // `path` must be equivalent to GitHub Trending's paths.
   { name: 'All', path: 'all' },
   { name: 'C', path: 'c' },
   { name: 'Go', path: 'go' },
