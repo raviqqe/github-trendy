@@ -1,7 +1,7 @@
 <template>
   <div class="repository">
     <div class="information">
-      <a class="name" :href="url" target="_blank">{{ name }}</a>
+      <div><a class="name" :href="url" target="_blank">{{ name }}</a></div>
       <div class="description" v-if="description">{{ description }}</div>
     </div>
     <div class="properties">
@@ -41,7 +41,6 @@ export default class extends Vue {
   .name {
     $color: lightseagreen;
 
-    display: block;
     color: $color;
     font-size: 1.4em;
     font-weight: bold;
