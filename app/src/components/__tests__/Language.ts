@@ -8,6 +8,7 @@ test('Render a component', () => {
       color: 'yellow',
       id: 'javascript',
       name: 'JavaScript'
-    }
+    },
+    stubs: ['router-link']
   });
 });

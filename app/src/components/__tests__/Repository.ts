@@ -7,7 +7,7 @@ test('Render a component', () => {
     propsData: {
       date: new Date(),
       description: 'This is good.',
-      language: 'JavaScript',
+      language: { color: 'yellow', id: 'javascript', name: 'JavaScript' },
       name: 'My repository',
       stars: 42,
       url: 'https://github.com/foo/bar'
