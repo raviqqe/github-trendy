@@ -9,7 +9,10 @@ test('Fetch trending repositories', async () => {
     const repositories = await fetchTrendingRepositories(language);
 
     for (const { language, name, stars, url } of repositories) {
-      expect(typeof language).toBe('string');
+      if (language) {
+        expect(typeof language).toBe('object');
+      }
+
       expect(typeof name).toBe('string');
       expect(typeof stars).toBe('number');
 

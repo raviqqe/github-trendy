@@ -10,24 +10,30 @@ const typeDefs = `
     id: ID!
     date: Float!
     description: String
-    language: String
+    language: Language
     name: String!
     stars: Int!
     url: String!
   }
 
+  type Language {
+    color: String!
+    id: ID!
+    name: String!
+  }
+
   type Query {
-    repositories(language: String): [Repository]
+    repositories(languageID: ID): [Repository]
   }
 `;
 
 export default makeExecutableSchema({
   resolvers: {
     Query: {
-      async repositories(_, { language }) {
-        const repositories = languages.repositories(language);
+      async repositories(_, { languageID }) {
+        const repositories = languages.repositories(languageID);
 
-        await repositories.store(await fetchTrendingRepositories(language));
+        await repositories.store(await fetchTrendingRepositories(languageID));
 
         return await repositories.fetch();
       }

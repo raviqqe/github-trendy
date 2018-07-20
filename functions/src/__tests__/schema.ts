@@ -33,7 +33,16 @@ function testRepository({
     expect(typeof description).toBe('string');
   }
 
-  expect(typeof language).toBe('string');
+  if (language) {
+    expect(typeof language).toBe('object');
+
+    const { color, id, name } = language;
+
+    expect(typeof color).toBe('string');
+    expect(typeof id).toBe('string');
+    expect(typeof name).toBe('string');
+  }
+
   expect(typeof name).toBe('string');
   expect(typeof stars).toBe('number');
   expect(stars).toBeGreaterThan(0);
@@ -41,18 +50,34 @@ function testRepository({
   expect(parse(url).protocol).toBe('https:');
 }
 
+const defaultQuery = `
+  query {
+    repositories {
+      id
+      date
+      language {
+        color
+        id
+        name
+      }
+      name
+      stars
+      url
+    }
+  }
+`;
+
 test('Respond to requests', async () => {
   for (const request of [
     () =>
       axios.get('http://localhost:8080/graphql', {
         params: {
-          query:
-            'query { repositories { id, date, language, name, stars, url } }'
+          query: defaultQuery
         }
       }),
     () =>
       axios.post('http://localhost:8080/graphql', {
-        query: 'query { repositories { id, date, language, name, stars, url } }'
+        query: defaultQuery
       })
   ]) {
     const {
@@ -67,32 +92,37 @@ test('Respond to requests', async () => {
   }
 });
 
-test('Use language argument', async () => {
-  for (const language of ['c', 'c#', 'c++']) {
+test('Use language ID argument', async () => {
+  for (const languageID of ['c', 'c#', 'c++']) {
     const {
       data: {
         data: { repositories }
       }
     } = await axios.post('http://localhost:8080/graphql', {
       query: `
-        query Query($language: String) {
-          repositories(language: $language) {
+        query Query($languageID: ID) {
+          repositories(languageID: $languageID) {
             id
             date
-            language
+            language {
+              color
+              id
+              name
+            }
             name
             stars
             url
           }
         }
       `,
-      variables: { language }
+      variables: { languageID }
     });
 
     for (const repository of repositories) {
       testRepository(repository);
 
-      expect(repository.language).toBe(language.toUpperCase());
+      expect(repository.language.id).toBe(languageID);
+      expect(repository.language.name).toBe(languageID.toUpperCase());
     }
   }
 });

@@ -7,7 +7,7 @@ const testRepository: IRepository = {
   date: new Date().getTime(),
   description: 'This is good.',
   id: 'javascript/raviqqe/github-trendy',
-  language: 'C',
+  language: { color: 'black', id: 'c', name: 'C' },
   name: 'raviqqe / github-trendy',
   stars: 42,
   url: 'https://github.com/raviqqe/github-trendy'
