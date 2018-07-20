@@ -32,7 +32,7 @@ body {
   display: flex;
   max-width: 800px;
   margin: 0 auto;
-  padding: 1rem;
-  @include horizontal-children-margin(1rem);
+  padding: 1.2rem;
+  @include horizontal-children-margin(1.2rem);
 }
 </style>
