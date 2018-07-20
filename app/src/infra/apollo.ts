@@ -25,6 +25,11 @@ export async function initialize(): Promise<void> {
 export default new VueApollo({
   defaultClient: new ApolloClient({
     cache,
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'cache-and-network'
+      }
+    },
     link: setContext(async (_, { headers }) => {
       const token = await firebase.getToken();
 
