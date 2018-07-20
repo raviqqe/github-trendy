@@ -22,17 +22,18 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
+@import '../style.scss';
+
 .menu {
   display: flex;
   flex-direction: column;
   flex: 0;
-  margin: 1em;
+  @include vertical-children-margin(0.2em);
 }
 
 a {
   color: black;
   text-decoration: none;
   white-space: nowrap;
-  margin: 0.1em;
 }
 </style>

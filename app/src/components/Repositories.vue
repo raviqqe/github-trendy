@@ -62,7 +62,6 @@ export default class extends Vue {
 
 .repositories {
   flex: 1;
-  margin: 1em;
 
   > div {
     @include vertical-children-margin(1rem);

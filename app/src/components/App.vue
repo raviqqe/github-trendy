@@ -26,9 +26,13 @@ body {
 </style>
 
 <style scoped lang="scss">
+@import '../style.scss';
+
 .content {
   display: flex;
   max-width: 800px;
   margin: 0 auto;
+  padding: 1rem;
+  @include horizontal-children-margin(1rem);
 }
 </style>
