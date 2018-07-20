@@ -1,7 +1,9 @@
 <template>
   <div class="repository">
-    <a class="name" :href="url" target="_blank">{{ name }}</a>
-    <div class="description" v-if="description">{{ description }}</div>
+    <div class="information">
+      <a class="name" :href="url" target="_blank">{{ name }}</a>
+      <div class="description" v-if="description">{{ description }}</div>
+    </div>
     <div class="properties">
       <span v-if="language">{{ language }}</span>
       <span><span class="star">★</span> {{ stars }}</span>
@@ -28,33 +30,38 @@ export default class extends Vue {
 @import '../style.scss';
 
 .repository {
-  padding: 0.6em;
   border: 1px solid darkgrey;
   border-radius: 2px;
-  @include vertical-children-margin(0.4rem);
 }
 
-.name {
-  $color: lightseagreen;
+.information {
+  padding: 0.6rem;
+  @include vertical-children-margin(0.4rem);
 
-  display: block;
-  color: $color;
-  font-size: 1.4em;
-  font-weight: bold;
-  text-decoration: none;
+  .name {
+    $color: lightseagreen;
 
-  &:visited {
+    display: block;
     color: $color;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:visited {
+      color: $color;
+    }
+  }
+
+  .description {
+    color: dimgrey;
   }
 }
 
-.description {
-  color: dimgrey;
-}
-
 .properties {
+  background: whitesmoke;
   color: dimgrey;
-  font-size: 0.95em;
+  font-size: 0.9em;
+  padding: 0.2rem 0.6rem;
   @include horizontal-children-margin(1em);
 }
 
