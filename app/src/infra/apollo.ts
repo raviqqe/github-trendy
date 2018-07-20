@@ -30,16 +30,12 @@ export default new VueApollo({
         fetchPolicy: 'cache-and-network'
       }
     },
-    link: setContext(async (_, { headers }) => {
-      const token = await firebase.getToken();
-
-      return {
-        headers: {
-          ...headers,
-          authorization: token ? `Bearer ${token}` : ''
-        }
-      };
-    }).concat(
+    link: setContext(async (_, { headers }) => ({
+      headers: {
+        ...headers,
+        authorization: `Bearer ${await firebase.getToken()}`
+      }
+    })).concat(
       createHttpLink({
         fetchOptions: { method: 'GET' },
         uri:
