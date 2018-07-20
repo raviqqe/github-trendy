@@ -41,10 +41,5 @@ export default new VueApollo({
           'https://us-central1-github-new-trends.cloudfunctions.net/functions/graphql'
       })
     )
-  }),
-  defaultOptions: {
-    $query: {
-      fetchPolicy: 'cache-first'
-    }
-  }
+  })
 });
