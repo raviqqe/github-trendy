@@ -5,7 +5,7 @@
       <div class="description" v-if="description">{{ description }}</div>
     </div>
     <div class="properties">
-      <span v-if="language">{{ language }}</span>
+      <span v-if="language"><Language v-bind="language" /></span>
       <span><span class="star">★</span> {{ stars }}</span>
       <span><span class="clock">◷</span> {{ date.toLocaleString() }}</span>
     </div>
@@ -15,11 +15,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-@Component
+import Language from './Language.vue';
+
+@Component({ components: { Language } })
 export default class extends Vue {
   @Prop(Date) private date: Date;
   @Prop(String) private description?: string;
-  @Prop(String) private language?: string;
+  @Prop(Object) private language?: object;
   @Prop(String) private name: string;
   @Prop(Number) private stars: number;
   @Prop(String) private url: string;

@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <span class="ball" :color="color || 'grey'" />
-    <a :href="'/' + id">{{ name }}</a>
-  </div>
+  <router-link :to="'/' + id">
+    <span class="ball" :style="{ color: color || 'grey' }">⬤</span>
+    {{ name }}
+  </router-link>
 </template>
 
 <script lang="ts">
@@ -17,9 +17,14 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
-.ball {
-  width: 1em;
-  height: 1em;
-  border-radius: 1em;
+a {
+  $color: dimgrey;
+
+  color: $color;
+  text-decoration: none;
+
+  &:visited {
+    color: $color;
+  }
 }
 </style>

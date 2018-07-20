@@ -1,6 +1,6 @@
 <template>
   <div class="repositories">
-    <ApolloQuery :query="query" :variables="{ language }" :skip="!initialized">
+    <ApolloQuery :query="query" :variables="{ languageID }" :skip="!initialized">
       <template slot-scope="{ result: { data, loading } }">
         <template v-if="loading || !data">Loading...</template>
         <template v-else>
@@ -28,12 +28,16 @@ import { Component, Vue } from 'vue-property-decorator';
 import Repository from './Repository.vue';
 
 const query = gql`
-  query Query($language: String) {
-    repositories(language: $language) {
+  query Query($languageID: ID) {
+    repositories(languageID: $languageID) {
       id
       date
       description
-      language
+      language {
+        color
+        id
+        name
+      }
       name
       stars
       url
@@ -47,7 +51,7 @@ const query = gql`
 export default class extends Vue {
   private query = query;
 
-  private get language(): string {
+  private get languageID(): string {
     return decodeURIComponent(this.$route.path.replace('/', ''));
   }
 
