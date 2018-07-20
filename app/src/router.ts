@@ -8,7 +8,7 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
-    { path: '/', redirect: languages[0].path },
+    { path: '/', redirect: languages[0].id },
     { component: Repositories, path: '/:language' }
   ],
   scrollBehavior() {

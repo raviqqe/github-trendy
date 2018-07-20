@@ -1,9 +1,9 @@
 <template>
   <div class="menu">
     <router-link
-      v-for="{ name, path } in languages"
+      v-for="{ id, name } of languages"
       :key="name"
-      :to="'/' + encodeURIComponent(path)"
+      :to="'/' + encodeURIComponent(id)"
     >
       {{ name }}
     </router-link>
