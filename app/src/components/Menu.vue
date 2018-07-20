@@ -1,12 +1,6 @@
 <template>
   <div class="menu">
-    <router-link
-      v-for="{ id, name } of languages"
-      :key="name"
-      :to="'/' + encodeURIComponent(id)"
-    >
-      {{ name }}
-    </router-link>
+    <Language v-for="language of languages" v-bind="language" :key="language.id" />
   </div>
 </template>
 
@@ -14,8 +8,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { languages } from '../domain';
+import Language from './Language.vue';
 
-@Component
+@Component({ components: { Language } })
 export default class extends Vue {
   private languages = languages;
 }
