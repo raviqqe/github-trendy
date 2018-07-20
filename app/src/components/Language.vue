@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/' + id">
+  <router-link :to="'/' + encodeURIComponent(id)">
     <span class="ball" :style="{ color: color || 'grey' }">⬤</span>
     {{ name }}
   </router-link>
