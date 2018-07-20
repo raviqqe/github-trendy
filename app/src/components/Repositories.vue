@@ -58,8 +58,14 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
+@import '../style.scss';
+
 .repositories {
   flex: 1;
   margin: 1em;
+
+  > div {
+    @include vertical-children-margin(1rem);
+  }
 }
 </style>
