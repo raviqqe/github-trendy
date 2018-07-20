@@ -41,7 +41,7 @@ export async function fetchTrendingRepositories(
     const title = $(element).find('h3');
     const path = title.find('a').prop('href');
 
-    let language: ILanguage;
+    let language: ILanguage = null;
     const languageElement = $(element).find('[itemprop="programmingLanguage"]');
 
     if (languageElement.text().trim()) {
