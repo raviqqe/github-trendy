@@ -5,8 +5,9 @@ import Language from '../Language.vue';
 test('Render a component', () => {
   shallowMount(Language, {
     propsData: {
-      name: 'JavaScript',
-      path: 'javascript'
+      color: 'yellow',
+      id: 'javascript',
+      name: 'JavaScript'
     }
   });
 });
