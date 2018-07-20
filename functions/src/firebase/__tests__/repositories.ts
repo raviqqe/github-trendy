@@ -6,11 +6,11 @@ import Repositories from '../repositories';
 const testRepository: IRepository = {
   date: new Date().getTime(),
   description: 'This is good.',
-  id: 'javascript/raviqqe/github-new-trends',
+  id: 'javascript/raviqqe/github-trendy',
   language: 'C',
-  name: 'raviqqe / github-new-trends',
+  name: 'raviqqe / github-trendy',
   stars: 42,
-  url: 'https://github.com/raviqqe/github-new-trends'
+  url: 'https://github.com/raviqqe/github-trendy'
 };
 
 test('Store repositories', async () => {
