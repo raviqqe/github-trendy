@@ -18,13 +18,11 @@ export default class extends Vue {
 
 <style scoped lang="scss">
 a {
-  $color: dimgrey;
-
-  color: $color;
+  color: inherit;
   text-decoration: none;
 
   &:visited {
-    color: $color;
+    color: inherit;
   }
 }
 </style>
