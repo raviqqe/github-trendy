@@ -2,7 +2,7 @@ import axios from 'axios';
 import cheerio = require('cheerio');
 import * as url from 'url';
 
-interface ILanguage {
+export interface ILanguage {
   color: string;
   id: string;
   name: string;
@@ -22,6 +22,32 @@ function languageNameToID(name: string): string {
   return name.toLowerCase().replace(' ', '-');
 }
 
+async function fetchTrendingPage(languageID: string) {
+  return cheerio.load(
+    (await axios.get(
+      `https://github.com/trending/${encodeURIComponent(languageID)}`
+    )).data
+  );
+}
+
+function getLanguage(parentElement): ILanguage | null {
+  const element = parentElement
+    .find('[itemprop="programmingLanguage"]')
+    .first();
+
+  if (!element.text().trim()) {
+    return null;
+  }
+
+  const name = element.text().trim();
+
+  return {
+    color: element.prev().css('background-color'),
+    id: languageNameToID(name),
+    name
+  };
+}
+
 export async function fetchTrendingRepositories(
   languageID?: string
 ): Promise<IRepository[]> {
@@ -29,30 +55,13 @@ export async function fetchTrendingRepositories(
     languageID = '';
   }
 
-  const $ = cheerio.load(
-    (await axios.get(
-      `https://github.com/trending/${encodeURIComponent(languageID)}`
-    )).data
-  );
+  const $ = await fetchTrendingPage(languageID);
   const repositories: IRepository[] = [];
   const date = new Date().getTime();
 
   for (const element of $('ol.repo-list li').toArray()) {
     const title = $(element).find('h3');
     const path = title.find('a').prop('href');
-
-    let language: ILanguage = null;
-    const languageElement = $(element).find('[itemprop="programmingLanguage"]');
-
-    if (languageElement.text().trim()) {
-      const name = languageElement.text().trim();
-
-      language = {
-        color: languageElement.prev().css('background-color'),
-        id: languageNameToID(name),
-        name
-      };
-    }
 
     repositories.push({
       date,
@@ -61,7 +70,7 @@ export async function fetchTrendingRepositories(
         .text()
         .trim(),
       id: (languageID || 'all') + path,
-      language,
+      language: getLanguage($(element)),
       name: title.text().trim(),
       stars: Number(
         $(element)
@@ -75,4 +84,10 @@ export async function fetchTrendingRepositories(
   }
 
   return repositories;
+}
+
+export async function fetchLanguage(languageID: string): Promise<ILanguage> {
+  const $ = await fetchTrendingPage(languageID);
+
+  return getLanguage($('body'));
 }

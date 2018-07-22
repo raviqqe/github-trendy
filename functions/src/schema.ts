@@ -3,7 +3,11 @@ import { makeExecutableSchema } from 'graphql-tools';
 import * as path from 'path';
 
 import { languages } from './firebase';
-import { fetchTrendingRepositories, IRepository } from './github';
+import {
+  fetchLanguage,
+  fetchTrendingRepositories,
+  IRepository
+} from './github';
 
 const typeDefs = `
   type Repository {
@@ -23,6 +27,7 @@ const typeDefs = `
   }
 
   type Query {
+    languages(languageIDs: [ID]!): [Language]
     repositories(languageID: ID): [Repository]
   }
 `;
@@ -30,6 +35,9 @@ const typeDefs = `
 export default makeExecutableSchema({
   resolvers: {
     Query: {
+      async languages(_, { languageIDs }) {
+        return await Promise.all(languageIDs.map(fetchLanguage));
+      },
       async repositories(_, { languageID }) {
         const repositories = languages.repositories(languageID);
 

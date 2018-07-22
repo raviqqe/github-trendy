@@ -3,9 +3,10 @@ import axios from 'axios';
 import * as bodyParser from 'body-parser';
 import express = require('express');
 import { Request, Response } from 'express';
+import * as lodash from 'lodash';
 import { parse } from 'url';
 
-import { IRepository } from '../github';
+import { ILanguage, IRepository } from '../github';
 import schema from '../schema';
 
 jest.setTimeout(10000);
@@ -16,6 +17,12 @@ beforeAll(() => {
   app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
   app.listen(8080);
 });
+
+function testLanguage({ id, color, name }: ILanguage) {
+  expect(typeof color).toBe('string');
+  expect(typeof id).toBe('string');
+  expect(typeof name).toBe('string');
+}
 
 function testRepository({
   id,
@@ -34,13 +41,7 @@ function testRepository({
   }
 
   if (language) {
-    expect(typeof language).toBe('object');
-
-    const { color, id, name } = language;
-
-    expect(typeof color).toBe('string');
-    expect(typeof id).toBe('string');
-    expect(typeof name).toBe('string');
+    testLanguage(language);
   }
 
   expect(typeof name).toBe('string');
@@ -124,5 +125,36 @@ test('Use language ID argument', async () => {
       expect(repository.language.id).toBe(languageID);
       expect(repository.language.name).toBe(languageID.toUpperCase());
     }
+  }
+});
+
+test('Query languages', async () => {
+  const languageIDs = ['c', 'c#', 'c++'];
+
+  const {
+    data: {
+      data: { languages }
+    }
+  } = await axios.post('http://localhost:8080/graphql', {
+    query: `
+        query Query($languageIDs: [ID]!) {
+          languages(languageIDs: $languageIDs) {
+            id
+            color
+            name
+          }
+        }
+      `,
+    variables: { languageIDs }
+  });
+
+  for (const [language, languageID] of lodash.zip(
+    languages as ILanguage[],
+    languageIDs
+  )) {
+    testLanguage(language);
+
+    expect(language.id).toBe(languageID);
+    expect(language.name).toBe(languageID.toUpperCase());
   }
 });

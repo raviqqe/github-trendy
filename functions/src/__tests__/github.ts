@@ -1,6 +1,6 @@
 import { parse } from 'url';
 
-import { fetchTrendingRepositories } from '../github';
+import { fetchLanguage, fetchTrendingRepositories } from '../github';
 
 jest.setTimeout(10000);
 
@@ -21,5 +21,15 @@ test('Fetch trending repositories', async () => {
       expect(hostname).toBe('github.com');
       expect(protocol).toBe('https:');
     }
+  }
+});
+
+test('Fetch a language information', async () => {
+  for (const languageID of ['c', 'javascript']) {
+    const { color, id, name } = await fetchLanguage(languageID);
+
+    expect(typeof color).toBe('string');
+    expect(typeof id).toBe('string');
+    expect(typeof name).toBe('string');
   }
 });
