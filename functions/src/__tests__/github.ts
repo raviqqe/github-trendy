@@ -5,8 +5,8 @@ import { fetchLanguage, fetchTrendingRepositories } from '../github';
 jest.setTimeout(10000);
 
 test('Fetch trending repositories', async () => {
-  for (const language of [undefined, 'c', 'javascript']) {
-    const repositories = await fetchTrendingRepositories(language);
+  for (const languageID of [undefined, 'c', 'javascript']) {
+    const repositories = await fetchTrendingRepositories(languageID);
 
     for (const { language, name, stars, url } of repositories) {
       if (language) {
