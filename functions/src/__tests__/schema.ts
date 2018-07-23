@@ -9,7 +9,7 @@ import { parse } from 'url';
 import { ILanguage, IRepository } from '../github';
 import schema from '../schema';
 
-jest.setTimeout(10000);
+jest.setTimeout(20000);
 
 const app = express();
 
@@ -94,7 +94,7 @@ test('Respond to requests', async () => {
 });
 
 test('Use language ID argument', async () => {
-  for (const languageID of ['c', 'c#', 'c++']) {
+  for (const languageID of [undefined, '', 'c', 'c#', 'c++']) {
     const {
       data: {
         data: { repositories }
@@ -119,11 +119,15 @@ test('Use language ID argument', async () => {
       variables: { languageID }
     });
 
+    expect(repositories.length).toBeGreaterThan(0);
+
     for (const repository of repositories) {
       testRepository(repository);
 
-      expect(repository.language.id).toBe(languageID);
-      expect(repository.language.name).toBe(languageID.toUpperCase());
+      if (languageID) {
+        expect(repository.language.id).toBe(languageID);
+        expect(repository.language.name).toBe(languageID.toUpperCase());
+      }
     }
   }
 });

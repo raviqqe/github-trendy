@@ -12,6 +12,10 @@ class Firestore {
 
     return {
       doc: (path: string) => {
+        if (!path) {
+          throw new Error('falsy document path');
+        }
+
         const newPaths = [...paths, path];
 
         return {

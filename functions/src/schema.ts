@@ -39,7 +39,7 @@ export default makeExecutableSchema({
         return await Promise.all(languageIDs.map(fetchLanguage));
       },
       async repositories(_, { languageID }) {
-        const repositories = languages.repositories(languageID);
+        const repositories = languages.repositories(languageID || 'default');
 
         await repositories.store(await fetchTrendingRepositories(languageID));
 
