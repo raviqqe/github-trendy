@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 interface IState {
   apolloInitialized: boolean;
+  menuOpen: boolean;
   windowSmall: boolean;
 }
 
@@ -22,12 +23,16 @@ const store = new Vuex.Store<IState>({
     initializeApollo(state: IState) {
       state.apolloInitialized = true;
     },
+    toggleMenu(state: IState) {
+      state.menuOpen = !state.menuOpen;
+    },
     setWindowSmall(state: IState, windowSmall: boolean) {
       state.windowSmall = windowSmall;
     }
   },
   state: {
     apolloInitialized: false,
+    menuOpen: !media.windowSmall,
     windowSmall: media.windowSmall
   }
 });

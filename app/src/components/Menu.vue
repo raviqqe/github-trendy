@@ -1,15 +1,18 @@
 <template>
-  <div class="menu">
-    <Language color="tomato" id="" name="All" />
-    <ApolloQuery :query="query" :variables="{ languageIDs }" :skip="!initialized">
-      <template slot-scope="{ result: { data, loading } }">
-        <template v-if="loading || !data">Loading...</template>
-        <template v-else>
-          <Language v-for="language of data.languages" v-bind="language" :key="language.id" />
+  <div>
+    <div class="background" :data-menu-open="menuOpen" @click="toggleMenu" />
+    <div class="menu" :data-open="menuOpen" :data-window-small="windowSmall">
+      <Language color="tomato" id="" name="All" />
+      <ApolloQuery :query="query" :variables="{ languageIDs }" :skip="!initialized">
+        <template slot-scope="{ result: { data, loading } }">
+          <template v-if="loading || !data">Loading...</template>
+          <template v-else>
+            <Language v-for="language of data.languages" v-bind="language" :key="language.id" />
+          </template>
         </template>
-      </template>
-    </ApolloQuery>
-    <Language color="grey" id="unknown" name="Unknown languages" />
+      </ApolloQuery>
+      <Language color="grey" id="unknown" name="Unknown languages" />
+    </div>
   </div>
 </template>
 
@@ -38,8 +41,20 @@ export default class extends Vue {
   private languageIDs = languageIDs;
   private query = query;
 
+  private toggleMenu(): void {
+    this.$store.commit('toggleMenu');
+  }
+
   private get initialized(): boolean {
     return this.$store.state.apolloInitialized;
+  }
+
+  private get menuOpen(): boolean {
+    return this.$store.state.menuOpen;
+  }
+
+  private get windowSmall(): boolean {
+    return this.$store.state.windowSmall;
   }
 }
 </script>
@@ -59,6 +74,40 @@ export default class extends Vue {
 
   > :nth-child(2) {
     @include languages-container;
+    flex-shrink: 0;
+  }
+
+  &[data-window-small='true'] {
+    background: white;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 1em;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: transform $duration;
+
+    &[data-open] {
+      transform: unset;
+    }
+  }
+}
+
+.background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity $duration, visibility $duration;
+  opacity: 0;
+  visibility: hidden;
+
+  &[data-menu-open] {
+    opacity: 1;
+    visibility: visible;
   }
 }
 

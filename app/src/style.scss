@@ -1,3 +1,5 @@
+$duration: 0.05s;
+
 @mixin vertical-children-margin($margin) {
   > * {
     margin-bottom: $margin;

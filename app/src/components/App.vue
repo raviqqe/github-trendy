@@ -19,6 +19,10 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
+
 body {
   font: 16px sans-serif;
   margin: 0;
