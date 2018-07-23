@@ -23,5 +23,6 @@ button {
   line-height: 0;
   color: lightgrey;
   transform: scale(1.5);
+  cursor: pointer;
 }
 </style>
