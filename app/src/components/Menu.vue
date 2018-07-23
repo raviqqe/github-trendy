@@ -86,7 +86,7 @@ export default class extends Vue {
     right: 0;
     top: 0;
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
-    transform: translateX(100%);
+    transform: translateX(calc(100% + 1em));
     transition: transform $duration;
 
     &[data-open] {
