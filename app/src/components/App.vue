@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="content">
+    <div class="content" :data-window-small="windowSmall">
       <router-view />
       <Menu />
     </div>
@@ -15,7 +15,11 @@ import Header from './Header.vue';
 import Menu from './Menu.vue';
 
 @Component({ components: { Header, Menu } })
-export default class extends Vue {}
+export default class extends Vue {
+  private get windowSmall(): boolean {
+    return this.$store.state.windowSmall;
+  }
+}
 </script>
 
 <style lang="scss">
@@ -37,6 +41,9 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 1.2rem;
-  @include horizontal-children-margin(1.2rem);
+
+  &:not([data-window-small]) {
+    @include horizontal-children-margin(1.2rem);
+  }
 }
 </style>
