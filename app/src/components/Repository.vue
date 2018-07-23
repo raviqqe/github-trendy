@@ -1,5 +1,5 @@
 <template>
-  <div class="repository">
+  <div>
     <div class="information">
       <div><a class="name" :href="url" target="_blank">{{ name }}</a></div>
       <div class="description" v-if="description">{{ description }}</div>
@@ -30,11 +30,6 @@ export default class extends Vue {
 
 <style scoped lang="scss">
 @import '../style.scss';
-
-.repository {
-  border: 1px solid darkgrey;
-  border-radius: 2px;
-}
 
 .information {
   padding: 0.6rem;
