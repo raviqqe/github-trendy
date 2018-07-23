@@ -57,7 +57,7 @@ export default class extends Vue {
   flex: 0;
   @include languages-container;
 
-  > *:nth-child(2) {
+  > :nth-child(2) {
     @include languages-container;
   }
 }
