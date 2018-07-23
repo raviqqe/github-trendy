@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <Language color="tomato" id="all" name="All" />
+    <Language color="tomato" id="" name="All" />
     <ApolloQuery :query="query" :variables="{ languageIDs }" :skip="!initialized">
       <template slot-scope="{ result: { data, loading } }">
         <template v-if="loading || !data">Loading...</template>
