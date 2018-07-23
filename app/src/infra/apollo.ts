@@ -28,6 +28,9 @@ export default new VueApollo({
     defaultOptions: {
       query: {
         fetchPolicy: 'cache-and-network'
+      },
+      watchQuery: {
+        fetchPolicy: 'cache-and-network'
       }
     },
     link: setContext(async (_, { headers }) => ({
