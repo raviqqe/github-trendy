@@ -2,13 +2,12 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Repositories from './components/Repositories.vue';
-import { languages } from './domain';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
-    { path: '/', redirect: languages[0].id },
+    { path: '/', redirect: '/all' },
     { component: Repositories, path: '/:language' }
   ],
   scrollBehavior() {
