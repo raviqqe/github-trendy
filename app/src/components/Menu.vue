@@ -85,6 +85,7 @@ export default class extends Vue {
     position: fixed;
     right: 0;
     top: 0;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
     transform: translateX(100%);
     transition: transform $duration;
 
@@ -100,7 +101,6 @@ export default class extends Vue {
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
   transition: opacity $duration, visibility $duration;
   opacity: 0;
   visibility: hidden;
