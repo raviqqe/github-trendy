@@ -10,6 +10,7 @@ localVue.use(Vuex);
 test('Render a component', () => {
   shallowMount(App, {
     localVue,
-    store: new Vuex.Store({})
+    store: new Vuex.Store({}),
+    stubs: ['router-view']
   });
 });
