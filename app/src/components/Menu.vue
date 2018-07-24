@@ -9,9 +9,9 @@
     <div class="menu" :data-open="menuOpen" :data-window-small="windowSmall">
       <Query :query="query" :variables="{ languageIDs }">
         <template slot-scope="{ languages }">
-          <Language color="tomato" id="" name="All" />
-          <Language v-for="language of languages" v-bind="language" :key="language.id" />
-          <Language color="grey" id="unknown" name="Unknown languages" />
+          <MenuItem color="tomato" id="" name="All" />
+          <MenuItem v-for="language of languages" v-bind="language" :key="language.id" />
+          <MenuItem color="grey" id="unknown" name="Unknown languages" />
         </template>
       </Query>
     </div>
@@ -23,7 +23,7 @@ import gql from 'graphql-tag';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { languageIDs } from '../domain';
-import Language from './Language.vue';
+import MenuItem from './MenuItem.vue';
 import Query from './Query.vue';
 
 const query = gql`
@@ -36,7 +36,7 @@ const query = gql`
   }
 `;
 
-@Component({ components: { Query, Language } })
+@Component({ components: { Query, MenuItem } })
 export default class extends Vue {
   private languageIDs = languageIDs;
   private query = query;

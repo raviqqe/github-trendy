@@ -10,8 +10,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class extends Vue {
+  @Prop(String) protected id: string;
   @Prop(String) private color: string;
-  @Prop(String) private id: string;
   @Prop(String) private name: string;
 }
 </script>
