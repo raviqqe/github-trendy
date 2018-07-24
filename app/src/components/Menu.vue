@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div class="background" :data-menu-open="menuOpen" @click="toggleMenu" />
+    <div
+      class="background"
+      :data-menu-open="menuOpen"
+      :data-window-small="windowSmall"
+      @click="toggleMenu"
+    />
     <div class="menu" :data-open="menuOpen" :data-window-small="windowSmall">
       <Query :query="query" :variables="{ languageIDs }">
         <template slot-scope="{ languages }">
@@ -61,7 +66,7 @@ export default class extends Vue {
     @include vertical-children-margin(0.2em);
   }
 
-  &[data-window-small='true'] {
+  &[data-window-small] {
     background: white;
     height: 100vh;
     overflow-y: auto;
@@ -89,7 +94,7 @@ export default class extends Vue {
   opacity: 0;
   visibility: hidden;
 
-  &[data-menu-open] {
+  &[data-menu-open][data-window-small] {
     opacity: 1;
     visibility: visible;
   }
