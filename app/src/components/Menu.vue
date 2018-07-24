@@ -2,16 +2,16 @@
   <div>
     <div class="background" :data-menu-open="menuOpen" @click="toggleMenu" />
     <div class="menu" :data-open="menuOpen" :data-window-small="windowSmall">
-      <Language color="tomato" id="" name="All" />
       <ApolloQuery :query="query" :variables="{ languageIDs }" :skip="!initialized">
         <template slot-scope="{ result: { data, loading } }">
           <template v-if="loading || !data">Loading...</template>
           <template v-else>
+            <Language color="tomato" id="" name="All" />
             <Language v-for="language of data.languages" v-bind="language" :key="language.id" />
+            <Language color="grey" id="unknown" name="Unknown languages" />
           </template>
         </template>
       </ApolloQuery>
-      <Language color="grey" id="unknown" name="Unknown languages" />
     </div>
   </div>
 </template>
@@ -62,19 +62,12 @@ export default class extends Vue {
 <style scoped lang="scss">
 @import '../style.scss';
 
-@mixin languages-container {
-  display: flex;
-  flex-direction: column;
-  @include vertical-children-margin(0.2em);
-}
-
 .menu {
-  flex: 0;
-  @include languages-container;
-
-  > :nth-child(2) {
-    @include languages-container;
-    flex-shrink: 0;
+  > * {
+    display: flex;
+    flex-direction: column;
+    flex: 0;
+    @include vertical-children-margin(0.2em);
   }
 
   &[data-window-small='true'] {
