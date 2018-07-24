@@ -1,0 +1,27 @@
+<template>
+  <ApolloQuery :query="query" :variables="variables" :skip="!initialized">
+    <template slot-scope="{ result: { data, loading } }">
+      <template v-if="loading || !data">Loading...</template>
+      <template v-else>
+        <slot v-bind="data" />
+      </template>
+    </template>
+  </ApolloQuery>
+</template>
+
+<script lang="ts">
+import * as vueApollo from 'vue-apollo';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component({
+  components: { ApolloQuery: (vueApollo as any).ApolloQuery }
+})
+export default class extends Vue {
+  @Prop(Object) private query;
+  @Prop(Object) private variables;
+
+  private get initialized(): boolean {
+    return this.$store.state.apolloInitialized;
+  }
+}
+</script>
