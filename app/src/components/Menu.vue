@@ -2,27 +2,24 @@
   <div>
     <div class="background" :data-menu-open="menuOpen" @click="toggleMenu" />
     <div class="menu" :data-open="menuOpen" :data-window-small="windowSmall">
-      <ApolloQuery :query="query" :variables="{ languageIDs }" :skip="!initialized">
-        <template slot-scope="{ result: { data, loading } }">
-          <template v-if="loading || !data">Loading...</template>
-          <template v-else>
-            <Language color="tomato" id="" name="All" />
-            <Language v-for="language of data.languages" v-bind="language" :key="language.id" />
-            <Language color="grey" id="unknown" name="Unknown languages" />
-          </template>
+      <Query :query="query" :variables="{ languageIDs }">
+        <template slot-scope="{ languages }">
+          <Language color="tomato" id="" name="All" />
+          <Language v-for="language of languages" v-bind="language" :key="language.id" />
+          <Language color="grey" id="unknown" name="Unknown languages" />
         </template>
-      </ApolloQuery>
+      </Query>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import gql from 'graphql-tag';
-import * as vueApollo from 'vue-apollo';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { languageIDs } from '../domain';
 import Language from './Language.vue';
+import Query from './Query.vue';
 
 const query = gql`
   query Query($languageIDs: [ID]!) {
@@ -34,19 +31,13 @@ const query = gql`
   }
 `;
 
-@Component({
-  components: { ApolloQuery: (vueApollo as any).ApolloQuery, Language }
-})
+@Component({ components: { Query, Language } })
 export default class extends Vue {
   private languageIDs = languageIDs;
   private query = query;
 
   private toggleMenu(): void {
     this.$store.commit('toggleMenu');
-  }
-
-  private get initialized(): boolean {
-    return this.$store.state.apolloInitialized;
   }
 
   private get menuOpen(): boolean {
