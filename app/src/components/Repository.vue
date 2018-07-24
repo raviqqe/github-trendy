@@ -43,6 +43,7 @@ export default class extends Vue {
     font-size: 1.4em;
     font-weight: bold;
     text-decoration: none;
+    word-break: break-word;
 
     &:visited {
       color: $color;
