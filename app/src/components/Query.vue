@@ -1,7 +1,9 @@
 <template>
   <ApolloQuery :query="query" :variables="variables" :skip="!initialized">
     <template slot-scope="{ result: { data, loading } }">
-      <template v-if="loading || !data">Loading...</template>
+      <template v-if="loading || !data">
+        <VueLoading type="spin" color="darkgrey" />
+      </template>
       <template v-else>
         <slot v-bind="data" />
       </template>
@@ -11,10 +13,11 @@
 
 <script lang="ts">
 import * as vueApollo from 'vue-apollo';
+import { VueLoading } from 'vue-loading-template';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({
-  components: { ApolloQuery: (vueApollo as any).ApolloQuery }
+  components: { ApolloQuery: (vueApollo as any).ApolloQuery, VueLoading }
 })
 export default class extends Vue {
   @Prop(Object) private query;
