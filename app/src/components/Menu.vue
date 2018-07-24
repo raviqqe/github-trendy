@@ -67,15 +67,19 @@ export default class extends Vue {
   }
 
   &[data-window-small] {
+    font-size: 1.1em;
     background: white;
     height: 100vh;
     overflow-y: auto;
-    padding: 1em;
+    padding: 1rem;
     position: fixed;
     right: 0;
     top: 0;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
-    transform: translateX(calc(100% + 1em));
+
+    $shadow-size: 1rem;
+
+    box-shadow: 0 0 $shadow-size rgba(0, 0, 0, 0.5);
+    transform: translateX(calc(100% + #{$shadow-size}));
     transition: transform $duration;
 
     &[data-open] {
