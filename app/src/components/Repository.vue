@@ -52,6 +52,7 @@ export default class extends Vue {
 
   .description {
     color: dimgrey;
+    word-break: break-word;
   }
 }
 
