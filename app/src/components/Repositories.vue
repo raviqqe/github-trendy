@@ -18,33 +18,15 @@
 </template>
 
 <script lang="ts">
-import gql from 'graphql-tag';
 import { Component, Vue } from 'vue-property-decorator';
 
+import { repositoriesQuery } from '../infra/apollo';
 import Query from './Query.vue';
 import Repository from './Repository.vue';
 
-const query = gql`
-  query Query($languageID: ID) {
-    repositories(languageID: $languageID) {
-      id
-      date
-      description
-      language {
-        color
-        id
-        name
-      }
-      name
-      stars
-      url
-    }
-  }
-`;
-
 @Component({ components: { Query, Repository } })
 export default class extends Vue {
-  private query = query;
+  private query = repositoriesQuery;
 
   private get languageID(): string {
     return decodeURIComponent(this.$route.path.replace('/', ''));
