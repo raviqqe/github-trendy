@@ -3,14 +3,10 @@
     <Query :query="query" :variables="{ languageID }">
       <template slot-scope="{ repositories }">
         <Repository
-          v-for="{ id, date, description, language, name, stars, url } of repositories"
-          :key="id"
-          :date="new Date(date)"
-          :description="description"
-          :language="language"
-          :name="name"
-          :stars="stars"
-          :url="url"
+          v-for="repository of repositories"
+          v-bind="repository"
+          :key="repository.id"
+          :date="new Date(repository.date)"
         />
       </template>
     </Query>
