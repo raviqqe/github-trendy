@@ -10,8 +10,8 @@
 		"deploy": "firebase deploy"
 	},
 	"dependencies": {
-		"apollo-boost": "^0.1.10",
-		"apollo-cache-inmemory": "^1.2.5",
+		"apollo-boost": "^0.1.12",
+		"apollo-cache-inmemory": "^1.2.6",
 		"apollo-cache-persist": "^0.1.1",
 		"apollo-link-context": "^1.0.8",
 		"apollo-link-http": "^1.5.4",
@@ -35,14 +35,14 @@
 		"@vue/cli-plugin-typescript": "^3.0.0-rc.5",
 		"@vue/cli-plugin-unit-jest": "^3.0.0-rc.5",
 		"@vue/cli-service": "^3.0.0-rc.5",
-		"@vue/test-utils": "^1.0.0-beta.16",
+		"@vue/test-utils": "^1.0.0-beta.21",
 		"babel-core": "7.0.0-bridge.0",
 		"node-sass": "^4.9.0",
 		"sass-loader": "^7.0.1",
-		"stylelint": "^9.3.0",
+		"stylelint": "^9.4.0",
 		"stylelint-config-prettier": "^3.3.0",
 		"ts-jest": "^23.0.1",
-		"tslint-config-prettier": "^1.13.0",
+		"tslint-config-prettier": "^1.14.0",
 		"vue-template-compiler": "^2.5.16"
 	},
 	"browserslist": [
