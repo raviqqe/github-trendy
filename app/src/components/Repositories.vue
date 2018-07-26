@@ -6,7 +6,6 @@
           v-for="repository of repositories"
           v-bind="repository"
           :key="repository.id"
-          :date="new Date(repository.date)"
         />
       </template>
     </Query>

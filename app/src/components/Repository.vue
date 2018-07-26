@@ -7,7 +7,6 @@
     <div class="properties">
       <span v-if="language"><Language v-bind="language" /></span>
       <span><Icon name="star" class="star" /> {{ stars }}</span>
-      <span><Icon name="clock" class="clock" /> {{ date.toLocaleString() }}</span>
     </div>
   </div>
 </template>
@@ -20,7 +19,6 @@ import Language from './Language.vue';
 
 @Component({ components: { Icon, Language } })
 export default class extends Vue {
-  @Prop(Date) private date: Date;
   @Prop(String) private description?: string;
   @Prop(Object) private language?: object;
   @Prop(String) private name: string;
