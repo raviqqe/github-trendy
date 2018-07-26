@@ -48,6 +48,16 @@ export const repositoriesQuery = gql`
   }
 `;
 
+export const languagesQuery = gql`
+  query Query($languageIDs: [ID]!) {
+    languages(languageIDs: $languageIDs) {
+      id
+      color
+      name
+    }
+  }
+`;
+
 export async function initialize(): Promise<void> {
   await Promise.all([
     firebase.initialize(),

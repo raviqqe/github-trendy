@@ -19,27 +19,17 @@
 </template>
 
 <script lang="ts">
-import gql from 'graphql-tag';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { languageIDs } from '../domain';
+import { languagesQuery } from '../infra/apollo';
 import MenuItem from './MenuItem.vue';
 import Query from './Query.vue';
-
-const query = gql`
-  query Query($languageIDs: [ID]!) {
-    languages(languageIDs: $languageIDs) {
-      id
-      color
-      name
-    }
-  }
-`;
 
 @Component({ components: { Query, MenuItem } })
 export default class extends Vue {
   private languageIDs = languageIDs;
-  private query = query;
+  private query = languagesQuery;
 
   private toggleMenu(): void {
     this.$store.commit('toggleMenu');
