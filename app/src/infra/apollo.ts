@@ -2,7 +2,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
 import ApolloClient from 'apollo-client';
 import { setContext } from 'apollo-link-context';
-import { createHttpLink } from 'apollo-link-http';
+import { HttpLink } from 'apollo-link-http';
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 
@@ -39,7 +39,7 @@ export default new VueApollo({
         authorization: `Bearer ${await firebase.getToken()}`
       }
     })).concat(
-      createHttpLink({
+      new HttpLink({
         fetchOptions: { method: 'GET' },
         uri:
           'https://us-central1-github-new-trends.cloudfunctions.net/functions/graphql'
