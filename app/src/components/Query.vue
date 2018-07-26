@@ -1,5 +1,10 @@
 <template>
-  <ApolloQuery :query="query" :variables="variables" :skip="!initialized">
+  <ApolloQuery
+    :query="query"
+    :variables="variables"
+    :skip="!initialized"
+    fetch-policy="cache-and-network"
+  >
     <template slot-scope="{ result: { data, loading } }">
       <template v-if="loading || !data">
         <VueLoading type="spin" color="darkgrey" />

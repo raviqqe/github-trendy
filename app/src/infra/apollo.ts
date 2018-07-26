@@ -26,6 +26,7 @@ export default new VueApollo({
   defaultClient: new ApolloClient({
     cache,
     defaultOptions: {
+      // TODO: Define fetch policies only here when these are not overwritten by vue-apollo.
       query: {
         fetchPolicy: 'cache-and-network'
       },
