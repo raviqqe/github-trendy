@@ -7,7 +7,11 @@
   >
     <template slot-scope="{ result: { data, loading } }">
       <template v-if="loading || !data">
-        <VueLoading type="spin" color="darkgrey" />
+        <VueLoading
+          type="spin"
+          color="darkgrey"
+          :style="{ margin: windowSmall ? 0 : 'auto' }"
+        />
       </template>
       <template v-else>
         <slot v-bind="data" />
@@ -30,6 +34,10 @@ export default class extends Vue {
 
   private get initialized(): boolean {
     return this.$store.state.apolloInitialized;
+  }
+
+  private get windowSmall(): boolean {
+    return this.$store.state.windowSmall;
   }
 }
 </script>
