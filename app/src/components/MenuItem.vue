@@ -23,7 +23,8 @@ export default class extends Language {
 
 <style scoped lang="scss">
 div {
-  padding: 0.2em 0.4em 0em;
+  line-height: 1em;
+  padding: 0.4em;
   border-radius: 3px;
 
   &[data-highlighted] {
