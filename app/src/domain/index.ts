@@ -1,3 +1,15 @@
+import { groupBy } from 'lodash';
+
+export interface IRepository {
+  date: number;
+  [key: string]: any;
+}
+
+export interface IDay {
+  date: Date;
+  repositories: IRepository[];
+}
+
 export const languageIDs: string[] = [
   // IDs must be equivalent to GitHub Trending's paths.
   'c',
@@ -33,3 +45,21 @@ export const languageIDs: string[] = [
   'vim-script',
   'vue'
 ];
+
+export function roundTimestampToDate(timestamp: number): number {
+  return new Date(new Date(timestamp).toDateString()).getTime();
+}
+
+export function repositoriesToDays(
+  repositories: IRepository[]
+): Array<{ date: Date; repositories: IRepository[] }> {
+  return Object.entries(
+    groupBy(repositories, ({ date }) => roundTimestampToDate(date))
+  )
+    .sort()
+    .reverse()
+    .map(([date, repositories]) => ({
+      date: new Date(Number(date)),
+      repositories
+    }));
+}
