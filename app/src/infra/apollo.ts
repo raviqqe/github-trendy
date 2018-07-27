@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 
-import { languageIDs } from '../domain';
+import { languageIDs, specialLanguageIDs } from '../domain';
 import * as firebase from './firebase';
 
 Vue.use(VueApollo);
@@ -67,7 +67,7 @@ export async function initialize(): Promise<void> {
     })
   ]);
 
-  for (const languageID of languageIDs) {
+  for (const languageID of [...languageIDs, ...specialLanguageIDs]) {
     client.query({
       fetchPolicy: 'network-only',
       query: repositoriesQuery,

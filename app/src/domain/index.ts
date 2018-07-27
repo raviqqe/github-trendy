@@ -46,6 +46,11 @@ export const languageIDs: string[] = [
   'vue'
 ];
 
+export const specialLanguageIDs: string[] = [
+  '', // all languages
+  'unknown'
+];
+
 export function roundTimestampToDate(timestamp: number): number {
   return new Date(new Date(timestamp).toDateString()).getTime();
 }
