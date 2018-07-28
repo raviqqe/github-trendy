@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 
+import configuration from '../configuration.json';
 import { languageIDs, specialLanguageIDs } from '../domain';
 import * as firebase from './firebase';
 
@@ -24,8 +25,7 @@ const client = new ApolloClient({
   })).concat(
     new HttpLink({
       fetchOptions: { method: 'GET' },
-      uri:
-        'https://us-central1-github-new-trends.cloudfunctions.net/functions/graphql'
+      uri: configuration.graphQLEndpointURL
     })
   )
 });

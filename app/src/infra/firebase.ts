@@ -1,11 +1,9 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-firebase.initializeApp({
-  apiKey: 'AIzaSyCM6swVfPD4KzYPqIzcKVhgJAxB6dLfR3A',
-  authDomain: 'github-new-trends.firebaseapp.com',
-  projectId: 'github-new-trends'
-});
+import configuration from '../configuration.json';
+
+firebase.initializeApp(configuration.firebase);
 
 export async function initialize(): Promise<void> {
   await firebase.auth().signInAnonymously();
