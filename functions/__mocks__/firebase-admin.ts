@@ -5,7 +5,7 @@ export function initializeApp() {
 }
 
 class Firestore {
-  private storage = {};
+  private data = {};
 
   public collection(path: string, paths: string[] = []) {
     paths = [...paths, path];
@@ -20,16 +20,14 @@ class Firestore {
 
         return {
           collection: (path: string) => this.collection(path, newPaths),
-          get: async () => ({ data: () => lodash.get(this.storage, newPaths) }),
-          set: data => lodash.set(this.storage, newPaths, data)
+          get: async () => ({ data: () => lodash.get(this.data, newPaths) }),
+          set: data => lodash.set(this.data, newPaths, data)
         };
       },
       get: async () => ({
-        docs: Object.values(lodash.get(this.storage, paths) || {}).map(
-          data => ({
-            data: () => data
-          })
-        )
+        docs: Object.values(lodash.get(this.data, paths) || {}).map(data => ({
+          data: () => data
+        }))
       }),
       limit() {
         return this;
@@ -43,4 +41,21 @@ class Firestore {
 
 export function firestore() {
   return new Firestore();
+}
+
+export function storage() {
+  return {
+    bucket() {
+      return {
+        file: (name: string) => {
+          return {
+            download: async () => [this[name]],
+            exists: async () => [this[name] !== undefined],
+            save: async data => (this[name] = Buffer.from(data))
+          };
+        }
+      };
+    },
+    'empty-file': ''
+  };
 }

@@ -3,6 +3,7 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 import Languages from './languages';
+import Storage from './storage';
 
 admin.initializeApp(functions.config().firebase);
 
@@ -11,3 +12,4 @@ export async function verifyToken(token: string): Promise<void> {
 }
 
 export const languages = new Languages();
+export const storage = new Storage();
