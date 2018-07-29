@@ -1,8 +1,11 @@
 {
   "extends": ["tslint:recommended", "tslint-config-prettier"],
   "rules": {
+    "ban-types": false,
+    "no-console": false,
     "no-reference": false,
     "no-shadowed-variable": false,
-    "no-unused-expression": false
+    "no-unused-expression": false,
+    "only-arrow-functions": false
   }
 }
