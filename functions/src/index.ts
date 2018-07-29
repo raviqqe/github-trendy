@@ -5,6 +5,7 @@ import express = require('express');
 import { https } from 'firebase-functions';
 
 import authentication from './authentication';
+import configuration from './configuration.json';
 import schema from './schema';
 
 const app = express();
@@ -17,7 +18,7 @@ app.get(
   '/graphql',
   graphqlExpress({
     cacheControl: {
-      defaultMaxAge: 6 * 60 * 60
+      defaultMaxAge: configuration.cacheExpirationTime
     },
     schema,
     tracing: true
