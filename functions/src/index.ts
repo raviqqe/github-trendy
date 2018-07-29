@@ -1,4 +1,3 @@
-import * as apicache from 'apicache';
 import { graphqlExpress } from 'apollo-server-express';
 import * as bodyParser from 'body-parser';
 import cors = require('cors');
@@ -12,9 +11,17 @@ const app = express();
 
 app.use(cors());
 app.use(authentication);
-app.use(apicache.middleware('6 hours'));
 
 app.options('*', cors());
-app.get('/graphql', graphqlExpress({ schema }));
+app.get(
+  '/graphql',
+  graphqlExpress({
+    cacheControl: {
+      defaultMaxAge: 6 * 60 * 60
+    },
+    schema,
+    tracing: true
+  })
+);
 
 export const functions = https.onRequest(app);
