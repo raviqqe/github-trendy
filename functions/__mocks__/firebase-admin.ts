@@ -51,6 +51,7 @@ export function storage() {
           return {
             download: async () => [this[name]],
             exists: async () => [this[name] !== undefined],
+            getMetadata: async () => [{ updated: new Date().toString() }],
             save: async data => (this[name] = Buffer.from(data))
           };
         }
