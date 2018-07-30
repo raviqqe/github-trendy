@@ -1,12 +1,11 @@
 <template>
   <div class="days">
     <Query :query="query" :variables="{ languageID }">
-      <template slot-scope="{ days }">
+      <template slot-scope="{ repositories }">
         <Day
-          v-for="day of days"
+          v-for="day of repositoriesToDays(repositories)"
           v-bind="day"
-          :date="new Date(day.date)"
-          :key="day.date"
+          :key="day.date.toDateString()"
         />
       </template>
     </Query>
@@ -16,13 +15,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import { daysQuery } from '../infra/apollo';
+import { repositoriesToDays } from '../domain';
+import { repositoriesQuery } from '../infra/apollo';
 import Day from './Day.vue';
 import Query from './Query.vue';
 
 @Component({ components: { Day, Query } })
 export default class extends Vue {
-  private query = daysQuery;
+  private query = repositoriesQuery;
+  private repositoriesToDays = repositoriesToDays;
 
   private get languageID(): string {
     return decodeURIComponent(this.$route.path.replace('/', ''));
