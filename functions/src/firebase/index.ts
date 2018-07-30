@@ -6,6 +6,7 @@ import Languages from './languages';
 import Storage from './storage';
 
 admin.initializeApp(functions.config().firebase);
+admin.firestore().settings({ timestampsInSnapshots: true });
 
 export async function verifyToken(token: string): Promise<void> {
   await admin.auth().verifyIdToken(token);

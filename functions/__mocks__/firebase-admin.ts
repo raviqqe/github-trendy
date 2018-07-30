@@ -37,6 +37,10 @@ class Firestore {
       }
     };
   }
+
+  public settings() {
+    return;
+  }
 }
 
 export function firestore() {
