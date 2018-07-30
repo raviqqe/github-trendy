@@ -3,6 +3,7 @@
     :query="query"
     :variables="variables"
     :skip="!initialized"
+    fetchPolicy="cache-first"
   >
     <template slot-scope="{ result: { data, loading } }">
       <template v-if="loading || !data">
