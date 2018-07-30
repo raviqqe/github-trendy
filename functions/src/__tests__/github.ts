@@ -2,7 +2,7 @@ import { parse } from 'url';
 
 import { fetchLanguage, fetchRepositories } from '../github';
 
-jest.setTimeout(10000);
+jest.setTimeout(20000);
 
 test("Fetch today's repositories", async () => {
   for (const languageID of [undefined, 'c', 'javascript']) {
