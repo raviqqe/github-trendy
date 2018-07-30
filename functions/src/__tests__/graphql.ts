@@ -159,3 +159,46 @@ test('Query languages', async () => {
     expect(language.name).toBe(languageID.toUpperCase());
   }
 });
+
+test('Query days', async () => {
+  for (const languageID of [undefined, '', 'c', 'c#', 'c++']) {
+    const {
+      data: {
+        data: { days }
+      }
+    } = await axios.post('http://localhost:8080/graphql', {
+      query: `
+        query Query($languageID: ID) {
+          days(languageID: $languageID) {
+            id
+            date
+            repositories {
+              id
+              date
+              language {
+                color
+                id
+                name
+              }
+              name
+              stars
+              url
+            }
+          }
+        }
+      `,
+      variables: { languageID }
+    });
+
+    expect(days.length).toBeGreaterThan(0);
+
+    for (const { date, id, repositories } of days) {
+      expect(typeof id).toBe('string');
+      expect(typeof date).toBe('number');
+
+      for (const repository of repositories) {
+        testRepository(repository);
+      }
+    }
+  }
+});

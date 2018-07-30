@@ -1,12 +1,12 @@
 import { parse } from 'url';
 
-import { fetchLanguage, fetchTrendingRepositories } from '../github';
+import { fetchLanguage, fetchRepositories } from '../github';
 
 jest.setTimeout(10000);
 
-test('Fetch trending repositories', async () => {
+test("Fetch today's repositories", async () => {
   for (const languageID of [undefined, 'c', 'javascript']) {
-    const repositories = await fetchTrendingRepositories(languageID);
+    const repositories = await fetchRepositories(languageID);
 
     for (const { language, name, stars, url } of repositories) {
       if (language) {

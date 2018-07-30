@@ -3,12 +3,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import configuration from './configuration.json';
+import { repositoriesToDays } from './domain';
 import { languages } from './firebase';
-import {
-  fetchLanguage,
-  fetchTrendingRepositories,
-  IRepository
-} from './github';
+import { fetchLanguage, fetchRepositories, IRepository } from './github';
 
 const typeDefs = gql`
   type Repository {
@@ -27,7 +24,14 @@ const typeDefs = gql`
     name: String!
   }
 
+  type Day {
+    id: ID!
+    date: Float!
+    repositories: [Repository]!
+  }
+
   type Query {
+    days(languageID: ID): [Day]
     languages(languageIDs: [ID]!): [Language]
     repositories(languageID: ID): [Repository]
   }
@@ -43,11 +47,12 @@ export default new ApolloServer({
         return await Promise.all(languageIDs.map(fetchLanguage));
       },
       async repositories(_, { languageID }) {
-        const repositories = languages.repositories(languageID);
-
-        await repositories.store(await fetchTrendingRepositories(languageID));
-
-        return await repositories.fetch();
+        return await fetchRepositories(languageID);
+      },
+      async days(_, { languageID }) {
+        return repositoriesToDays(await fetchRepositories(languageID)).map(
+          day => ({ ...day, id: languageID + '-' + day.date })
+        );
       }
     }
   },

@@ -2,6 +2,8 @@ import axios from 'axios';
 import cheerio = require('cheerio');
 import * as url from 'url';
 
+import { languages } from './firebase';
+
 export interface ILanguage {
   color: string;
   id: string;
@@ -48,7 +50,7 @@ function getLanguage(parentElement): ILanguage | null {
   };
 }
 
-export async function fetchTrendingRepositories(
+export async function fetchRepositoriesOfToday(
   languageID?: string
 ): Promise<IRepository[]> {
   if (!languageID) {
@@ -84,6 +86,14 @@ export async function fetchTrendingRepositories(
   }
 
   return repositories;
+}
+
+export async function fetchRepositories(languageID?: string) {
+  const repositories = languages.repositories(languageID);
+
+  await repositories.store(await fetchRepositoriesOfToday(languageID));
+
+  return await repositories.fetch();
 }
 
 export async function fetchLanguage(languageID: string): Promise<ILanguage> {
