@@ -9,11 +9,21 @@ import graphqlServer from '../graphql';
 
 jest.setTimeout(20000);
 
+const languageIDs = [undefined, '', 'c', 'c#', 'c++', 'common-lisp'];
+
 beforeAll(() => {
   const app = express();
   graphqlServer.applyMiddleware({ app });
   app.listen(8080);
 });
+
+function languageIDToName(id: string): string {
+  return id
+    .replace('-', ' ')
+    .split(' ')
+    .map(lodash.capitalize)
+    .join(' ');
+}
 
 function testLanguage({ id, color, name }: ILanguage) {
   expect(typeof color).toBe('string');
@@ -91,7 +101,7 @@ test('Respond to requests', async () => {
 });
 
 test('Use language ID argument', async () => {
-  for (const languageID of [undefined, '', 'c', 'c#', 'c++']) {
+  for (const languageID of languageIDs) {
     const {
       data: {
         data: { repositories }
@@ -123,7 +133,7 @@ test('Use language ID argument', async () => {
 
       if (languageID) {
         expect(repository.language.id).toBe(languageID);
-        expect(repository.language.name).toBe(languageID.toUpperCase());
+        expect(repository.language.name).toBe(languageIDToName(languageID));
       }
     }
   }
@@ -156,12 +166,12 @@ test('Query languages', async () => {
     testLanguage(language);
 
     expect(language.id).toBe(languageID);
-    expect(language.name).toBe(languageID.toUpperCase());
+    expect(language.name).toBe(languageIDToName(languageID));
   }
 });
 
 test('Query days', async () => {
-  for (const languageID of [undefined, '', 'c', 'c#', 'c++']) {
+  for (const languageID of languageIDs) {
     const {
       data: {
         data: { days }
