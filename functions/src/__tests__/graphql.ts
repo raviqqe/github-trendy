@@ -1,20 +1,17 @@
-import { graphqlExpress } from 'apollo-server-express';
 import axios from 'axios';
-import * as bodyParser from 'body-parser';
 import express = require('express');
 import { Request, Response } from 'express';
 import * as lodash from 'lodash';
 import { parse } from 'url';
 
 import { ILanguage, IRepository } from '../github';
-import schema from '../schema';
+import graphqlServer from '../graphql';
 
 jest.setTimeout(20000);
 
-const app = express();
-
 beforeAll(() => {
-  app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+  const app = express();
+  graphqlServer.applyMiddleware({ app });
   app.listen(8080);
 });
 

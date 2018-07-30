@@ -1,7 +1,8 @@
+import { ApolloServer, gql } from 'apollo-server-express';
 import * as fs from 'fs';
-import { makeExecutableSchema } from 'graphql-tools';
 import * as path from 'path';
 
+import configuration from './configuration.json';
 import { languages } from './firebase';
 import {
   fetchLanguage,
@@ -9,7 +10,7 @@ import {
   IRepository
 } from './github';
 
-const typeDefs = `
+const typeDefs = gql`
   type Repository {
     id: ID!
     date: Float!
@@ -32,7 +33,10 @@ const typeDefs = `
   }
 `;
 
-export default makeExecutableSchema({
+export default new ApolloServer({
+  cacheControl: {
+    defaultMaxAge: configuration.cacheExpirationTime
+  },
   resolvers: {
     Query: {
       async languages(_, { languageIDs }) {
@@ -47,5 +51,6 @@ export default makeExecutableSchema({
       }
     }
   },
+  tracing: true,
   typeDefs
 });
