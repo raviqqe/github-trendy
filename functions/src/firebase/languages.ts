@@ -7,7 +7,7 @@ export default class {
 
   public repositories(language: string): Repositories {
     return new Repositories(
-      this.collection.doc(language).collection('repositories')
+      this.collection.doc(language || 'default').collection('repositories')
     );
   }
 }

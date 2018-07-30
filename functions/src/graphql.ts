@@ -43,7 +43,7 @@ export default new ApolloServer({
         return await Promise.all(languageIDs.map(fetchLanguage));
       },
       async repositories(_, { languageID }) {
-        const repositories = languages.repositories(languageID || 'default');
+        const repositories = languages.repositories(languageID);
 
         await repositories.store(await fetchTrendingRepositories(languageID));
 
