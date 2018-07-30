@@ -30,20 +30,24 @@ const client = new ApolloClient({
   )
 });
 
-export const repositoriesQuery = gql`
+export const daysQuery = gql`
   query Query($languageID: ID) {
-    repositories(languageID: $languageID) {
+    days(languageID: $languageID) {
       id
       date
-      description
-      language {
-        color
+      repositories {
         id
+        date
+        description
+        language {
+          color
+          id
+          name
+        }
         name
+        stars
+        url
       }
-      name
-      stars
-      url
     }
   }
 `;
@@ -70,7 +74,7 @@ export async function initialize(): Promise<void> {
   for (const languageID of [...languageIDs, ...specialLanguageIDs]) {
     client.query({
       fetchPolicy: 'network-only',
-      query: repositoriesQuery,
+      query: daysQuery,
       variables: { languageID }
     });
   }
