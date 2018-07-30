@@ -55,9 +55,7 @@ export function roundTimestampToDate(timestamp: number): number {
   return new Date(new Date(timestamp).toDateString()).getTime();
 }
 
-export function repositoriesToDays(
-  repositories: IRepository[]
-): Array<{ date: Date; repositories: IRepository[] }> {
+export function repositoriesToDays(repositories: IRepository[]): IDay[] {
   return Object.entries(
     groupBy(repositories, ({ date }) => roundTimestampToDate(date))
   )
