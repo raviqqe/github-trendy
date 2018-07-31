@@ -12,9 +12,12 @@
     ]
   },
   "hosting": {
-    "public": "app/dist"
-  },
-  "storage": {
-    "rules": "storage.rules"
+    "public": "app/dist",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "ssr"
+      }
+    ]
   }
 }
