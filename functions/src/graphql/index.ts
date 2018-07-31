@@ -1,10 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-express';
-import * as fs from 'fs';
-import * as path from 'path';
 
 import configuration from '../configuration.json';
 import { IRepository, repositoriesToDays } from '../domain';
-import { languages } from '../firebase';
 import { fetchLanguage, fetchRepositories } from './github';
 
 const typeDefs = gql`

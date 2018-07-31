@@ -1,6 +1,5 @@
 import axios from 'axios';
 import express = require('express');
-import { Request, Response } from 'express';
 import * as lodash from 'lodash';
 import { parse } from 'url';
 
