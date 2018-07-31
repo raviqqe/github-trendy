@@ -1,7 +1,7 @@
 <template>
-  <div :data-highlighted="highlighted">
-    <Language :color="color" :id="id" :name="name" />
-  </div>
+  <router-link :data-highlighted="highlighted" :to="path">
+    <Language :color="color" :name="name" />
+  </router-link>
 </template>
 
 <script lang="ts">
@@ -11,18 +11,20 @@ import Language from './Language.vue';
 
 @Component({ components: { Language } })
 export default class extends Language {
+  @Prop(String) private id: string;
+
   private get highlighted(): boolean {
-    return this.languageID === this.id;
+    return this.id === decodeURIComponent(this.$route.path.replace('/', ''));
   }
 
-  private get languageID(): string {
-    return decodeURIComponent(this.$route.path.replace('/', ''));
+  private get path(): string {
+    return '/' + encodeURIComponent(this.id);
   }
 }
 </script>
 
 <style scoped lang="scss">
-div {
+a {
   line-height: 1em;
   padding: 0.4em;
   border-radius: 3px;
