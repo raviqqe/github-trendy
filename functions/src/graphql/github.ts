@@ -2,27 +2,8 @@ import axios from 'axios';
 import cheerio = require('cheerio');
 import * as url from 'url';
 
-import { languages } from './firebase';
-
-export interface ILanguage {
-  color: string;
-  id: string;
-  name: string;
-}
-
-export interface IRepository {
-  date: number;
-  description?: string;
-  id: string;
-  language?: ILanguage;
-  name: string;
-  stars: number;
-  url: string;
-}
-
-function languageNameToID(name: string): string {
-  return name.toLowerCase().replace(' ', '-');
-}
+import { ILanguage, IRepository, languageNameToID } from '../domain';
+import { languages } from '../firebase';
 
 async function fetchTrendingPage(languageID: string) {
   return cheerio.load(

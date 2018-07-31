@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 
-import { IRepository } from '../../github';
+import { IRepository } from '../../domain';
 import Repositories from '../repositories';
 
 const testRepository: IRepository = {

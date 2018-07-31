@@ -1,7 +1,7 @@
 import { CollectionReference } from '@google-cloud/firestore';
 import * as admin from 'firebase-admin';
 
-import { IRepository } from '../github';
+import { IRepository } from '../domain';
 
 export default class {
   private collection: CollectionReference;

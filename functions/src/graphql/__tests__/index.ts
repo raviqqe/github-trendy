@@ -4,8 +4,8 @@ import { Request, Response } from 'express';
 import * as lodash from 'lodash';
 import { parse } from 'url';
 
-import { ILanguage, IRepository } from '../github';
-import graphqlServer from '../graphql';
+import graphqlServer from '..';
+import { ILanguage, IRepository } from '../../domain';
 
 jest.setTimeout(20000);
 

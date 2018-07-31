@@ -1,16 +1,13 @@
-import { NextFunction, Request, Response } from 'express';
 import * as admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
+import { config, https } from 'firebase-functions';
 
 import Languages from './languages';
-import Storage from './storage';
 
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp(config().firebase);
 admin.firestore().settings({ timestampsInSnapshots: true });
 
-export async function verifyToken(token: string): Promise<void> {
-  await admin.auth().verifyIdToken(token);
-}
-
 export const languages = new Languages();
-export const storage = new Storage();
+
+export function httpsFunction(handler) {
+  return https.onRequest(handler);
+}
