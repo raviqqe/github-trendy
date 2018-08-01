@@ -3,9 +3,8 @@
 	"private": true,
 	"scripts": {
 		"lint": "tslint --project tsconfig.json",
-		"build": "tsc && nuxt build",
-		"test": "jest --coverage --detectOpenHandles",
-		"start": "nuxt build && nuxt start"
+		"build": "tsc",
+		"test": "jest --coverage --detectOpenHandles"
 	},
 	"main": "dist/index.js",
 	"engines": {

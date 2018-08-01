@@ -2,7 +2,7 @@
 
 set -e
 
-for dir in app functions
+for dir in ssr functions
 do
 	(
 		cd $dir

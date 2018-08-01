@@ -1,6 +1,5 @@
 module.exports = {
-  srcDir: 'nuxt',
-  buildDir: 'dist/nuxt-build',
+  buildDir: '../functions/dist/nuxt',
   mode: 'universal',
   head: {
     title: 'Github Trendy',
@@ -8,10 +7,5 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ]
-  },
-  loading: {},
-  css: [],
-  plugins: [],
-  modules: [],
-  build: {}
+  }
 };
