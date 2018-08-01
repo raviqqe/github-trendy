@@ -9,5 +9,5 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest'
   },
   snapshotSerializers: ['jest-serializer-vue'],
-  testMatch: ['<rootDir>/(pages|components)/**/__tests__/*.ts']
+  testMatch: ['<rootDir>/(components|domain|pages)/**/__tests__/*.ts']
 };
