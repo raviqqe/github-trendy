@@ -38,6 +38,10 @@ export default new ApolloServer({
   cacheControl: {
     defaultMaxAge: configuration.cacheExpirationTime
   },
+  formatError: error => {
+    console.error(error);
+    return error;
+  },
   resolvers: {
     Query: {
       async languages(_, { languageIDs }) {
