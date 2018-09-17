@@ -5,7 +5,7 @@
   "scripts": {
     "build": "vue-cli-service build",
     "deploy": "firebase deploy",
-    "format": "prettier --write *.js src/**/* ts*.json",
+    "format": "prettier --write *.js *.json 'src/**/*'",
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve",
     "test": "vue-cli-service test:unit"

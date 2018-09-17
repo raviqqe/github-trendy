@@ -4,7 +4,7 @@
   "scripts": {
     "build": "tsc",
     "deploy": "firebase deploy",
-    "format": "prettier --write *.js src/**/* ts*.json",
+    "format": "prettier --write *.js *.json 'src/**/*'",
     "lint": "tslint --project tsconfig.json",
     "test": "jest --coverage --detectOpenHandles"
   },

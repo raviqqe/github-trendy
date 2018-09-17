@@ -1,14 +1,14 @@
-import axios from 'axios';
-import express = require('express');
-import * as lodash from 'lodash';
-import { parse } from 'url';
+import axios from "axios";
+import express = require("express");
+import * as lodash from "lodash";
+import { parse } from "url";
 
-import graphqlServer from '..';
-import { ILanguage, IRepository } from '../../domain';
+import graphqlServer from "..";
+import { ILanguage, IRepository } from "../../domain";
 
 jest.setTimeout(20000);
 
-const languageIDs = [undefined, '', 'c', 'c#', 'c++', 'common-lisp'];
+const languageIDs = [undefined, "", "c", "c#", "c++", "common-lisp"];
 
 beforeAll(() => {
   const app = express();
@@ -18,16 +18,16 @@ beforeAll(() => {
 
 function languageIDToName(id: string): string {
   return id
-    .replace('-', ' ')
-    .split(' ')
+    .replace("-", " ")
+    .split(" ")
     .map(lodash.capitalize)
-    .join(' ');
+    .join(" ");
 }
 
 function testLanguage({ id, color, name }: ILanguage) {
-  expect(typeof color).toBe('string');
-  expect(typeof id).toBe('string');
-  expect(typeof name).toBe('string');
+  expect(typeof color).toBe("string");
+  expect(typeof id).toBe("string");
+  expect(typeof name).toBe("string");
 }
 
 function testRepository({
@@ -39,22 +39,22 @@ function testRepository({
   stars,
   url
 }: IRepository & { id: string }) {
-  expect(typeof id).toBe('string');
-  expect(typeof date).toBe('number');
+  expect(typeof id).toBe("string");
+  expect(typeof date).toBe("number");
 
   if (description) {
-    expect(typeof description).toBe('string');
+    expect(typeof description).toBe("string");
   }
 
   if (language) {
     testLanguage(language);
   }
 
-  expect(typeof name).toBe('string');
-  expect(typeof stars).toBe('number');
+  expect(typeof name).toBe("string");
+  expect(typeof stars).toBe("number");
   expect(stars).toBeGreaterThan(0);
-  expect(typeof url).toBe('string');
-  expect(parse(url).protocol).toBe('https:');
+  expect(typeof url).toBe("string");
+  expect(parse(url).protocol).toBe("https:");
 }
 
 const defaultQuery = `
@@ -74,16 +74,16 @@ const defaultQuery = `
   }
 `;
 
-test('Respond to requests', async () => {
+test("Respond to requests", async () => {
   for (const request of [
     () =>
-      axios.get('http://localhost:8080/graphql', {
+      axios.get("http://localhost:8080/graphql", {
         params: {
           query: defaultQuery
         }
       }),
     () =>
-      axios.post('http://localhost:8080/graphql', {
+      axios.post("http://localhost:8080/graphql", {
         query: defaultQuery
       })
   ]) {
@@ -99,13 +99,13 @@ test('Respond to requests', async () => {
   }
 });
 
-test('Use language ID argument', async () => {
+test("Use language ID argument", async () => {
   for (const languageID of languageIDs) {
     const {
       data: {
         data: { repositories }
       }
-    } = await axios.post('http://localhost:8080/graphql', {
+    } = await axios.post("http://localhost:8080/graphql", {
       query: `
         query Query($languageID: ID) {
           repositories(languageID: $languageID) {
@@ -138,14 +138,14 @@ test('Use language ID argument', async () => {
   }
 });
 
-test('Query languages', async () => {
-  const languageIDs = ['c', 'c#', 'c++'];
+test("Query languages", async () => {
+  const languageIDs = ["c", "c#", "c++"];
 
   const {
     data: {
       data: { languages }
     }
-  } = await axios.post('http://localhost:8080/graphql', {
+  } = await axios.post("http://localhost:8080/graphql", {
     query: `
         query Query($languageIDs: [ID]!) {
           languages(languageIDs: $languageIDs) {
@@ -169,13 +169,13 @@ test('Query languages', async () => {
   }
 });
 
-test('Query days', async () => {
+test("Query days", async () => {
   for (const languageID of languageIDs) {
     const {
       data: {
         data: { days }
       }
-    } = await axios.post('http://localhost:8080/graphql', {
+    } = await axios.post("http://localhost:8080/graphql", {
       query: `
         query Query($languageID: ID) {
           days(languageID: $languageID) {
@@ -202,8 +202,8 @@ test('Query days', async () => {
     expect(days.length).toBeGreaterThan(0);
 
     for (const { date, id, repositories } of days) {
-      expect(typeof id).toBe('string');
-      expect(typeof date).toBe('number');
+      expect(typeof id).toBe("string");
+      expect(typeof date).toBe("number");
 
       for (const repository of repositories) {
         testRepository(repository);

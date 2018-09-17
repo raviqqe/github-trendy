@@ -3,18 +3,18 @@ import {
   IRepository,
   repositoriesToDays,
   roundTimestampToDate
-} from '..';
+} from "..";
 
 const testDates: number[] = [new Date().getTime(), new Date(0).getTime()];
 
 const testRepositories = [
-  { date: testDates[0], name: 'a' },
-  { date: testDates[0], name: 'b' },
-  { date: testDates[1], name: 'c' },
-  { date: testDates[1], name: 'd' }
+  { date: testDates[0], name: "a" },
+  { date: testDates[0], name: "b" },
+  { date: testDates[1], name: "c" },
+  { date: testDates[1], name: "d" }
 ] as IRepository[];
 
-test('Convert repositories into days', () => {
+test("Convert repositories into days", () => {
   for (const { days, repositories } of [
     { days: [], repositories: [] },
     {
