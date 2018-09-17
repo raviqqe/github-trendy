@@ -5,16 +5,11 @@
   },
   "functions": {
     "predeploy": [
-      "npm run deps",
+      "npm install",
       "npm run lint",
       "npm run test",
       "npm run build"
-    ]
-  },
-  "hosting": {
-    "public": "app/dist"
-  },
-  "storage": {
-    "rules": "storage.rules"
+    ],
+    "source": "."
   }
 }

@@ -4,5 +4,5 @@
     "authDomain": "github-new-trends.firebaseapp.com",
     "projectId": "github-new-trends"
   },
-  "graphQLEndpointURL": "https://us-central1-github-new-trends.cloudfunctions.net/functions/graphql"
+  "graphQLEndpointURL": "https://us-central1-github-trendy-backend.cloudfunctions.net/functions/graphql"
 }
