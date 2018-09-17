@@ -7,6 +7,7 @@ module.exports = {
       "jest-transform-stub",
     "^.+\\.ts$": "ts-jest"
   },
+  setupTestFrameworkScriptFile: "./src/set-up-tests.ts",
   snapshotSerializers: ["jest-serializer-vue"],
   testMatch: ["<rootDir>/src/**/__tests__/*.ts"]
 };
