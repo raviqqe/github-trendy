@@ -21,16 +21,18 @@
 </template>
 
 <script lang="ts">
-import * as vueApollo from 'vue-apollo';
-import { VueLoading } from 'vue-loading-template';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import * as vueApollo from "vue-apollo";
+import { VueLoading } from "vue-loading-template";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({
   components: { ApolloQuery: (vueApollo as any).ApolloQuery, VueLoading }
 })
 export default class extends Vue {
-  @Prop(Object) private query;
-  @Prop(Object) private variables;
+  @Prop(Object)
+  private query;
+  @Prop(Object)
+  private variables;
 
   private get initialized(): boolean {
     return this.$store.state.apolloInitialized;

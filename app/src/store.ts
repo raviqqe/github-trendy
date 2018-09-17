@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
-import * as apollo from './infra/apollo';
-import * as media from './infra/media';
+import * as apollo from "./infra/apollo";
+import * as media from "./infra/media";
 
 Vue.use(Vuex);
 
@@ -16,7 +16,7 @@ const store = new Vuex.Store<IState>({
   actions: {
     async initializeApollo(context) {
       await apollo.initialize();
-      context.commit('initializeApollo');
+      context.commit("initializeApollo");
     }
   },
   mutations: {
@@ -37,9 +37,9 @@ const store = new Vuex.Store<IState>({
   }
 });
 
-store.dispatch('initializeApollo');
+store.dispatch("initializeApollo");
 media.onWindowResize((windowSmall: boolean) =>
-  store.commit('setWindowSmall', windowSmall)
+  store.commit("setWindowSmall", windowSmall)
 );
 
 export default store;

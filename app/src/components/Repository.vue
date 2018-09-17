@@ -12,23 +12,28 @@
 </template>
 
 <script lang="ts">
-import Icon from 'vue-awesome';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import Icon from "vue-awesome";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-import Language from './Language.vue';
+import Language from "./Language.vue";
 
 @Component({ components: { Icon, Language } })
 export default class extends Vue {
-  @Prop(String) private description?: string;
-  @Prop(Object) private language?: object;
-  @Prop(String) private name: string;
-  @Prop(Number) private stars: number;
-  @Prop(String) private url: string;
+  @Prop(String)
+  private description?: string;
+  @Prop(Object)
+  private language?: object;
+  @Prop(String)
+  private name: string;
+  @Prop(Number)
+  private stars: number;
+  @Prop(String)
+  private url: string;
 }
 </script>
 
 <style scoped lang="scss">
-@import '../style.scss';
+@import "../style.scss";
 
 .information {
   padding: 0.6rem;

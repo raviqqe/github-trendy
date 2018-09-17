@@ -1,15 +1,15 @@
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { persistCache } from 'apollo-cache-persist';
-import ApolloClient from 'apollo-client';
-import { setContext } from 'apollo-link-context';
-import { HttpLink } from 'apollo-link-http';
-import gql from 'graphql-tag';
-import Vue from 'vue';
-import VueApollo from 'vue-apollo';
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { persistCache } from "apollo-cache-persist";
+import ApolloClient from "apollo-client";
+import { setContext } from "apollo-link-context";
+import { HttpLink } from "apollo-link-http";
+import gql from "graphql-tag";
+import Vue from "vue";
+import VueApollo from "vue-apollo";
 
-import configuration from '../configuration.json';
-import { languageIDs, specialLanguageIDs } from '../domain';
-import * as firebase from './firebase';
+import configuration from "../configuration.json";
+import { languageIDs, specialLanguageIDs } from "../domain";
+import * as firebase from "./firebase";
 
 Vue.use(VueApollo);
 
@@ -24,7 +24,7 @@ const client = new ApolloClient({
     }
   })).concat(
     new HttpLink({
-      fetchOptions: { method: 'GET' },
+      fetchOptions: { method: "GET" },
       uri: configuration.graphQLEndpointURL
     })
   )
@@ -69,7 +69,7 @@ export async function initialize(): Promise<void> {
 
   for (const languageID of [...languageIDs, ...specialLanguageIDs]) {
     client.query({
-      fetchPolicy: 'network-only',
+      fetchPolicy: "network-only",
       query: repositoriesQuery,
       variables: { languageID }
     });

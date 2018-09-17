@@ -1,8 +1,8 @@
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer, gql } from "apollo-server-express";
 
-import configuration from '../configuration.json';
-import { IRepository, repositoriesToDays } from '../domain';
-import { fetchLanguage, fetchRepositories } from './github';
+import configuration from "../configuration.json";
+import { IRepository, repositoriesToDays } from "../domain";
+import { fetchLanguage, fetchRepositories } from "./github";
 
 const typeDefs = gql`
   type Repository {
@@ -48,7 +48,7 @@ export default new ApolloServer({
       },
       async days(_, { languageID }) {
         return repositoriesToDays(await fetchRepositories(languageID)).map(
-          day => ({ ...day, id: languageID + '-' + day.date })
+          day => ({ ...day, id: languageID + "-" + day.date })
         );
       }
     }

@@ -1,14 +1,14 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount } from "@vue/test-utils";
 
-import Language from '../Language.vue';
+import Language from "../Language.vue";
 
-test('Render a component', () => {
+test("Render a component", () => {
   shallowMount(Language, {
     propsData: {
-      color: 'yellow',
-      id: 'javascript',
-      name: 'JavaScript'
+      color: "yellow",
+      id: "javascript",
+      name: "JavaScript"
     },
-    stubs: ['router-link']
+    stubs: ["router-link"]
   });
 });

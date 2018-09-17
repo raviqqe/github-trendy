@@ -3,22 +3,22 @@ import {
   IRepository,
   repositoriesToDays,
   roundTimestampToDate
-} from '..';
+} from "..";
 
 const testDates: Date[] = [new Date(), new Date(0)];
 
 const testRepositories: IRepository[] = [
-  { date: testDates[0].getTime(), name: 'a' },
-  { date: testDates[0].getTime(), name: 'b' },
-  { date: testDates[1].getTime(), name: 'c' },
-  { date: testDates[1].getTime(), name: 'd' }
+  { date: testDates[0].getTime(), name: "a" },
+  { date: testDates[0].getTime(), name: "b" },
+  { date: testDates[1].getTime(), name: "c" },
+  { date: testDates[1].getTime(), name: "d" }
 ];
 
 function roundDate(date: Date): Date {
   return new Date(roundTimestampToDate(date.getTime()));
 }
 
-test('Convert repositories into days', () => {
+test("Convert repositories into days", () => {
   for (const { days, repositories } of [
     { days: [], repositories: [] },
     {

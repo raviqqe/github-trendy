@@ -5,13 +5,13 @@
 </template>
 
 <script lang="ts">
-import Icon from 'vue-awesome';
-import { Component, Vue } from 'vue-property-decorator';
+import Icon from "vue-awesome";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({ components: { Icon } })
 export default class extends Vue {
   public toggleMenu() {
-    this.$store.commit('toggleMenu');
+    this.$store.commit("toggleMenu");
   }
 }
 </script>

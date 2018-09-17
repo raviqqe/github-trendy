@@ -1,12 +1,17 @@
 {
-	"indexes": [{
-		"collectionId": "repositories",
-		"fields": [{
-			"fieldPath": "date",
-			"mode": "DESCENDING"
-		}, {
-			"fieldPath": "stars",
-			"mode": "DESCENDING"
-		}]
-	}]
+  "indexes": [
+    {
+      "collectionId": "repositories",
+      "fields": [
+        {
+          "fieldPath": "date",
+          "mode": "DESCENDING"
+        },
+        {
+          "fieldPath": "stars",
+          "mode": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }

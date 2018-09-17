@@ -6,11 +6,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class extends Vue {
-  @Prop(String) private color: string;
-  @Prop(String) private name: string;
+  @Prop(String)
+  private color: string;
+  @Prop(String)
+  private name: string;
 }
 </script>

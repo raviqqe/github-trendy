@@ -1,13 +1,13 @@
-import * as admin from 'firebase-admin';
+import * as admin from "firebase-admin";
 
-import Repositories from './repositories';
+import Repositories from "./repositories";
 
 export default class {
-  private collection = admin.firestore().collection('languages');
+  private collection = admin.firestore().collection("languages");
 
   public repositories(language: string): Repositories {
     return new Repositories(
-      this.collection.doc(language || 'default').collection('repositories')
+      this.collection.doc(language || "default").collection("repositories")
     );
   }
 }

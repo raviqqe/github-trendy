@@ -13,12 +13,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
-import { repositoriesToDays } from '../domain';
-import { repositoriesQuery } from '../infra/apollo';
-import Day from './Day.vue';
-import Query from './Query.vue';
+import { repositoriesToDays } from "../domain";
+import { repositoriesQuery } from "../infra/apollo";
+import Day from "./Day.vue";
+import Query from "./Query.vue";
 
 @Component({ components: { Day, Query } })
 export default class extends Vue {
@@ -26,13 +26,13 @@ export default class extends Vue {
   private repositoriesToDays = repositoriesToDays;
 
   private get languageID(): string {
-    return decodeURIComponent(this.$route.path.replace('/', ''));
+    return decodeURIComponent(this.$route.path.replace("/", ""));
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '../style.scss';
+@import "../style.scss";
 
 .days {
   flex: 1;

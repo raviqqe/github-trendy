@@ -1,4 +1,4 @@
-import { IRepository } from './repository';
+import { IRepository } from "./repository";
 
 export interface IDay {
   date: number;

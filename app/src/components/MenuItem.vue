@@ -5,20 +5,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-import Language from './Language.vue';
+import Language from "./Language.vue";
 
 @Component({ components: { Language } })
 export default class extends Language {
-  @Prop(String) private id: string;
+  @Prop(String)
+  private id: string;
 
   private get highlighted(): boolean {
-    return this.id === decodeURIComponent(this.$route.path.replace('/', ''));
+    return this.id === decodeURIComponent(this.$route.path.replace("/", ""));
   }
 
   private get path(): string {
-    return '/' + encodeURIComponent(this.id);
+    return "/" + encodeURIComponent(this.id);
   }
 }
 </script>

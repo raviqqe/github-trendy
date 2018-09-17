@@ -12,25 +12,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-import Repository from './Repository.vue';
+import Repository from "./Repository.vue";
 
 @Component({ components: { Repository } })
 export default class extends Vue {
-  @Prop(Date) private date: Date;
-  @Prop(Array) private repositories: object[];
+  @Prop(Date)
+  private date: Date;
+  @Prop(Array)
+  private repositories: object[];
 
   private get formattedDate(): string {
     const date = this.date.toLocaleDateString();
 
-    return date === new Date().toLocaleDateString() ? 'Today' : date;
+    return date === new Date().toLocaleDateString() ? "Today" : date;
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '../style.scss';
+@import "../style.scss";
 
 .day {
   @include vertical-children-margin(0.6rem);

@@ -1,7 +1,7 @@
-import { CollectionReference } from '@google-cloud/firestore';
-import * as admin from 'firebase-admin';
+import { CollectionReference } from "@google-cloud/firestore";
+import * as admin from "firebase-admin";
 
-import { IRepository } from '../domain';
+import { IRepository } from "../domain";
 
 export default class {
   private collection: CollectionReference;
@@ -13,7 +13,7 @@ export default class {
   public async store(repositories: IRepository[]): Promise<void> {
     await Promise.all(
       repositories.map(async (repository: IRepository) => {
-        const key = Buffer.from(repository.url).toString('base64');
+        const key = Buffer.from(repository.url).toString("base64");
 
         const oldRepository = (await this.collection
           .doc(key)
@@ -32,8 +32,8 @@ export default class {
 
   public async fetch(): Promise<IRepository[]> {
     return (await this.collection
-      .orderBy('date', 'desc')
-      .orderBy('stars', 'desc')
+      .orderBy("date", "desc")
+      .orderBy("stars", "desc")
       .limit(1000)
       .get()).docs.map(snapshot => snapshot.data() as IRepository);
   }

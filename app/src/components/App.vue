@@ -9,10 +9,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
-import Header from './Header.vue';
-import Menu from './Menu.vue';
+import Header from "./Header.vue";
+import Menu from "./Menu.vue";
 
 @Component({ components: { Header, Menu } })
 export default class extends Vue {
@@ -34,7 +34,7 @@ body {
 </style>
 
 <style scoped lang="scss">
-@import '../style.scss';
+@import "../style.scss";
 
 .content {
   display: flex;

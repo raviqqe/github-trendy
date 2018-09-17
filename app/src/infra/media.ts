@@ -1,4 +1,4 @@
-const widthQuery = matchMedia('(max-width: 650px)');
+const widthQuery = matchMedia("(max-width: 650px)");
 
 export const windowSmall: boolean = !!widthQuery.matches;
 

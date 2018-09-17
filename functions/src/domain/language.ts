@@ -5,5 +5,5 @@ export interface ILanguage {
 }
 
 export function languageNameToID(name: string): string {
-  return name.toLowerCase().replace(' ', '-');
+  return name.toLowerCase().replace(" ", "-");
 }

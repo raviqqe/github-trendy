@@ -1,9 +1,9 @@
-import axios from 'axios';
-import cheerio = require('cheerio');
-import * as url from 'url';
+import axios from "axios";
+import cheerio = require("cheerio");
+import * as url from "url";
 
-import { ILanguage, IRepository, languageNameToID } from '../domain';
-import { languages } from '../firebase';
+import { ILanguage, IRepository, languageNameToID } from "../domain";
+import { languages } from "../firebase";
 
 async function fetchTrendingPage(languageID: string) {
   return cheerio.load(
@@ -25,7 +25,7 @@ function getLanguage(parentElement): ILanguage | null {
   const name = element.text().trim();
 
   return {
-    color: element.prev().css('background-color'),
+    color: element.prev().css("background-color"),
     id: languageNameToID(name),
     name
   };
@@ -35,24 +35,24 @@ export async function fetchRepositoriesOfToday(
   languageID?: string
 ): Promise<IRepository[]> {
   if (!languageID) {
-    languageID = '';
+    languageID = "";
   }
 
   const $ = await fetchTrendingPage(languageID);
   const repositories: IRepository[] = [];
   const date = new Date().getTime();
 
-  for (const element of $('ol.repo-list li').toArray()) {
-    const title = $(element).find('h3');
-    const path = title.find('a').prop('href');
+  for (const element of $("ol.repo-list li").toArray()) {
+    const title = $(element).find("h3");
+    const path = title.find("a").prop("href");
 
     repositories.push({
       date,
       description: $(element)
-        .find('p')
+        .find("p")
         .text()
         .trim(),
-      id: (languageID || 'all') + path,
+      id: (languageID || "all") + path,
       language: getLanguage($(element)),
       name: title.text().trim(),
       stars: Number(
@@ -60,9 +60,9 @@ export async function fetchRepositoriesOfToday(
           .find('[aria-label="star"]')
           .parent()
           .text()
-          .replace(',', '')
+          .replace(",", "")
       ),
-      url: url.resolve('https://github.com', path)
+      url: url.resolve("https://github.com", path)
     });
   }
 
@@ -80,5 +80,5 @@ export async function fetchRepositories(languageID?: string) {
 export async function fetchLanguage(languageID: string): Promise<ILanguage> {
   const $ = await fetchTrendingPage(languageID);
 
-  return getLanguage($('body'));
+  return getLanguage($("body"));
 }

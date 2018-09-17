@@ -19,12 +19,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
-import { languageIDs } from '../domain';
-import { languagesQuery } from '../infra/apollo';
-import MenuItem from './MenuItem.vue';
-import Query from './Query.vue';
+import { languageIDs } from "../domain";
+import { languagesQuery } from "../infra/apollo";
+import MenuItem from "./MenuItem.vue";
+import Query from "./Query.vue";
 
 @Component({ components: { Query, MenuItem } })
 export default class extends Vue {
@@ -32,7 +32,7 @@ export default class extends Vue {
   private query = languagesQuery;
 
   private toggleMenu(): void {
-    this.$store.commit('toggleMenu');
+    this.$store.commit("toggleMenu");
   }
 
   private get menuOpen(): boolean {
@@ -46,7 +46,7 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import '../style.scss';
+@import "../style.scss";
 
 .menu {
   > * {

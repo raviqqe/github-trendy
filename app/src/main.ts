@@ -1,10 +1,10 @@
-import Vue from 'vue';
+import Vue from "vue";
 
-import App from './components/App.vue';
-import apolloProvider from './infra/apollo';
-import './register-service-worker';
-import router from './router';
-import store from './store';
+import App from "./components/App.vue";
+import apolloProvider from "./infra/apollo";
+import "./register-service-worker";
+import router from "./router";
+import store from "./store";
 
 Vue.config.productionTip = false;
 
@@ -13,4 +13,4 @@ new Vue({
   render: h => h(App),
   router,
   store
-}).$mount('#app');
+}).$mount("#app");

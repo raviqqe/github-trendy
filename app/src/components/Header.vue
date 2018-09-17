@@ -8,9 +8,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
-import MenuButton from './MenuButton.vue';
+import MenuButton from "./MenuButton.vue";
 
 @Component({ components: { MenuButton } })
 export default class extends Vue {
