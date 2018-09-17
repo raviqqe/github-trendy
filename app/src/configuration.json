@@ -1,8 +1,3 @@
 {
-  "firebase": {
-    "apiKey": "AIzaSyCM6swVfPD4KzYPqIzcKVhgJAxB6dLfR3A",
-    "authDomain": "github-new-trends.firebaseapp.com",
-    "projectId": "github-new-trends"
-  },
   "graphQLEndpointURL": "https://us-central1-github-trendy-backend.cloudfunctions.net/functions/graphql"
 }

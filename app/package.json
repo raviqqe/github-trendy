@@ -16,7 +16,6 @@
     "apollo-cache-persist": "^0.1.1",
     "apollo-link-context": "^1.0.9",
     "apollo-link-http": "^1.5.5",
-    "firebase": "^5.5.0",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "lodash": "^4.17.11",
@@ -34,6 +33,7 @@
     "@types/graphql": "^14.0.0",
     "@types/jest": "^23.3.2",
     "@types/lodash": "^4.14.116",
+    "@types/node-fetch": "^2.1.2",
     "@vue/cli-plugin-babel": "^3.0.3",
     "@vue/cli-plugin-pwa": "^3.0.3",
     "@vue/cli-plugin-typescript": "^3.0.3",
@@ -50,6 +50,7 @@
     "ts-jest": "^23.1.4",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "^3.0.3",
+    "unfetch": "^3.1.1",
     "vue-template-compiler": "^2.5.17"
   },
   "browserslist": [

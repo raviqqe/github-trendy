@@ -9,7 +9,6 @@ import VueApollo from "vue-apollo";
 
 import configuration from "../configuration.json";
 import { languageIDs, specialLanguageIDs } from "../domain";
-import * as firebase from "./firebase";
 
 Vue.use(VueApollo);
 
@@ -18,10 +17,7 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   cache,
   link: setContext(async (_, { headers }) => ({
-    headers: {
-      ...headers,
-      authorization: `Bearer ${await firebase.getToken()}`
-    }
+    headers
   })).concat(
     new HttpLink({
       fetchOptions: { method: "GET" },
@@ -59,13 +55,10 @@ export const languagesQuery = gql`
 `;
 
 export async function initialize(): Promise<void> {
-  await Promise.all([
-    firebase.initialize(),
-    persistCache({
-      cache,
-      storage: window.localStorage
-    })
-  ]);
+  await persistCache({
+    cache,
+    storage: window.localStorage
+  });
 
   for (const languageID of [...languageIDs, ...specialLanguageIDs]) {
     client.query({
