@@ -8,7 +8,7 @@ import { ILanguage, IRepository } from "../../domain";
 
 jest.setTimeout(20000);
 
-const languageIDs = [undefined, "", "c", "c#", "c++", "common-lisp"];
+const languageIDs = [undefined, "", "c", "c#", "c++", "common-lisp", "unknown"];
 
 beforeAll(() => {
   const app = express();
@@ -130,7 +130,9 @@ test("Use language ID argument", async () => {
     for (const repository of repositories) {
       testRepository(repository);
 
-      if (languageID) {
+      if (languageID === "unknown") {
+        expect(repository.language).toBeNull();
+      } else if (languageID) {
         expect(repository.language.id).toBe(languageID);
         expect(repository.language.name).toBe(languageIDToName(languageID));
       }
@@ -207,6 +209,10 @@ test("Query days", async () => {
 
       for (const repository of repositories) {
         testRepository(repository);
+
+        if (languageID === "unknown") {
+          expect(repository.language).toBeNull();
+        }
       }
     }
   }
