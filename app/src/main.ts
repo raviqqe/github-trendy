@@ -9,7 +9,7 @@ import store from "./store";
 Vue.config.productionTip = false;
 
 new Vue({
-  provide: apolloProvider.provide(),
+  apolloProvider,
   render: h => h(App),
   router,
   store
