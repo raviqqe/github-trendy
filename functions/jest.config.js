@@ -1,4 +1,5 @@
 module.exports = {
+  forceExit: true,
   moduleFileExtensions: ["ts", "js"],
   transform: {
     "^.+\\.ts$": "ts-jest"
