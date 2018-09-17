@@ -32,12 +32,8 @@ function getLanguage(parentElement): ILanguage | null {
 }
 
 export async function fetchRepositoriesOfToday(
-  languageID?: string
+  languageID: string = ""
 ): Promise<IRepository[]> {
-  if (!languageID) {
-    languageID = "";
-  }
-
   const $ = await fetchTrendingPage(languageID);
   const repositories: IRepository[] = [];
   const date = new Date().getTime();
