@@ -1,9 +1,4 @@
-import {
-  IDay,
-  IRepository,
-  repositoriesToDays,
-  roundTimestampToDate
-} from "..";
+import { IRepository, repositoriesToDays, roundTimestampToDate } from "..";
 
 const testDates: number[] = [new Date().getTime(), new Date(0).getTime()];
 

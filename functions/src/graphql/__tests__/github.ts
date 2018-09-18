@@ -1,5 +1,6 @@
 import { parse } from "url";
 
+import { ILanguage } from "../../domain/language";
 import { fetchLanguage, fetchRepositories } from "../github";
 
 jest.setTimeout(20000);
@@ -26,7 +27,7 @@ test("Fetch today's repositories", async () => {
 
 test("Fetch a language information", async () => {
   for (const languageID of ["c", "javascript"]) {
-    const { color, id, name } = await fetchLanguage(languageID);
+    const { color, id, name } = (await fetchLanguage(languageID)) as ILanguage;
 
     expect(typeof color).toBe("string");
     expect(typeof id).toBe("string");

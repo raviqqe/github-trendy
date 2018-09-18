@@ -163,8 +163,8 @@ test("Query languages", async () => {
   for (const [language, languageID] of lodash.zip(
     languages as ILanguage[],
     languageIDs
-  )) {
-    testLanguage(language);
+  ) as Array<[ILanguage, string]>) {
+    testLanguage(language as ILanguage);
 
     expect(language.id).toBe(languageID);
     expect(language.name).toBe(languageIDToName(languageID));

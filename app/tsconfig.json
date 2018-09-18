@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
+    "noUnusedParameters": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "strictNullChecks": true,
+    "target": "esnext",
     "types": ["node", "jest"]
   }
 }

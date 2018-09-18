@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from "apollo-server-express";
 
 import configuration from "../configuration.json";
-import { IRepository, repositoriesToDays } from "../domain";
+import { repositoriesToDays } from "../domain";
 import { fetchLanguage, fetchRepositories } from "./github";
 
 const typeDefs = gql`

@@ -1,5 +1,4 @@
 import { CollectionReference } from "@google-cloud/firestore";
-import * as admin from "firebase-admin";
 
 import { IRepository } from "../domain";
 

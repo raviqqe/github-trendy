@@ -49,7 +49,7 @@ export async function fetchRepositoriesOfToday(
         .text()
         .trim(),
       id: (languageID || "all") + path,
-      language: getLanguage($(element)),
+      language: getLanguage($(element)) || undefined,
       name: title.text().trim(),
       stars: Number(
         $(element)
@@ -73,7 +73,9 @@ export async function fetchRepositories(languageID?: string) {
   return await repositories.fetch();
 }
 
-export async function fetchLanguage(languageID: string): Promise<ILanguage> {
+export async function fetchLanguage(
+  languageID: string
+): Promise<ILanguage | null> {
   const $ = await fetchTrendingPage(languageID);
 
   return getLanguage($("body"));
