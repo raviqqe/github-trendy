@@ -44,7 +44,8 @@ export const languageIDs: string[] = [
   "swift",
   "typescript",
   "vim-script",
-  "vue"
+  "vue",
+  "webassembly"
 ];
 
 export const specialLanguageIDs: string[] = [
