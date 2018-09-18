@@ -12,20 +12,6 @@ import { languageIDs, specialLanguageIDs } from "../domain";
 
 Vue.use(VueApollo);
 
-const cache = new InMemoryCache();
-
-const client = new ApolloClient({
-  cache,
-  link: setContext(async (_, { headers }) => ({
-    headers
-  })).concat(
-    new HttpLink({
-      fetchOptions: { method: "GET" },
-      uri: configuration.graphQLEndpointURL
-    })
-  )
-});
-
 export const repositoriesQuery = gql`
   query Query($languageID: ID) {
     repositories(languageID: $languageID) {
@@ -54,7 +40,21 @@ export const languagesQuery = gql`
   }
 `;
 
-export async function initialize(): Promise<void> {
+export default async function(): Promise<VueApollo> {
+  const cache = new InMemoryCache();
+
+  const client = new ApolloClient({
+    cache,
+    link: setContext(async (_, { headers }) => ({
+      headers
+    })).concat(
+      new HttpLink({
+        fetchOptions: { method: "GET" },
+        uri: configuration.graphQLEndpointURL
+      })
+    )
+  });
+
   await persistCache({
     cache,
     storage: window.localStorage
@@ -67,6 +67,6 @@ export async function initialize(): Promise<void> {
       variables: { languageID }
     });
   }
-}
 
-export default new VueApollo({ defaultClient: client });
+  return new VueApollo({ defaultClient: client });
+}

@@ -2,7 +2,6 @@
   <ApolloQuery
     :query="query"
     :variables="variables"
-    :skip="!initialized"
     fetchPolicy="cache-first"
   >
     <template slot-scope="{ result: { data, loading } }">
@@ -33,10 +32,6 @@ export default class extends Vue {
   private query;
   @Prop(Object)
   private variables;
-
-  private get initialized(): boolean {
-    return this.$store.state.apolloInitialized;
-  }
 
   private get windowSmall(): boolean {
     return this.$store.state.windowSmall;

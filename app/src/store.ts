@@ -7,23 +7,14 @@ import * as media from "./infra/media";
 Vue.use(Vuex);
 
 interface IState {
-  apolloInitialized: boolean;
   menuOpen: boolean; // only for small windows
   windowSmall: boolean;
 }
 
 export default function(): Store<IState> {
   const store = new Store<IState>({
-    actions: {
-      async initializeApollo(context) {
-        await apollo.initialize();
-        context.commit("initializeApollo");
-      }
-    },
+    actions: {},
     mutations: {
-      initializeApollo(state: IState) {
-        state.apolloInitialized = true;
-      },
       toggleMenu(state: IState) {
         state.menuOpen = !state.menuOpen;
       },
@@ -32,13 +23,11 @@ export default function(): Store<IState> {
       }
     },
     state: {
-      apolloInitialized: false,
       menuOpen: false,
       windowSmall: media.windowSmall
     }
   });
 
-  store.dispatch("initializeApollo");
   media.onWindowResize((windowSmall: boolean) =>
     store.commit("setWindowSmall", windowSmall)
   );

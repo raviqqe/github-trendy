@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
 import Router from "vue-router";
-import Vuex from "vuex";
+import Vuex, { Store } from "vuex";
 
 import Menu from "../Menu.vue";
 
@@ -13,10 +13,6 @@ test("Render a component", () => {
   shallowMount(Menu, {
     localVue,
     router: new Router(),
-    store: new Vuex.Store({
-      getters: {
-        apolloInitialized: () => true
-      }
-    })
+    store: new Store({})
   });
 });
