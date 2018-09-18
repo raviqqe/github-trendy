@@ -1,5 +1,4 @@
 import { config } from "@vue/test-utils";
-import fetch from "unfetch";
+import "unfetch/polyfill";
 
 config.logModifiedComponents = false;
-window.fetch = fetch;
