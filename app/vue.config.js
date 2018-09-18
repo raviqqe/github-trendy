@@ -5,13 +5,9 @@ const {
 } = require("./public/manifest.json");
 
 module.exports = {
-  chainWebpack: config => {
-    config.plugin("pwa").tap(() => [
-      {
-        themeColor: theme_color,
-        name: short_name,
-        msTileColor: background_color
-      }
-    ]);
+  pwa: {
+    themeColor: theme_color,
+    name: short_name,
+    msTileColor: background_color
   }
 };
