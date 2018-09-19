@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
 
 import { IRepository } from "../../domain";
-import Repositories from "../repositories";
+import Repositories, { convertObjectToFirestoreObject } from "../repositories";
 
 const testRepository: IRepository = {
   date: new Date().getTime(),
@@ -53,4 +53,17 @@ test("Update repositories", async () => {
   expect(await repositories.fetch()).toEqual([
     { ...testRepository, name: "someone / repo" }
   ]);
+});
+
+test("Convert objects stored in Firestore", () => {
+  for (const [dirtyObject, cleanObject] of [
+    [{ foo: undefined }, { foo: null }],
+    [{ bar: "baz", foo: undefined }, { bar: "baz", foo: null }],
+    [{ foo: { bar: undefined } }, { foo: { bar: null } }],
+    [{ foo: [0, 1, 2, 3] }, { foo: [0, 1, 2, 3] }],
+    [{ foo: [0, 1, undefined, 3] }, { foo: [0, 1, null, 3] }],
+    [{ foo: [{ bar: undefined }] }, { foo: [{ bar: null }] }]
+  ]) {
+    expect(convertObjectToFirestoreObject(dirtyObject)).toEqual(cleanObject);
+  }
 });
