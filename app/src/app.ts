@@ -10,11 +10,11 @@ register("/service-worker.js", {});
 
 Vue.config.productionTip = false;
 
-(async () => {
-  new Vue({
+export default async function(): Promise<Vue> {
+  return new Vue({
     apolloProvider: await createApolloProvider(),
     render: h => h(App),
     router: createRouter(),
     store: createStore()
-  }).$mount("#app");
-})();
+  });
+}

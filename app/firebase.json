@@ -6,6 +6,6 @@
       "npm run test",
       "npm run build"
     ],
-    "public": "dist"
+    "public": "dist/client"
   }
 }

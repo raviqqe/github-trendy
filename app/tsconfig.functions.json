@@ -1,0 +1,10 @@
+{
+  "extend": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "module": "commonjs",
+    "outDir": "dist",
+    "target": "es5"
+  },
+  "include": ["./src/functions.ts"]
+}
