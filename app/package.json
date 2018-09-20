@@ -1,6 +1,6 @@
 {
   "name": "github-trendy",
-  "main": "dist/functions.js",
+  "main": "dist/functions/src/functions.js",
   "scripts": {
     "build": "vue-cli-service build && ssr=true vue-cli-service build && tsc --project tsconfig.functions.json",
     "deploy": "firebase deploy",

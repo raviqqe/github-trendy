@@ -1,10 +1,11 @@
 {
-  "extend": "./tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "lib": ["esnext", "dom"],
     "module": "commonjs",
-    "outDir": "dist",
+    "outDir": "dist/functions",
+    "resolveJsonModule": true,
     "target": "es5"
   },
-  "include": ["./src/functions.ts"]
+  "files": ["src/functions.ts"]
 }

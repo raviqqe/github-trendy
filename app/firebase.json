@@ -1,4 +1,7 @@
 {
+  "functions": {
+    "source": "."
+  },
   "hosting": {
     "predeploy": [
       "npm install",
@@ -6,6 +9,12 @@
       "npm run test",
       "npm run build"
     ],
-    "public": "dist/client"
+    "public": "dist/client",
+    "rewrites": [
+      {
+        "source": "/",
+        "function": "ssr"
+      }
+    ]
   }
 }
