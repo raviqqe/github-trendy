@@ -1,3 +1,3 @@
 import createApp from "./app";
 
-(async () => (await createApp()).$mount("#app"))();
+(async () => (await createApp()).app.$mount("#app"))();

@@ -1,5 +1,6 @@
 <template>
   <ApolloQuery
+    :prefetch="variables"
     :query="query"
     :variables="variables"
     fetchPolicy="cache-first"

@@ -5,7 +5,7 @@ import * as apollo from "./infra/apollo";
 
 Vue.use(Vuex);
 
-interface IState {
+export interface IState {
   menuOpen: boolean; // only for small windows
 }
 
