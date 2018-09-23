@@ -3,10 +3,9 @@
     <div
       class="background"
       :data-menu-open="menuOpen"
-      :data-window-small="windowSmall"
       @click="toggleMenu"
     />
-    <div class="menu" :data-open="menuOpen" :data-window-small="windowSmall">
+    <div class="menu" :data-open="menuOpen">
       <Query :query="query" :variables="{ languageIDs }">
         <template slot-scope="{ languages }">
           <MenuItem color="tomato" id="" name="All" />
@@ -38,10 +37,6 @@ export default class extends Vue {
   private get menuOpen(): boolean {
     return this.$store.state.menuOpen;
   }
-
-  private get windowSmall(): boolean {
-    return this.$store.state.windowSmall;
-  }
 }
 </script>
 
@@ -56,7 +51,7 @@ export default class extends Vue {
     @include vertical-children-margin(0.2em);
   }
 
-  &[data-window-small] {
+  @media (max-width: $widthThreshold) {
     font-size: 1.1em;
     background: white;
     height: 100vh;
@@ -88,9 +83,11 @@ export default class extends Vue {
   opacity: 0;
   visibility: hidden;
 
-  &[data-menu-open][data-window-small] {
-    opacity: 1;
-    visibility: visible;
+  &[data-menu-open] {
+    @media (max-width: $widthThreshold) {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 

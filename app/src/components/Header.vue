@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     GitHub <span class="trendy">Trendy</span>
-    <div class="menu-button" v-if="windowSmall">
+    <div class="menu-button">
       <MenuButton />
     </div>
   </div>
@@ -13,14 +13,12 @@ import { Component, Vue } from "vue-property-decorator";
 import MenuButton from "./MenuButton.vue";
 
 @Component({ components: { MenuButton } })
-export default class extends Vue {
-  private get windowSmall(): boolean {
-    return this.$store.state.windowSmall;
-  }
-}
+export default class extends Vue {}
 </script>
 
 <style scoped lang="scss">
+@import "../style.scss";
+
 .header {
   position: relative;
   color: white;
@@ -45,5 +43,9 @@ export default class extends Vue {
   justify-content: flex-end;
   align-items: center;
   padding-right: 1em;
+
+  @media not all and (max-width: $widthThreshold) {
+    display: none;
+  }
 }
 </style>

@@ -32,9 +32,5 @@ export default class extends Vue {
   private query;
   @Prop(Object)
   private variables;
-
-  private get windowSmall(): boolean {
-    return this.$store.state.windowSmall;
-  }
 }
 </script>

@@ -1,4 +1,5 @@
 $duration: 0.05s;
+$widthThreshold: 650px;
 
 @mixin vertical-children-margin($margin) {
   > * {
