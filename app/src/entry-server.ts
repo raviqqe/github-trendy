@@ -4,6 +4,8 @@ import ApolloSSR from "vue-apollo/ssr";
 import createApp from "./app";
 import App from "./components/App.vue";
 
+(global as any).fetch = require("node-fetch");
+
 Vue.use(ApolloSSR);
 
 export default async (): Promise<Vue> => {

@@ -18,7 +18,7 @@ module.exports = {
         target: "node",
         plugins: [new VueSSRServerPlugin()],
         externals: nodeExternals({
-          whitelist: /\.css$/
+          whitelist: [/\.css$/, "regenerator-runtime/runtime"]
         }),
         optimization: {
           splitChunks: false
