@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "build": "tools/all.sh npm run build",
-    "deploy": "tools/all.sh npm run deploy",
+    "deploy": "firebase deploy",
     "deps": "npm install && tools/all.sh npm install",
-    "format": "tools/all.sh npm run format",
+    "format": "prettier --write fire*.json && tools/all.sh npm run format",
     "lint": "tools/all.sh npm run lint",
     "outdated": "npm outdated && tools/all.sh --no-error npm outdated",
     "test": "tools/all.sh npm run test",
@@ -14,6 +14,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "codecov": "^3.1.0"
+    "codecov": "^3.1.0",
+    "firebase-tools": "^4.2.1",
+    "prettier": "^1.14.2"
   }
 }
