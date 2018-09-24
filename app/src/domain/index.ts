@@ -1,5 +1,11 @@
 import { groupBy } from "lodash";
 
+export interface ILanguage {
+  color: string;
+  id: string;
+  name: string;
+}
+
 export interface IRepository {
   date: number;
   [key: string]: any;
@@ -52,6 +58,19 @@ export const specialLanguageIDs: string[] = [
   "", // all languages
   "unknown"
 ];
+
+export const specialLanguages: { all: ILanguage; unknown: ILanguage } = {
+  all: {
+    color: "tomato",
+    id: "",
+    name: "All"
+  },
+  unknown: {
+    color: "grey",
+    id: "unknown",
+    name: "Unknown languages"
+  }
+};
 
 export function roundTimestampToDate(timestamp: number): number {
   return new Date(new Date(timestamp).toDateString()).getTime();

@@ -8,9 +8,11 @@
     <div class="menu" :data-open="menuOpen">
       <Query :query="query" :variables="{ languageIDs }">
         <template slot-scope="{ languages }">
-          <MenuItem color="tomato" id="" name="All" />
-          <MenuItem v-for="language of languages" v-bind="language" :key="language.id" />
-          <MenuItem color="grey" id="unknown" name="Unknown languages" />
+          <MenuItem
+            v-for="language of [specialLanguages.all, ...languages, specialLanguages.unknown]"
+            v-bind="language"
+            :key="language.id"
+          />
         </template>
       </Query>
     </div>
@@ -20,7 +22,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import { languageIDs } from "../domain";
+import { ILanguage, languageIDs, specialLanguages } from "../domain";
 import { languagesQuery } from "../infra/apollo";
 import MenuItem from "./MenuItem.vue";
 import Query from "./Query.vue";
@@ -29,6 +31,7 @@ import Query from "./Query.vue";
 export default class extends Vue {
   private languageIDs = languageIDs;
   private query = languagesQuery;
+  private readonly specialLanguages = specialLanguages;
 
   private toggleMenu(): void {
     this.$store.commit("toggleMenu");
