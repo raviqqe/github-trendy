@@ -1,5 +1,5 @@
 <template>
-  <router-link :data-highlighted="highlighted" :to="path">
+  <router-link :data-highlighted="highlighted" :to="path" @click.native="viewLanguage">
     <Language :color="color" :name="name" />
   </router-link>
 </template>
@@ -20,6 +20,10 @@ export default class extends Language {
 
   private get path(): string {
     return "/" + encodeURIComponent(this.id);
+  }
+
+  private viewLanguage(): void {
+    this.$store.commit("viewLanguage", this.id);
   }
 }
 </script>
