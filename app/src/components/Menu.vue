@@ -8,11 +8,16 @@
     <div class="menu" :data-open="menuOpen">
       <Query :query="query" :variables="{ languageIDs }">
         <template slot-scope="{ languages }">
-          <MenuItem
-            v-for="language of [specialLanguages.all, ...languages, specialLanguages.unknown]"
-            v-bind="language"
-            :key="language.id"
+          <RecentlyViewedLanguages
+            :languages="[specialLanguages.all, ...languages, specialLanguages.unknown]"
           />
+          <div class="all-languages">
+            <MenuItem
+              v-for="language of [specialLanguages.all, ...languages, specialLanguages.unknown]"
+              v-bind="language"
+              :key="language.id"
+            />
+          </div>
         </template>
       </Query>
     </div>
@@ -26,8 +31,9 @@ import { ILanguage, languageIDs, specialLanguages } from "../domain";
 import { languagesQuery } from "../infra/apollo";
 import MenuItem from "./MenuItem.vue";
 import Query from "./Query.vue";
+import RecentlyViewedLanguages from "./RecentlyViewedLanguages.vue";
 
-@Component({ components: { Query, MenuItem } })
+@Component({ components: { MenuItem, Query, RecentlyViewedLanguages } })
 export default class extends Vue {
   private languageIDs = languageIDs;
   private query = languagesQuery;
@@ -94,9 +100,9 @@ export default class extends Vue {
   }
 }
 
-a {
-  color: black;
-  text-decoration: none;
-  white-space: nowrap;
+.all-languages {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 </style>

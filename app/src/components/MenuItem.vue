@@ -30,9 +30,12 @@ export default class extends Language {
 
 <style scoped lang="scss">
 a {
+  border-radius: 3px;
+  color: black;
   line-height: 1em;
   padding: 0.4em;
-  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
 
   &[data-highlighted] {
     background: #eee;
