@@ -24,7 +24,10 @@ export default (): Store<IState> => {
         );
       },
       viewLanguage(state: IState, id: string) {
-        state.recentlyViewedLanguageIDs[id] = Date.now();
+        state.recentlyViewedLanguageIDs = {
+          ...state.recentlyViewedLanguageIDs,
+          [id]: Date.now()
+        };
       },
       toggleMenu(state: IState) {
         state.menuOpen = !state.menuOpen;
