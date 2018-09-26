@@ -43,14 +43,11 @@ export default class extends Vue {
 }
 
 .title {
-  color: dimgrey;
-  font-weight: bold;
+  @include title;
   margin: 0.5em;
-  border-bottom: 1px solid darkgrey;
 
   @media (max-width: $widthThreshold) {
-    border-color: tomato;
-    color: tomato;
+    @include title(tomato, tomato);
   }
 }
 </style>

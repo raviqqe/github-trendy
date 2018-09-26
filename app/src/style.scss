@@ -20,3 +20,10 @@ $widthThreshold: 650px;
     }
   }
 }
+
+@mixin title($color: dimgrey, $border-color: darkgrey) {
+  color: $color;
+  font-weight: bold;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid $border-color;
+}

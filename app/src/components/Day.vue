@@ -39,11 +39,8 @@ export default class extends Vue {
 }
 
 .date {
-  color: dimgray;
+  @include title;
   font-size: 1.8em;
-  font-weight: bold;
-  padding-bottom: 0.2em;
-  border-bottom: 1px solid darkgray;
 }
 
 .repositories {
