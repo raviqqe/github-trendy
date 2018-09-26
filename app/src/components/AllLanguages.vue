@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="title">Recently viewed</div>
+    <div class="title">All languages</div>
     <MenuItem
-      v-for="language of recentlyViewedLanguages"
+      v-for="language of languages"
       v-bind="language"
       :key="language.id"
     />
@@ -19,12 +19,6 @@ import MenuItem from "./MenuItem.vue";
 export default class extends Vue {
   @Prop(Array)
   private languages: ILanguage[];
-
-  private get recentlyViewedLanguages(): ILanguage[] {
-    return this.languages.filter(
-      ({ id }: ILanguage) => id in this.$store.state.recentlyViewedLanguageIDs
-    );
-  }
 }
 </script>
 
@@ -32,14 +26,9 @@ export default class extends Vue {
 @import "../style.scss";
 
 .container {
-  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-
-  @media not all and (max-width: $widthThreshold) {
-    border: solid 1px darkgrey;
-  }
 }
 
 .title {
@@ -48,9 +37,8 @@ export default class extends Vue {
   margin: 0.5em;
   border-bottom: solid 1px darkgrey;
 
-  @media (max-width: $widthThreshold) {
-    border-color: tomato;
-    color: tomato;
+  @media not all and (max-width: $widthThreshold) {
+    display: none;
   }
 }
 </style>

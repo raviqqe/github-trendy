@@ -11,13 +11,9 @@
           <RecentlyViewedLanguages
             :languages="[specialLanguages.all, ...languages, specialLanguages.unknown]"
           />
-          <div class="all-languages">
-            <MenuItem
-              v-for="language of [specialLanguages.all, ...languages, specialLanguages.unknown]"
-              v-bind="language"
-              :key="language.id"
-            />
-          </div>
+          <AllLanguages
+            :languages="[specialLanguages.all, ...languages, specialLanguages.unknown]"
+          />
         </template>
       </Query>
     </div>
@@ -29,11 +25,14 @@ import { Component, Vue } from "vue-property-decorator";
 
 import { ILanguage, languageIDs, specialLanguages } from "../domain";
 import { languagesQuery } from "../infra/apollo";
+import AllLanguages from "./AllLanguages.vue";
 import MenuItem from "./MenuItem.vue";
 import Query from "./Query.vue";
 import RecentlyViewedLanguages from "./RecentlyViewedLanguages.vue";
 
-@Component({ components: { MenuItem, Query, RecentlyViewedLanguages } })
+@Component({
+  components: { AllLanguages, MenuItem, Query, RecentlyViewedLanguages }
+})
 export default class extends Vue {
   private languageIDs = languageIDs;
   private query = languagesQuery;
@@ -98,11 +97,5 @@ export default class extends Vue {
       visibility: visible;
     }
   }
-}
-
-.all-languages {
-  margin: 0.5rem;
-  display: flex;
-  flex-direction: column;
 }
 </style>
