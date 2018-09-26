@@ -38,7 +38,7 @@ export default class extends Vue {
   padding: 0.5rem;
 
   @media not all and (max-width: $widthThreshold) {
-    border: solid 1px darkgrey;
+    border: 1px solid darkgrey;
   }
 }
 
@@ -46,7 +46,7 @@ export default class extends Vue {
   color: dimgrey;
   font-weight: bold;
   margin: 0.5em;
-  border-bottom: solid 1px darkgrey;
+  border-bottom: 1px solid darkgrey;
 
   @media (max-width: $widthThreshold) {
     border-color: tomato;

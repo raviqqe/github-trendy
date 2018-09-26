@@ -35,7 +35,7 @@ export default class extends Vue {
   color: dimgrey;
   font-weight: bold;
   margin: 0.5em;
-  border-bottom: solid 1px darkgrey;
+  border-bottom: 1px solid darkgrey;
 
   @media not all and (max-width: $widthThreshold) {
     display: none;
