@@ -17,7 +17,7 @@ test("View languages", () => {
 
   expect(store.state.recentlyViewedLanguageIDs).toEqual({});
   store.commit("viewLanguage", "c");
-  expect(store.state.recentlyViewedLanguageIDs.c).toBeGreaterThan(time);
+  expect(store.state.recentlyViewedLanguageIDs.c).toBeGreaterThanOrEqual(time);
 });
 
 test("Clean up recently viewed languages", () => {
