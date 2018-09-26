@@ -9,7 +9,6 @@
         <VueLoading
           type="spin"
           color="darkgrey"
-          :style="{ margin: windowSmall ? 0 : 'auto' }"
         />
       </template>
       <template v-else>
