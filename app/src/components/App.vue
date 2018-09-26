@@ -34,7 +34,7 @@ body {
 
 .content {
   display: flex;
-  max-width: 800px;
+  max-width: 60em;
   margin: 0 auto;
   padding: 1rem;
 
