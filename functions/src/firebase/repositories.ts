@@ -36,7 +36,7 @@ export default class {
     return (await this.collection
       .orderBy("date", "desc")
       .orderBy("stars", "desc")
-      .limit(1000)
+      .limit(64)
       .get()).docs.map(snapshot => snapshot.data() as IRepository);
   }
 }
