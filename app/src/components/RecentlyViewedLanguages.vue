@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="recentlyViewedLanguages.length !== 0">
     <div class="title">Recently viewed</div>
     <MenuItem
       v-for="language of recentlyViewedLanguages"

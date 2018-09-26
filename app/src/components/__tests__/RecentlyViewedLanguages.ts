@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from "@vue/test-utils";
+import { createLocalVue, mount, shallowMount } from "@vue/test-utils";
 import Router from "vue-router";
 import Vuex, { Store } from "vuex";
 
@@ -23,4 +23,19 @@ test("Render a component", () => {
       }
     })
   });
+});
+
+test("Don't render a component with no recently viewed languages", () => {
+  const wrapper = mount(RecentlyViewedLanguages, {
+    localVue,
+    propsData: { languages: [specialLanguages.all, specialLanguages.unknown] },
+    router: new Router(),
+    store: new Store({
+      state: {
+        recentlyViewedLanguageIDs: {}
+      }
+    })
+  });
+
+  expect(wrapper.text()).toBe("");
 });
