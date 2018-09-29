@@ -1,4 +1,11 @@
-import createStore from "..";
+import createStore, { maxViewPoints } from "..";
+
+test("Check initial state", () => {
+  const store = createStore();
+
+  expect(store.state.menuOpen).toBe(false);
+  expect(store.state.recentlyViewedLanguageIDs).toEqual({});
+});
 
 test("Toggle a menu", () => {
   const store = createStore();
@@ -13,11 +20,18 @@ test("Toggle a menu", () => {
 
 test("View languages", () => {
   const store = createStore();
-  const time: number = Date.now();
 
-  expect(store.state.recentlyViewedLanguageIDs).toEqual({});
   store.commit("viewLanguage", "c");
-  expect(store.state.recentlyViewedLanguageIDs.c).toBeGreaterThanOrEqual(time);
+  expect(store.state.recentlyViewedLanguageIDs).toEqual({ c: 2 });
+});
+
+test("Limit max view points", () => {
+  const store = createStore();
+  store.state.recentlyViewedLanguageIDs = {};
+
+  store.commit("viewLanguage", "c");
+  store.commit("viewLanguage", "c");
+  expect(store.state.recentlyViewedLanguageIDs).toEqual({ c: maxViewPoints });
 });
 
 test("Clean up recently viewed languages", () => {
@@ -25,6 +39,6 @@ test("Clean up recently viewed languages", () => {
 
   store.state.recentlyViewedLanguageIDs = { c: 0 };
 
-  store.commit("cleanRecentlyViewedLanguages");
+  store.commit("reduceLanguageViewPoints");
   expect(store.state.recentlyViewedLanguageIDs).toEqual({});
 });

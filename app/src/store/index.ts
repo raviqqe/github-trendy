@@ -1,10 +1,11 @@
-import { pickBy, uniq } from "lodash";
-import { duration } from "moment";
+import { mapValues, pickBy, uniq } from "lodash";
 import Vue from "vue";
 import Vuex, { Payload, Store } from "vuex";
 import VuexPersist from "vuex-persist";
 
 import * as apollo from "../infra/apollo";
+
+export const maxViewPoints: number = 4;
 
 Vue.use(Vuex);
 
@@ -17,16 +18,22 @@ export default (): Store<IState> => {
   const store = new Store<IState>({
     actions: {},
     mutations: {
-      cleanRecentlyViewedLanguages(state: IState) {
+      reduceLanguageViewPoints(state: IState) {
         state.recentlyViewedLanguageIDs = pickBy(
-          state.recentlyViewedLanguageIDs,
-          (time: number) => duration(Date.now() - time).days() <= 7
+          mapValues(
+            state.recentlyViewedLanguageIDs,
+            (points: number) => points - 1
+          ),
+          (points: number) => points > 0
         );
       },
       viewLanguage(state: IState, id: string) {
         state.recentlyViewedLanguageIDs = {
           ...state.recentlyViewedLanguageIDs,
-          [id]: Date.now()
+          [id]: Math.min(
+            (state.recentlyViewedLanguageIDs[id] || 0) + 2,
+            maxViewPoints
+          )
         };
       },
       toggleMenu(state: IState) {
@@ -45,7 +52,7 @@ export default (): Store<IState> => {
     }
   });
 
-  store.commit("cleanRecentlyViewedLanguages");
+  store.commit("reduceLanguageViewPoints");
 
   return store;
 };
