@@ -1,6 +1,5 @@
 import { ApolloServer, gql } from "apollo-server-express";
 
-import { repositoriesToDays } from "../domain";
 import { fetchLanguage, fetchRepositories } from "./github";
 
 const typeDefs = gql`
@@ -27,7 +26,6 @@ const typeDefs = gql`
   }
 
   type Query {
-    days(languageID: ID): [Day] @cacheControl(maxAge: 43200)
     languages(languageIDs: [ID]!): [Language] @cacheControl(maxAge: 2592000)
     repositories(languageID: ID): [Repository] @cacheControl(maxAge: 43200)
   }
@@ -46,11 +44,6 @@ export default new ApolloServer({
       },
       async repositories(_, { languageID }) {
         return await fetchRepositories(languageID);
-      },
-      async days(_, { languageID }) {
-        return repositoriesToDays(await fetchRepositories(languageID)).map(
-          day => ({ ...day, id: languageID + "-" + day.date })
-        );
       }
     }
   },

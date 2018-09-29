@@ -24,7 +24,7 @@ function languageIDToName(id: string): string {
     .join(" ");
 }
 
-function testLanguage({ id, color, name }: ILanguage) {
+function expectValidLanguage({ id, color, name }: ILanguage) {
   expect(typeof color).toBe("string");
   expect(typeof id).toBe("string");
   expect(typeof name).toBe("string");
@@ -47,7 +47,7 @@ function testRepository({
   }
 
   if (language) {
-    testLanguage(language);
+    expectValidLanguage(language);
   }
 
   expect(typeof name).toBe("string");
@@ -164,56 +164,9 @@ test("Query languages", async () => {
     languages as ILanguage[],
     languageIDs
   ) as Array<[ILanguage, string]>) {
-    testLanguage(language as ILanguage);
+    expectValidLanguage(language as ILanguage);
 
     expect(language.id).toBe(languageID);
     expect(language.name).toBe(languageIDToName(languageID));
-  }
-});
-
-test("Query days", async () => {
-  for (const languageID of languageIDs) {
-    const {
-      data: {
-        data: { days }
-      }
-    } = await axios.post("http://localhost:8080/graphql", {
-      query: `
-        query Query($languageID: ID) {
-          days(languageID: $languageID) {
-            id
-            date
-            repositories {
-              id
-              date
-              language {
-                color
-                id
-                name
-              }
-              name
-              stars
-              url
-            }
-          }
-        }
-      `,
-      variables: { languageID }
-    });
-
-    expect(days.length).toBeGreaterThan(0);
-
-    for (const { date, id, repositories } of days) {
-      expect(typeof id).toBe("string");
-      expect(typeof date).toBe("number");
-
-      for (const repository of repositories) {
-        testRepository(repository);
-
-        if (languageID === "unknown") {
-          expect(repository.language).toBeNull();
-        }
-      }
-    }
   }
 });
