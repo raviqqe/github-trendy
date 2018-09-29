@@ -4,6 +4,9 @@ jobs:
     docker:
       - image: node
     steps:
+      - run: |
+          apt -y update --fix-missing
+          apt -y install inkscape
       - checkout
       - run: npm run deps
       - run: npm run format

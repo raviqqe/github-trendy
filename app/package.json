@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "vue-cli-service build",
+    "build": "tools/build-images.sh && vue-cli-service build",
     "format": "prettier --write *.js *.json 'src/**/*'",
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve",

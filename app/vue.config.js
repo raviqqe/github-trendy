@@ -6,8 +6,14 @@ const {
 
 module.exports = {
   pwa: {
-    themeColor: theme_color,
+    iconPaths: {
+      appleTouchIcon: "icon-152.png",
+      favicon16: "icon-16.png",
+      favicon32: "icon-32.png",
+      msTileImage: "icon-144.png"
+    },
+    msTileColor: background_color,
     name: short_name,
-    msTileColor: background_color
+    themeColor: theme_color
   }
 };
