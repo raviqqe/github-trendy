@@ -31,6 +31,7 @@ export const languageIDs: string[] = [
   "emacs-lisp",
   "erlang",
   "go",
+  "groovy",
   "haskell",
   "java",
   "javascript",
