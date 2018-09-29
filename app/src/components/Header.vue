@@ -1,6 +1,9 @@
 <template>
   <div class="header">
-    GitHub <span class="trendy">Trendy</span>
+    <img class="icon" src="/icon.svg" />
+    <div>
+      GitHub <span class="trendy">Trendy</span>
+    </div>
     <div class="menu-button">
       <MenuButton />
     </div>
@@ -20,13 +23,45 @@ export default class extends Vue {}
 @import "../style.scss";
 
 .header {
+  @include horizontal-children-margin(0.4em);
   position: relative;
   color: white;
   font-size: 1.5em;
   font-weight: bold;
   background: #24292e;
   padding: 0.5em;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 1.25em;
+
+  &:hover {
+    animation: shake 0.8s ease-in-out;
+  }
+
+  @keyframes shake {
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: rotate(10deg);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: rotate(-10deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 }
 
 .trendy {
