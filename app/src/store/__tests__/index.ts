@@ -22,19 +22,19 @@ test("View languages", () => {
   const store = createStore();
 
   store.commit("viewLanguage", "c");
-  expect(store.state.recentlyViewedLanguageIDs).toEqual({ c: 2 });
-});
-
-test("Limit max view points", () => {
-  const store = createStore();
-  store.state.recentlyViewedLanguageIDs = {};
-
-  store.commit("viewLanguage", "c");
-  store.commit("viewLanguage", "c");
   expect(store.state.recentlyViewedLanguageIDs).toEqual({ c: maxViewPoints });
 });
 
-test("Clean up recently viewed languages", () => {
+test("Reduce language view points", () => {
+  const store = createStore();
+
+  store.state.recentlyViewedLanguageIDs = { c: 3 };
+
+  store.commit("reduceLanguageViewPoints");
+  expect(store.state.recentlyViewedLanguageIDs).toEqual({ c: 2 });
+});
+
+test("Clean up languages not viewed recently", () => {
   const store = createStore();
 
   store.state.recentlyViewedLanguageIDs = { c: 0 };

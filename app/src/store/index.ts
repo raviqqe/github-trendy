@@ -30,10 +30,7 @@ export default (): Store<IState> => {
       viewLanguage(state: IState, id: string) {
         state.recentlyViewedLanguageIDs = {
           ...state.recentlyViewedLanguageIDs,
-          [id]: Math.min(
-            (state.recentlyViewedLanguageIDs[id] || 0) + 2,
-            maxViewPoints
-          )
+          [id]: maxViewPoints
         };
       },
       toggleMenu(state: IState) {
