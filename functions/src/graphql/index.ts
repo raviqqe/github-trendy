@@ -1,6 +1,11 @@
 import { ApolloServer, gql } from "apollo-server-express";
+import { Duration } from "luxon";
 
 import { fetchLanguage, fetchRepositories } from "./github";
+
+const repositoryMaxAge: number = Duration.fromObject({
+  hours: 12
+}).as("seconds");
 
 const typeDefs = gql`
   type Repository {
@@ -26,13 +31,15 @@ const typeDefs = gql`
   }
 
   type Query {
-    languages(languageIDs: [ID]!): [Language] @cacheControl(maxAge: 2592000)
-    repositories(languageID: ID): [Repository] @cacheControl(maxAge: 43200)
+    languages(languageIDs: [ID]!): [Language]
+    repositories(languageID: ID): [Repository] @cacheControl(maxAge: ${repositoryMaxAge})
   }
 `;
 
 export default new ApolloServer({
-  cacheControl: true,
+  cacheControl: {
+    defaultMaxAge: Duration.fromObject({ weeks: 2 }).as("seconds")
+  },
   formatError: error => {
     console.error(error);
     return error;
