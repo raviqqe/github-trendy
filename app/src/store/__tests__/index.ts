@@ -3,6 +3,9 @@ import createStore, { maxViewPoints } from "..";
 test("Check initial state", () => {
   const store = createStore();
 
+  expect(store.state.loading[""]).toBe(true);
+  expect(store.state.loading.c).toBe(true);
+  expect(store.state.loading.unknown).toBe(true);
   expect(store.state.menuOpen).toBe(false);
   expect(store.state.recentlyViewedLanguageIDs).toEqual({});
 });
@@ -41,4 +44,11 @@ test("Clean up languages not viewed recently", () => {
 
   store.commit("reduceLanguageViewPoints");
   expect(store.state.recentlyViewedLanguageIDs).toEqual({});
+});
+
+test("Finish loading languages' data", () => {
+  const store = createStore();
+
+  store.commit("finishLoading", "c");
+  expect(store.state.loading.c).toBe(false);
 });

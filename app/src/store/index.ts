@@ -3,13 +3,15 @@ import Vue from "vue";
 import Vuex, { Payload, Store } from "vuex";
 import VuexPersist from "vuex-persist";
 
+import { languageIDs, specialLanguageIDs } from "../domain";
 import * as apollo from "../infra/apollo";
 
 export const maxViewPoints: number = 4;
 
 Vue.use(Vuex);
 
-interface IState {
+export interface IState {
+  loading: { [languageID: string]: boolean };
   menuOpen: boolean; // only for small windows
   recentlyViewedLanguageIDs: { [languageID: string]: number };
 }
@@ -18,6 +20,9 @@ export default (): Store<IState> => {
   const store = new Store<IState>({
     actions: {},
     mutations: {
+      finishLoading(state: IState, languageID: string) {
+        state.loading = { ...state.loading, [languageID]: false };
+      },
       reduceLanguageViewPoints(state: IState) {
         state.recentlyViewedLanguageIDs = pickBy(
           mapValues(
@@ -44,6 +49,13 @@ export default (): Store<IState> => {
       }).plugin
     ],
     state: {
+      loading: [...languageIDs, ...specialLanguageIDs].reduce(
+        (loading: object, languageID: string) => ({
+          ...loading,
+          [languageID]: true
+        }),
+        {}
+      ),
       menuOpen: false,
       recentlyViewedLanguageIDs: {}
     }

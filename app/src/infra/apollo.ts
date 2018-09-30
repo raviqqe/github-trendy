@@ -6,9 +6,11 @@ import { HttpLink } from "apollo-link-http";
 import gql from "graphql-tag";
 import Vue from "vue";
 import VueApollo from "vue-apollo";
+import { Store } from "vuex";
 
 import configuration from "../configuration.json";
 import { languageIDs, specialLanguageIDs } from "../domain";
+import { IState } from "../store";
 
 Vue.use(VueApollo);
 
@@ -40,7 +42,7 @@ export const languagesQuery = gql`
   }
 `;
 
-export default async function(): Promise<VueApollo> {
+export default async function(store: Store<IState>): Promise<VueApollo> {
   const cache = new InMemoryCache();
 
   const client = new ApolloClient({
@@ -61,11 +63,15 @@ export default async function(): Promise<VueApollo> {
   });
 
   for (const languageID of [...languageIDs, ...specialLanguageIDs]) {
-    client.query({
-      fetchPolicy: "network-only",
-      query: repositoriesQuery,
-      variables: { languageID }
-    });
+    (async () => {
+      await client.query({
+        fetchPolicy: "network-only",
+        query: repositoriesQuery,
+        variables: { languageID }
+      });
+
+      store.commit("finishLoading", languageID);
+    })();
   }
 
   return new VueApollo({ defaultClient: client });
