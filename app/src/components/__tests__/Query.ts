@@ -1,5 +1,5 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
-import Vuex from "vuex";
+import Vuex, { Store } from "vuex";
 
 import Query from "../Query.vue";
 
@@ -11,6 +11,6 @@ test("Render a component", () => {
   shallowMount(Query, {
     localVue,
     propsData: { query: {}, variables: {} },
-    store: new Vuex.Store({})
+    store: new Store({})
   });
 });

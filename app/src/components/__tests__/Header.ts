@@ -1,5 +1,5 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
-import Vuex from "vuex";
+import Vuex, { Store } from "vuex";
 
 import Header from "../Header.vue";
 
@@ -10,6 +10,6 @@ localVue.use(Vuex);
 test("Render a component", () => {
   shallowMount(Header, {
     localVue,
-    store: new Vuex.Store({})
+    store: new Store({})
   });
 });
