@@ -88,3 +88,7 @@ export function repositoriesToDays(repositories: IRepository[]): IDay[] {
       repositories
     }));
 }
+
+export function pathToLanguageID(path: string): string {
+  return decodeURIComponent(path.replace("/", ""));
+}

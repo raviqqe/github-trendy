@@ -15,7 +15,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import { repositoriesToDays } from "../domain";
+import { pathToLanguageID, repositoriesToDays } from "../domain";
 import { repositoriesQuery } from "../infra/apollo";
 import Day from "./Day.vue";
 import Query from "./Query.vue";
@@ -26,7 +26,7 @@ export default class extends Vue {
   private repositoriesToDays = repositoriesToDays;
 
   private get languageID(): string {
-    return decodeURIComponent(this.$route.path.replace("/", ""));
+    return pathToLanguageID(this.$route.path);
   }
 }
 </script>

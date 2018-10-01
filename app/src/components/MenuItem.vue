@@ -8,6 +8,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+import { pathToLanguageID } from "../domain";
 import Language from "./Language.vue";
 
 @Component({ components: { Language } })
@@ -16,7 +17,7 @@ export default class extends Language {
   private id: string;
 
   private get highlighted(): boolean {
-    return this.id === decodeURIComponent(this.$route.path.replace("/", ""));
+    return this.id === pathToLanguageID(this.$route.path);
   }
 
   private get loading(): boolean {
