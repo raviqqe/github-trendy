@@ -54,6 +54,7 @@ export default async function(store: Store<IState>): Promise<VueApollo> {
 
   await persistCache({
     cache,
+    maxSize: false,
     storage: window.localStorage
   });
 
