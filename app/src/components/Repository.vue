@@ -6,18 +6,17 @@
     </div>
     <div class="properties">
       <span v-if="language"><Language v-bind="language" /></span>
-      <span><Icon name="star" class="star" /> {{ stars }}</span>
+      <span><span class="star">⭐</span> {{ stars }}</span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Icon from "vue-awesome";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 import Language from "./Language.vue";
 
-@Component({ components: { Icon, Language } })
+@Component({ components: { Language } })
 export default class extends Vue {
   @Prop(String)
   private description?: string;
@@ -68,12 +67,6 @@ export default class extends Vue {
 }
 
 .star {
-  color: gold;
-  vertical-align: -5%;
-}
-
-.clock {
-  color: grey;
-  vertical-align: -20%;
+  vertical-align: 0.05em;
 }
 </style>

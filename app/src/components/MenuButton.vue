@@ -1,14 +1,11 @@
 <template>
-  <button @click="toggleMenu">
-    <Icon name="bars" />
-  </button>
+  <button @click="toggleMenu">≡</button>
 </template>
 
 <script lang="ts">
-import Icon from "vue-awesome";
 import { Component, Vue } from "vue-property-decorator";
 
-@Component({ components: { Icon } })
+@Component
 export default class extends Vue {
   public toggleMenu() {
     this.$store.commit("toggleMenu");
@@ -20,9 +17,8 @@ export default class extends Vue {
 button {
   background: transparent;
   border: none;
-  line-height: 0;
   color: lightgrey;
-  transform: scale(1.5);
   cursor: pointer;
+  font-size: 2em;
 }
 </style>
