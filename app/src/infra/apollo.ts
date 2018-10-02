@@ -1,7 +1,6 @@
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
 import ApolloClient from "apollo-client";
-import { setContext } from "apollo-link-context";
 import { HttpLink } from "apollo-link-http";
 import gql from "graphql-tag";
 import Vue from "vue";
@@ -47,14 +46,10 @@ export default async function(store: Store<IState>): Promise<VueApollo> {
 
   const client = new ApolloClient({
     cache,
-    link: setContext(async (_, { headers }) => ({
-      headers
-    })).concat(
-      new HttpLink({
-        fetchOptions: { method: "GET" },
-        uri: configuration.graphQLEndpointURL
-      })
-    )
+    link: new HttpLink({
+      fetchOptions: { method: "GET" },
+      uri: configuration.graphQLEndpointURL
+    })
   });
 
   await persistCache({
