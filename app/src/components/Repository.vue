@@ -6,7 +6,7 @@
     </div>
     <div class="properties">
       <span v-if="language"><Language v-bind="language" /></span>
-      <span><span class="star">⭐</span> {{ stars }}</span>
+      <span><span class="star">🟊</span> {{ stars }}</span>
     </div>
   </div>
 </template>
@@ -67,6 +67,9 @@ export default class extends Vue {
 }
 
 .star {
-  vertical-align: 0.05em;
+  color: gold;
+  display: inline-block;
+  margin-right: 0.1em;
+  transform: scale(1.5) translateY(0.05em);
 }
 </style>
