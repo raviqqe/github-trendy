@@ -1,17 +1,18 @@
 <template>
   <router-link :data-highlighted="highlighted" :to="path" @click.native="viewLanguage">
     <Language :color="color" :name="name" />
-    <div v-if="loading" class="loading">↻</div>
+    <Loading v-if="loading" />
   </router-link>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 import { pathToLanguageID } from "../domain";
 import Language from "./Language.vue";
+import Loading from "./Loading.vue";
 
-@Component({ components: { Language } })
+@Component({ components: { Language, Loading } })
 export default class extends Language {
   @Prop(String)
   private id: string;
@@ -50,18 +51,6 @@ a {
 
   &[data-highlighted] {
     background: #eee;
-  }
-}
-
-.loading {
-  animation: spin 0.7s linear infinite;
-  color: grey;
-  display: inline-block;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
   }
 }
 </style>

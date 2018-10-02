@@ -4,12 +4,9 @@
     :variables="variables"
     fetchPolicy="cache-first"
   >
-    <template slot-scope="{ result: { data, loading } }">
-      <template v-if="loading || !data">
-        <VueLoading
-          type="spin"
-          color="darkgrey"
-        />
+    <template slot-scope="{ result: { data } }">
+      <template v-if="!data">
+        <div class="loading-wrapper"><Loading /></div>
       </template>
       <template v-else>
         <slot v-bind="data" />
@@ -20,11 +17,12 @@
 
 <script lang="ts">
 import * as vueApollo from "vue-apollo";
-import { VueLoading } from "vue-loading-template";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+import Loading from "./Loading.vue";
+
 @Component({
-  components: { ApolloQuery: (vueApollo as any).ApolloQuery, VueLoading }
+  components: { ApolloQuery: (vueApollo as any).ApolloQuery, Loading }
 })
 export default class extends Vue {
   @Prop(Object)
@@ -33,3 +31,11 @@ export default class extends Vue {
   private variables;
 }
 </script>
+
+<style scoped lang="scss">
+.loading-wrapper {
+  display: flex;
+  font-size: 2em;
+  justify-content: center;
+}
+</style>
