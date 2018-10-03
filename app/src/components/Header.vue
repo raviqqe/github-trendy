@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img class="icon" src="/icon.svg" />
+    <img alt="icon" class="icon" src="/icon.svg" />
     <div>
       GitHub <span class="trendy">Trendy</span>
     </div>
