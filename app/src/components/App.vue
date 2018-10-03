@@ -19,12 +19,15 @@ export default class extends Vue {}
 </script>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  font: 16px sans-serif;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
   margin: 0;
 }
 </style>

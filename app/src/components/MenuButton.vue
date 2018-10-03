@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggleMenu">≡</button>
+  <button @click="toggleMenu">☰</button>
 </template>
 
 <script lang="ts">
@@ -19,6 +19,6 @@ button {
   border: none;
   color: lightgrey;
   cursor: pointer;
-  font-size: 2em;
+  transform: scale(2.5) translateY(0.1em);
 }
 </style>
