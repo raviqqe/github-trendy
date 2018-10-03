@@ -20,14 +20,18 @@ export default class extends Vue {}
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
-@import url("/NotoSansSymbols2-Regular.ttf");
+
+@font-face {
+  font-family: Symbols;
+  src: url("/NotoSansSymbols2-Regular.ttf");
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Noto Sans", "Noto Sans Symbols2", sans-serif;
+  font-family: "Noto Sans", Symbols, sans-serif;
   font-size: 16px;
   margin: 0;
 }
