@@ -1,6 +1,6 @@
 {
   "name": "GitHub Trendy",
-  "short_name": "GitHub Trendy",
+  "short_name": "gitrendy",
   "icons": [
     { "sizes": "16x16", "src": "icon-16.png" },
     { "sizes": "128x128", "src": "icon-128.png" },
