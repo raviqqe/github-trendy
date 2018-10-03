@@ -6,7 +6,7 @@ jobs:
     steps:
       - run: |
           apt -y update --fix-missing
-          apt -y install inkscape
+          apt -y install inkscape unzip
       - checkout
       - run: npm run deps
       - run: npm run format

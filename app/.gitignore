@@ -1,1 +1,3 @@
-public/*.png
+*.png
+*.ttf
+tmp
