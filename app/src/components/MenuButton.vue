@@ -19,6 +19,6 @@ button {
   border: none;
   color: lightgrey;
   cursor: pointer;
-  transform: scale(2.5) translateY(0.1em);
+  transform: scale(2.5);
 }
 </style>
