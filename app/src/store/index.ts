@@ -43,7 +43,7 @@ export default (): Store<IState> => {
       }
     },
     plugins: [
-      new VuexPersist<IState, Payload>({
+      new VuexPersist<IState>({
         modules: ["recentlyViewedLanguageIDs"],
         storage: window.localStorage
       }).plugin
