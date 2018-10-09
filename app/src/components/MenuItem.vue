@@ -31,6 +31,7 @@ export default class extends Language {
 
   private viewLanguage(): void {
     this.$store.commit("viewLanguage", this.id);
+    this.$store.commit("toggleMenu");
   }
 }
 </script>
