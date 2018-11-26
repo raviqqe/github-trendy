@@ -3,12 +3,13 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "module": "esnext",
+    "lib": ["esnext", "dom"],
+    "module": "es2015",
     "moduleResolution": "node",
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "esnext",
+    "target": "es5",
     "types": ["node", "jest"]
   }
 }
