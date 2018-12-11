@@ -12,29 +12,29 @@
     "node": "8"
   },
   "dependencies": {
-    "apollo-server-express": "^2.2.2",
+    "apollo-server-express": "^2.2.6",
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "firebase-admin": "^6.2.0",
+    "firebase-admin": "^6.3.0",
     "firebase-functions": "^2.1.0",
     "graphql": "^14.0.2",
-    "luxon": "^1.8.0"
+    "luxon": "^1.8.2"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.9",
+    "@types/cheerio": "^0.22.10",
     "@types/express": "^4.16.0",
     "@types/graphql": "^14.0.3",
-    "@types/jest": "^23.3.9",
+    "@types/jest": "^23.3.10",
     "@types/luxon": "^1.4.1",
     "graphql-tools": "^4.0.3",
     "jest": "^23.6.0",
     "lodash": "^4.17.11",
-    "prettier": "^1.15.2",
+    "prettier": "^1.15.3",
     "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.16.0",
-    "typescript": "^3.1.6"
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.2"
   }
 }
