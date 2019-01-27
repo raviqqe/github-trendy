@@ -1,18 +1,22 @@
 <template>
   <div>
-    <div
-      class="background"
-      :data-menu-open="menuOpen"
-      @click="toggleMenu"
-    />
+    <div class="background" :data-menu-open="menuOpen" @click="toggleMenu" />
     <div class="menu" :data-open="menuOpen">
       <Query :query="query" :variables="{ languageIDs }">
         <template slot-scope="{ languages }">
           <RecentlyViewedLanguages
-            :languages="[specialLanguages.all, ...languages, specialLanguages.unknown]"
+            :languages="[
+              specialLanguages.all,
+              ...languages,
+              specialLanguages.unknown
+            ]"
           />
           <AllLanguages
-            :languages="[specialLanguages.all, ...languages, specialLanguages.unknown]"
+            :languages="[
+              specialLanguages.all,
+              ...languages,
+              specialLanguages.unknown
+            ]"
           />
         </template>
       </Query>

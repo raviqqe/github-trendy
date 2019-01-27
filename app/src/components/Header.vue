@@ -1,9 +1,7 @@
 <template>
   <div class="header">
     <img alt="icon" class="icon" src="/icon.svg" />
-    <div>
-      GitHub <span class="trendy">Trendy</span>
-    </div>
+    <div>GitHub <span class="trendy">Trendy</span></div>
     <div class="menu-button">
       <MenuButton />
     </div>

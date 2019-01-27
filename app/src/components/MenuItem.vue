@@ -1,5 +1,9 @@
 <template>
-  <router-link :data-highlighted="highlighted" :to="path" @click.native="viewLanguage">
+  <router-link
+    :data-highlighted="highlighted"
+    :to="path"
+    @click.native="viewLanguage"
+  >
     <Language :color="color" :name="name" />
     <Loading v-if="loading" />
   </router-link>

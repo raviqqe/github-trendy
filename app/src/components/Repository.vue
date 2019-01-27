@@ -1,11 +1,15 @@
 <template>
   <div>
     <div class="information">
-      <div><a class="name" :href="url" rel="noopener" target="_blank">{{ name }}</a></div>
+      <div>
+        <a class="name" :href="url" rel="noopener" target="_blank">{{
+          name
+        }}</a>
+      </div>
       <div class="description" v-if="description">{{ description }}</div>
     </div>
     <div class="properties">
-      <span v-if="language"><Language v-bind="language" /></span>
+      <span v-if="language"><Language v-bind="language"/></span>
       <span><span class="star">🟊</span> {{ stars }}</span>
     </div>
   </div>

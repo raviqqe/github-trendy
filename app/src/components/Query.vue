@@ -1,9 +1,5 @@
 <template>
-  <ApolloQuery
-    :query="query"
-    :variables="variables"
-    fetchPolicy="cache-first"
-  >
+  <ApolloQuery :query="query" :variables="variables" fetchPolicy="cache-first">
     <template slot-scope="{ result: { data } }">
       <template v-if="!data">
         <div class="loading-wrapper"><Loading /></div>
