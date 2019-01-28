@@ -1,13 +1,12 @@
 import createStore, { maxViewPoints } from "..";
 
+beforeEach(() => window.localStorage.clear());
+
 test("Check initial state", () => {
   const store = createStore();
 
-  expect(store.state.loading[""]).toBe(true);
-  expect(store.state.loading.c).toBe(true);
-  expect(store.state.loading.unknown).toBe(true);
   expect(store.state.menuOpen).toBe(false);
-  expect(store.state.recentlyViewedLanguageIDs).toEqual({});
+  expect(store.state.languages).toEqual({});
 });
 
 test("Toggle a menu", () => {
@@ -25,30 +24,31 @@ test("View languages", () => {
   const store = createStore();
 
   store.commit("viewLanguage", "c");
-  expect(store.state.recentlyViewedLanguageIDs).toEqual({ c: maxViewPoints });
+  expect(store.state.languages).toEqual({ c: { viewPoints: maxViewPoints } });
 });
 
 test("Reduce language view points", () => {
   const store = createStore();
 
-  store.state.recentlyViewedLanguageIDs = { c: 3 };
+  store.state.languages = { c: { loading: false, viewPoints: 3 } };
 
   store.commit("reduceLanguageViewPoints");
-  expect(store.state.recentlyViewedLanguageIDs).toEqual({ c: 2 });
+  expect(store.state.languages).toEqual({
+    c: { loading: false, viewPoints: 2 }
+  });
 });
 
-test("Clean up languages not viewed recently", () => {
+test("Start loading languages' data", () => {
   const store = createStore();
 
-  store.state.recentlyViewedLanguageIDs = { c: 0 };
-
-  store.commit("reduceLanguageViewPoints");
-  expect(store.state.recentlyViewedLanguageIDs).toEqual({});
+  store.commit("startLoading", "c");
+  expect(store.state.languages.c).toEqual({ loading: true });
 });
 
 test("Finish loading languages' data", () => {
   const store = createStore();
 
+  store.commit("startLoading", "c");
   store.commit("finishLoading", "c");
-  expect(store.state.loading.c).toBe(false);
+  expect(store.state.languages.c).toEqual({ loading: false });
 });

@@ -59,6 +59,8 @@ export default async function(store: Store<IState>): Promise<VueApollo> {
   });
 
   for (const languageID of [...languageIDs, ...specialLanguageIDs]) {
+    store.commit("startLoading", languageID);
+
     (async () => {
       await client.query({
         fetchPolicy: "network-only",

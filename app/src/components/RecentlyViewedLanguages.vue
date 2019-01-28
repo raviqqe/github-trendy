@@ -22,7 +22,10 @@ export default class extends Vue {
 
   private get recentlyViewedLanguages(): ILanguage[] {
     return this.languages.filter(
-      ({ id }: ILanguage) => id in this.$store.state.recentlyViewedLanguageIDs
+      ({ id }: ILanguage): boolean => {
+        const language = this.$store.state.languages[id];
+        return language && language.viewPoints > 0;
+      }
     );
   }
 }

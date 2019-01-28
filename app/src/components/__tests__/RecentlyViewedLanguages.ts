@@ -2,6 +2,7 @@ import { createLocalVue, mount, shallowMount } from "@vue/test-utils";
 import Router from "vue-router";
 import Vuex, { Store } from "vuex";
 
+import { IState } from "src/store";
 import { specialLanguages } from "../../domain";
 import RecentlyViewedLanguages from "../RecentlyViewedLanguages.vue";
 
@@ -15,11 +16,12 @@ test("Render a component", () => {
     localVue,
     propsData: { languages: [specialLanguages.all, specialLanguages.unknown] },
     router: new Router(),
-    store: new Store({
+    store: new Store<IState>({
       state: {
-        recentlyViewedLanguageIDs: {
-          [specialLanguages.all.id]: Date.now()
-        }
+        languages: {
+          [specialLanguages.all.id]: { loading: false, viewPoints: 1 }
+        },
+        menuOpen: false
       }
     })
   });
@@ -30,9 +32,10 @@ test("Don't render a component with no recently viewed languages", () => {
     localVue,
     propsData: { languages: [specialLanguages.all, specialLanguages.unknown] },
     router: new Router(),
-    store: new Store({
+    store: new Store<IState>({
       state: {
-        recentlyViewedLanguageIDs: {}
+        languages: {},
+        menuOpen: false
       }
     })
   });

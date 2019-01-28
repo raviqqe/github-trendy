@@ -26,7 +26,8 @@ export default class extends Language {
   }
 
   private get loading(): boolean {
-    return this.$store.state.loading[this.id];
+    const language = this.$store.state.languages[this.id];
+    return language && language.loading;
   }
 
   private get path(): string {
