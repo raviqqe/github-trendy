@@ -28,7 +28,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import { ILanguage, languageIDs, specialLanguages } from "../domain";
-import { languagesQuery } from "../infra/apollo";
+import { languagesQuery } from "../drivers/apollo";
 import AllLanguages from "./AllLanguages.vue";
 import MenuItem from "./MenuItem.vue";
 import Query from "./Query.vue";

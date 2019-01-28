@@ -4,7 +4,7 @@ import Vuex, { Payload, Store } from "vuex";
 import VuexPersist from "vuex-persist";
 
 import { languageIDs, specialLanguageIDs } from "../domain";
-import * as apollo from "../infra/apollo";
+import * as apollo from "../drivers/apollo";
 
 export const maxViewPoints: number = 4;
 

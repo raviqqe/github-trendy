@@ -3,7 +3,7 @@ import Vue from "vue";
 
 import App from "./components/App.vue";
 import { pathToLanguageID } from "./domain";
-import createApolloProvider from "./infra/apollo";
+import createApolloProvider from "./drivers/apollo";
 import createRouter from "./router";
 import createStore from "./store";
 

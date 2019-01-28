@@ -16,7 +16,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import { pathToLanguageID, repositoriesToDays } from "../domain";
-import { repositoriesQuery } from "../infra/apollo";
+import { repositoriesQuery } from "../drivers/apollo";
 import Day from "./Day.vue";
 import Query from "./Query.vue";
 
